@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { doc, getDoc, getFirestore, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 export interface LoginError {
@@ -27,9 +28,10 @@ export class LoginService {
     return signInWithEmailAndPassword(this.auth, email, password)
     .then((resultado)=>
     {
-      error.errorMsj=""
-      error.errorFlag=true;
+      error.errorMsj=`Bienvenido ${resultado.user.email}`;
+      error.errorFlag=false;
       return error;
+      
     })
     .catch((e)=>
     {
@@ -50,4 +52,5 @@ export class LoginService {
         this.router.navigate(['/home']);
       });
   }
+
 }

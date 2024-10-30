@@ -21,6 +21,10 @@ export class SplashPage implements OnInit {
     this.ocultarLogoPrincipalIso();
     this.mostrarLogoPrincipalTexto();
     this.mostrarNombres();
+    setTimeout(() => {
+      this.router.navigateByUrl('/login');
+    }, 12000);
+    
   }
 
   ocultarLogoPrincipalIso () {

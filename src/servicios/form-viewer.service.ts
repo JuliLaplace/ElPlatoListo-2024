@@ -46,7 +46,7 @@ export class FormViewerService {
       } else if (errors?.['pattern'].requiredPattern == '^[0-9-]*$') {
         errorMessage = "Sólo se aceptan números.";
       } else if (errors?.['pattern'].requiredPattern == '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') {
-        errorMessage = "Email inválido.";
+        errorMessage = "Error, debe ingresar un correo válido";
       } else {
         errorMessage = "Caracteres inválidos.";
       }
