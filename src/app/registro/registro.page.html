@@ -1,13 +1,110 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registro</ion-title>
-  </ion-toolbar>
-</ion-header>
+<body class="centrado">
+  <div class="container">
+    <!-- <ion-card-header>
+      <img src="../../../assets/icon-logo.png" class="logo-imagen" />
+    </ion-card-header> -->
+    <ion-card-content>
+      <div class="spinner" *ngIf="cargando">
+        <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner">
+      </div>
+      <div class="form-container">
+        <form [formGroup]="formRegistro" (ngSubmit)="registrarse()">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+          <!--FOTO DE PERFIL-->
+          <ion-avatar class="ion-avatar" *ngIf="formRegistro.value.perfilImagen">
+            <img [src]="formRegistro.value.perfilImagen" alt="foto-perfil" />
+          </ion-avatar>
+
+          <ion-icon *ngIf="!formRegistro.value.perfilImagen" name="image-outline" class="image-icon"></ion-icon>
+          <br>
+
+          <!--BOTON PARA TOMAR O SELECCIONAR UNA IMAGEN--->
+          <div style="display: flex; flex-direction: column; justify-content: center;">
+            <ion-button (click)="tomarFotoPefil()" size="small" shape="round">
+              <ion-icon name="camera-outline"></ion-icon>
+            </ion-button>
+  
+            <ion-button class="btn-scanner">
+              <ion-icon name="barcode-outline"></ion-icon><b>Escanear DNI</b>
+            </ion-button>
+          </div>
+      
+          <div class="custom-spinner" *ngIf="cargando">
+            <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" />
+          </div>
+
+          <ion-item class="estilo-input">
+            <ion-icon name="nombre" color="secondary"></ion-icon>
+            <ion-input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre"
+              formControlName="nombre"></ion-input>
+          </ion-item>
+          @if (controlError('nombre')) {
+          <ion-note class="error-mensaje">{{ obtenerControlMensajeError('nombre') }}</ion-note>
+          }
+
+          <ion-item class="estilo-input">
+            <ion-icon name="apellido" color="secondary"></ion-icon>
+            <ion-input type="text" name="apellido" id="apellido" placeholder="Ingrese su apellido"
+              formControlName="apellido"></ion-input>
+          </ion-item>
+          @if (controlError('apellido')) {
+          <ion-note class="error-mensaje">{{ obtenerControlMensajeError('apellido') }}</ion-note>
+          }
+
+          <ion-item class="estilo-input">
+            <ion-icon name="apellido" color="secondary"></ion-icon>
+            <ion-input type="number" name="dni" id="dni" placeholder="Ingrese su N° de DNI"
+              formControlName="dni"></ion-input>
+          </ion-item>
+          @if (controlError('dni')) {
+          <ion-note class="error-mensaje">{{ obtenerControlMensajeError('dni') }}</ion-note>
+          }
+
+          <ion-item class="estilo-input">
+            <ion-icon name="mail" color="secondary"></ion-icon>
+            <ion-input type="email" name="email" id="email" placeholder="Ingrese su correo electrónico"
+              formControlName="email"></ion-input>
+          </ion-item>
+          @if (controlError('email')) {
+          <ion-note class="error-mensaje">{{ obtenerControlMensajeError('email') }}</ion-note>
+          }
+          <!-- <ion-note class="error-mensaje"
+            *ngIf="(formRegistro.controls['email'].hasError('required')) && formRegistro.controls['email'].touched">
+            Error, debe ingresar una correo
+          </ion-note> -->
+          <!-- <ion-note class="error-mensaje"
+            *ngIf="(formRegistro.controls['email'].hasError('pattern')) && formRegistro.controls['email'].touched">
+            Error, debe ingresar un correo válido
+          </ion-note> -->
+
+          <ion-item class="estilo-input">
+            <ion-icon name="key" color="secondary"></ion-icon>
+            <ion-input type="{{type}}" name="password" id="password" placeholder="Ingrese su contraseña"
+              formControlName="passwordLogin">
+            </ion-input>
+            <ion-button *ngIf="isPassword" (click)="mostrarOcultarPassword()" expand="end" fill="clear" shape="none">
+              <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline' " class="eye-icon"></ion-icon>
+            </ion-button>
+          </ion-item>
+
+          <ion-note class="error-mensaje"
+            *ngIf="(formRegistro.controls['passwordLogin'].hasError('required')) && formRegistro.controls['passwordLogin'].touched">
+            Error, debe ingresar una contraseña
+          </ion-note>
+          <ion-note class="error-mensaje"
+            *ngIf="(formRegistro.controls['passwordLogin'].hasError('minlength')) && formRegistro.controls['passwordLogin'].touched">
+            La contraseña debe tener como minimo de 5 caracteres
+          </ion-note>
+          <ion-note class="error-mensaje"
+            *ngIf="(formRegistro.controls['passwordLogin'].hasError('maxlength')) && formRegistro.controls['passwordLogin'].touched">
+            La contraseña debe tener como maximo de 10 caracteres
+          </ion-note>
+          <ion-button shape="round" type="button" expand="block" color="tertiary" fill="outline" class="btn-estilos"
+            (click)="registrarse()">
+            Crear cuenta
+          </ion-button>
+        </form>
+      </div>
+    </ion-card-content>
+  </div>
+</body>
