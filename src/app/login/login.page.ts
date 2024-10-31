@@ -1,29 +1,44 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { beer, eye, eyeOffOutline, eyeOutline, footsteps, glasses, logoIonic, mail, personAdd, personCircle, pizza } from 'ionicons/icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonFabButton, IonFabList, IonCard, IonCardContent, IonNote, IonCardHeader, IonItem, IonButton, IonFab, IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFabList, IonCard, IonCardContent, IonNote, IonCardHeader, IonItem, IonButton, IonFab, IonInput } from '@ionic/angular/standalone';
 import { LoginService } from 'src/servicios/login.service';
 import { Router } from '@angular/router';
 import { SpinnerService } from 'src/servicios/spinner.service';
 import { FormViewerService } from 'src/servicios/form-viewer.service';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonNote, IonFabButton, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule, IonFabList, IonFabButton, IonCard, IonCardContent, IonCardHeader, IonItem, IonButton, IonFab, IonInput]
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    IonicModule
+  ],
 })
 export class LoginPage implements OnInit {
-
   formLogin!: FormGroup;
   type: string = 'password';
   isPassword!: boolean;
   hide: boolean = false;
   cargando: boolean = false;
 
-  ngOnInit(): void {
+  constructor(
+    private loginService: LoginService,
+    private spinnerService: SpinnerService,
+    private formViewer: FormViewerService,
+    private router: Router
+  ) {
+    addIcons({ logoIonic, mail, eye, beer, pizza, footsteps, glasses, personCircle, personAdd, eyeOffOutline, eyeOutline});
+  }
 
+  ngOnInit(): void {
     if (this.type == 'password') this.isPassword = true;
     this.formLogin = new FormGroup({
       email: new FormControl('', [
@@ -39,15 +54,11 @@ export class LoginPage implements OnInit {
     });
   }
 
-  constructor(private loginService: LoginService, private spinnerService: SpinnerService, private formViewer: FormViewerService, private router: Router) {}
-
   async iniciarSesion() {
-
     this.cargando = true;
     if (this.formLogin.valid) {
       const { email, passwordLogin } = this.formLogin.value;
       this.loginService.login(email!, passwordLogin!).then((error) => {
-        
         if (!error.errorFlag) {
           this.spinnerService.mostrarMensaje({
             message: `${error.errorMsj}`,
@@ -55,7 +66,7 @@ export class LoginPage implements OnInit {
             color: 'success',
             position: 'middle',
             icon: 'person-circle-outline',
-          })
+          });
           this.formLogin.reset();
           this.cargando = false;
           this.router.navigateByUrl('/home');
@@ -67,16 +78,13 @@ export class LoginPage implements OnInit {
             color: 'danger',
             position: 'middle',
             icon: 'person-circle-outline',
-          })
-          
+          });
         }
-    
       });
-    } 
-    
+    }
   }
 
-  registrarse(){
+  registrarse() {
     this.formLogin.reset();
     this.router.navigate(['/registro']);
   }
@@ -122,11 +130,11 @@ export class LoginPage implements OnInit {
     }
   }
 
-  controlError(control: string){
+  controlError(control: string) {
     return this.formViewer.controlConError(this.formLogin, control);
   }
 
-  obtenerControlMensajeError(control: string){
+  obtenerControlMensajeError(control: string) {
     return this.formViewer.mensajeError(this.formLogin, control);
   }
 

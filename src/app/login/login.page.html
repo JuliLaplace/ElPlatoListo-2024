@@ -1,59 +1,94 @@
-<body class="centrado">
+<div class="centrado">
   <div class="container">
     <!-- <ion-card-header>
       <img src="../../../assets/icon-logo.png" class="logo-imagen" />
     </ion-card-header> -->
     <ion-card-content>
       <div class="spinner" *ngIf="cargando">
-        <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner">
+        <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" />
       </div>
       <div class="form-container">
-        <h1><strong>El Plato Listo 👌🏼</strong></h1>
-        <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
+        <div class="container-titulo">
+          <img src="../../assets/imagenes/icono-tenedor.png" class="icono" />
+          <h1><strong>El Plato Listo</strong></h1>
+          <img src="../../assets/imagenes/icono-cuchara.png" class="icono" />
+        </div>
 
+        <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
           <ion-item class="estilo-input">
             <ion-icon name="mail" color="secondary"></ion-icon>
-            <ion-input type="email" name="email" id="email" placeholder="Ingrese su correo electrónico"
-              formControlName="email"></ion-input>
+            <ion-input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Ingrese su correo electrónico"
+              formControlName="email"
+              style="color: black;"
+            ></ion-input>
           </ion-item>
 
+          <div>
+            
+          </div>
           @if (controlError('email')) {
-            <ion-note class="error-mensaje">{{ obtenerControlMensajeError('email') }}</ion-note>
+          <ion-note class="error-mensaje"
+            >{{ obtenerControlMensajeError('email') }}</ion-note
+          >
           }
-          <!-- <ion-note class="error-mensaje"
-            *ngIf="(formLogin.controls['email'].hasError('required')) && formLogin.controls['email'].touched">
-            Error, debe ingresar una correo
-          </ion-note> -->
-          <!-- <ion-note class="error-mensaje"
-            *ngIf="(formLogin.controls['email'].hasError('pattern')) && formLogin.controls['email'].touched">
-            Error, debe ingresar un correo válido
-          </ion-note> -->
 
           <ion-item class="estilo-input">
             <ion-icon name="key" color="secondary"></ion-icon>
-            <ion-input type="{{type}}" name="password" id="password" placeholder="Ingrese su contraseña"
-              formControlName="passwordLogin">
+            <ion-input
+              type="{{type}}"
+              name="password"
+              id="password"
+              placeholder="Ingrese su contraseña"
+              formControlName="passwordLogin"
+              style="color: black;"
+            >
             </ion-input>
-            <ion-button *ngIf="isPassword" (click)="mostrarOcultarPassword()" expand="end" fill="clear" shape="none">
-              <ion-icon slot="icon-only" [name]="hide ? 'eye-outline' : 'eye-off-outline' " class="eye-icon"></ion-icon>
+            <ion-button
+              *ngIf="isPassword"
+              (click)="mostrarOcultarPassword()"
+              expand="end"
+              fill="clear"
+              shape="none"
+            >
+              <ion-icon
+                slot="icon-only"
+                [name]="hide ? 'eye-outline' : 'eye-off-outline' "
+                class="eye-icon"
+              ></ion-icon>
             </ion-button>
           </ion-item>
 
-          <ion-note class="error-mensaje"
-            *ngIf="(formLogin.controls['passwordLogin'].hasError('required')) && formLogin.controls['passwordLogin'].touched">
+          <ion-note
+            class="error-mensaje"
+            *ngIf="(formLogin.controls['passwordLogin'].hasError('required')) && formLogin.controls['passwordLogin'].touched"
+          >
             Error, debe ingresar una contraseña
           </ion-note>
-          <ion-note class="error-mensaje"
-            *ngIf="(formLogin.controls['passwordLogin'].hasError('minlength')) && formLogin.controls['passwordLogin'].touched">
+          <ion-note
+            class="error-mensaje"
+            *ngIf="(formLogin.controls['passwordLogin'].hasError('minlength')) && formLogin.controls['passwordLogin'].touched"
+          >
             La contraseña debe tener como minimo de 5 caracteres
           </ion-note>
-          <ion-note class="error-mensaje"
-            *ngIf="(formLogin.controls['passwordLogin'].hasError('maxlength')) && formLogin.controls['passwordLogin'].touched">
+          <ion-note
+            class="error-mensaje"
+            *ngIf="(formLogin.controls['passwordLogin'].hasError('maxlength')) && formLogin.controls['passwordLogin'].touched"
+          >
             La contraseña debe tener como maximo de 10 caracteres
           </ion-note>
 
-          <ion-button expand="block" shape="round" type="submit" class="btn-estilos" color="tertiary"
-            [disabled]="formLogin.invalid">
+          <ion-button
+            expand="block"
+            shape="round"
+            type="submit"
+            class="btn-estilos"
+            color="tertiary"
+            [disabled]="formLogin.invalid"
+          >
             Iniciar Sesión
           </ion-button>
         </form>
@@ -64,42 +99,68 @@
           <div class="linea"></div>
         </div>
         <ion-button
-        type="button"
-        expand="block"
-        color="tertiary"
-        fill="outline"
-        shape="round"
-        class="btn-estilos"
-        >Ingresar como Invitado
-      </ion-button>
-        <ion-button shape="round" type="button" expand="block" color="tertiary" fill="outline" class="btn-estilos" (click)="registrarse()"> 
+          type="button"
+          expand="block"
+          color="tertiary"
+          fill="outline"
+          shape="round"
+          class="btn-estilos"
+          >Ingresar como Invitado
+        </ion-button>
+        <ion-button
+          shape="round"
+          type="button"
+          expand="block"
+          color="tertiary"
+          fill="outline"
+          class="btn-estilos"
+          (click)="registrarse()"
+        >
           Crear cuenta
         </ion-button>
       </div>
     </ion-card-content>
   </div>
-</body>
+</div>
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button color="secondary" color="primary">
     <ion-icon name="person-add"></ion-icon>
   </ion-fab-button>
   <ion-fab-list side="start">
-    <ion-fab-button (click)="accesoAutomatico('duenio')" style="--background: #9dfbda;">
+    <ion-fab-button
+      (click)="accesoAutomatico('duenio')"
+      style="--background: #9dfbda"
+    >
       <ion-icon name="person-circle" color="dark"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="accesoAutomatico('cliente')" style="--background: #cbacff;">
+    <ion-fab-button
+      (click)="accesoAutomatico('cliente')"
+      style="--background: #cbacff"
+    >
       <ion-icon name="body" color="dark"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="accesoAutomatico('maitre')" style="--background: #a3d6ff;">
+    <ion-fab-button
+      (click)="accesoAutomatico('maitre')"
+      style="--background: #a3d6ff"
+    >
       <ion-icon name="glasses" color="dark"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="accesoAutomatico('mozo')" style="--background: #a3d6ff;">
+    <ion-fab-button
+      (click)="accesoAutomatico('mozo')"
+      style="--background: #a3d6ff"
+    >
       <ion-icon name="footsteps" color="dark"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="accesoAutomatico('cocinero')" style="--background: #a3d6ff;">
+    <ion-fab-button
+      (click)="accesoAutomatico('cocinero')"
+      style="--background: #a3d6ff"
+    >
       <ion-icon name="pizza" color="dark"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button (click)="accesoAutomatico('barman')" style="--background: #a3d6ff;">
+    <ion-fab-button
+      (click)="accesoAutomatico('barman')"
+      style="--background: #a3d6ff"
+    >
       <ion-icon name="beer" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>
