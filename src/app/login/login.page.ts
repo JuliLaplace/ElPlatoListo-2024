@@ -1,9 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { beer, eye, eyeOffOutline, eyeOutline, footsteps, glasses, logoIonic, mail, personAdd, personCircle, pizza } from 'ionicons/icons';
+import { beer, body, eye, eyeOffOutline, eyeOutline, footsteps, glasses, key, logoIonic, mail, personAdd, personCircle, pizza } from 'ionicons/icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFabList, IonCard, IonCardContent, IonNote, IonCardHeader, IonItem, IonButton, IonFab, IonInput } from '@ionic/angular/standalone';
 import { LoginService } from 'src/servicios/login.service';
 import { Router } from '@angular/router';
 import { SpinnerService } from 'src/servicios/spinner.service';
@@ -15,12 +14,7 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    IonicModule
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule],
 })
 export class LoginPage implements OnInit {
   formLogin!: FormGroup;
@@ -35,7 +29,21 @@ export class LoginPage implements OnInit {
     private formViewer: FormViewerService,
     private router: Router
   ) {
-    addIcons({ logoIonic, mail, eye, beer, pizza, footsteps, glasses, personCircle, personAdd, eyeOffOutline, eyeOutline});
+    addIcons({
+      logoIonic,
+      mail,
+      eye,
+      beer,
+      pizza,
+      footsteps,
+      glasses,
+      personCircle,
+      personAdd,
+      eyeOffOutline,
+      eyeOutline,
+      key,
+      body,
+    });
   }
 
   ngOnInit(): void {
@@ -87,6 +95,10 @@ export class LoginPage implements OnInit {
   registrarse() {
     this.formLogin.reset();
     this.router.navigate(['/registro']);
+  }
+
+  accederComoInvitado(){
+    this.router.navigate(['/componente-anonimo']);
   }
 
   accesoAutomatico(perfil: string) {

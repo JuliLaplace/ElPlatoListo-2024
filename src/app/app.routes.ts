@@ -24,6 +24,10 @@ export const routes: Routes = [
   {
     path: 'registro',
     loadComponent: () => import('./registro/registro.page').then( m => m.RegistroPage)
+  },
+  {
+    path: 'componente-anonimo',
+    loadComponent: () => import('./componente-anonimo/componente-anonimo.page').then( m => m.ComponenteAnonimoPage)
   }
 
   

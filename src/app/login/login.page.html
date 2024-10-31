@@ -27,9 +27,6 @@
             ></ion-input>
           </ion-item>
 
-          <div>
-            
-          </div>
           @if (controlError('email')) {
           <ion-note class="error-mensaje"
             >{{ obtenerControlMensajeError('email') }}</ion-note
@@ -105,7 +102,8 @@
           fill="outline"
           shape="round"
           class="btn-estilos"
-          >Ingresar como Invitado
+          (click)="accederComoInvitado()"
+          >Ingresar como Anónimo
         </ion-button>
         <ion-button
           shape="round"
@@ -116,7 +114,7 @@
           class="btn-estilos"
           (click)="registrarse()"
         >
-          Crear cuenta
+          Crear cuenta Cliente
         </ion-button>
       </div>
     </ion-card-content>
@@ -124,44 +122,44 @@
 </div>
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button color="secondary" color="primary">
-    <ion-icon name="person-add"></ion-icon>
+    <ion-icon name="person-add" class="icon-fab"></ion-icon>
   </ion-fab-button>
   <ion-fab-list side="start">
     <ion-fab-button
       (click)="accesoAutomatico('duenio')"
-      style="--background: #9dfbda"
+      style="--background: #cbacff"
     >
-      <ion-icon name="person-circle" color="dark"></ion-icon>
+      <ion-icon name="person-circle"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('cliente')"
       style="--background: #cbacff"
     >
-      <ion-icon name="body" color="dark"></ion-icon>
+      <ion-icon name="body"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('maitre')"
-      style="--background: #a3d6ff"
+      style="--background: #cbacff"
     >
-      <ion-icon name="glasses" color="dark"></ion-icon>
+      <ion-icon name="glasses"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('mozo')"
-      style="--background: #a3d6ff"
+      style="--background: #cbacff"
     >
-      <ion-icon name="footsteps" color="dark"></ion-icon>
+      <ion-icon name="footsteps"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('cocinero')"
-      style="--background: #a3d6ff"
+      style="--background: #cbacff"
     >
-      <ion-icon name="pizza" color="dark"></ion-icon>
+      <ion-icon name="pizza"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('barman')"
-      style="--background: #a3d6ff"
+      style="--background: #cbacff"
     >
-      <ion-icon name="beer" color="dark"></ion-icon>
+      <ion-icon name="beer"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>
 </ion-fab>

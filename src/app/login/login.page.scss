@@ -39,8 +39,12 @@
 
   ion-icon {
     margin-right: 10px;
-    ;
   }
+}
+
+ion-icon {
+  width: 35px;
+  color: #9c1de0;
 }
 
 .logo {
@@ -73,7 +77,7 @@ ion-fab-list {
 }
 
 .btn-estilos {
-  margin-top: 15px;
+  margin-top: 20px;
   font-weight: bold;
   color: azure; //color de letra
 }
