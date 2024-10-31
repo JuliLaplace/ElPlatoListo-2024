@@ -1,0 +1,60 @@
+<div class="centrado">
+  <div class="container">
+    <ion-card-content>
+      <div class="spinner" *ngIf="cargando">
+        <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" />
+      </div>
+      <div class="form-container">
+        <div class="container-titulo">
+          <img src="../../assets/imagenes/icono-tenedor.png" class="icono" />
+          <h1><strong>BIENVENIDO</strong></h1>
+          <img src="../../assets/imagenes/icono-cuchara.png" class="icono" />
+        </div>
+        <ion-card-header
+          style="
+            align-items: center;
+            margin-top: 20px;
+            min-width: 0;
+            min-height: 0;
+          "
+        >
+          <div (click)="tomarFoto()" class="imagen-container">
+            <img [src]="imagenPerfil" alt="Perfil Imagen"/>
+          </div>
+          <ion-note *ngIf="imagenPerfil === '../../../assets/imagenes/icono-anonimo.png'"
+            >Tomar Foto</ion-note
+          >
+        </ion-card-header>
+        <!-- <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
+          <ion-item class="estilo-input">
+            <ion-icon name="mail" color="secondary"></ion-icon>
+            <ion-input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Ingrese su correo electrónico"
+              formControlName="email"
+              style="color: black;"
+            ></ion-input>
+          </ion-item>
+
+          @if (controlError('email')) {
+          <ion-note class="error-mensaje"
+            >{{ obtenerControlMensajeError('email') }}</ion-note
+          >
+          
+          <ion-button
+            expand="block"
+            shape="round"
+            type="submit"
+            class="btn-estilos"
+            color="tertiary"
+            [disabled]="formLogin.invalid"
+          >
+            INGRESAR
+          </ion-button>
+        </form> -->
+      </div>
+    </ion-card-content>
+  </div>
+</div>

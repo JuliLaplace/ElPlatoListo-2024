@@ -1,0 +1,62 @@
+.container {
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 10vh;
+}
+
+.centrado {
+  width: 100vw;
+  height: 100vh;
+  flex: auto;
+  align-items: center;
+  position: relative;
+  overflow: hidden; // Asegura que el pseudo-elemento no se desborde
+  background: url("../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
+  z-index: -1; // Asegura que el pseudo-elemento esté detrás del contenido
+}
+
+.form-container {
+  background-color: #ffffffe0;
+  padding: 20px;
+  border-radius: 10px;
+  height: 70vh;
+
+  h1 {
+    color: #b692c2;
+    font-size: 40px;
+    margin: 0 20px;
+  }
+
+  ion-icon {
+    margin-right: 10px;
+  }
+}
+
+.icono {
+  width: auto;
+  height: 50px;
+}
+
+.container-titulo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.imagen-container {
+  width:  130px; /* Ajusta el tamaño según sea necesario */
+  height: 130px; /* Ajusta el tamaño según sea necesario */
+  border-radius: 9999px; /* Hace que el contenedor sea circular */
+  overflow: hidden; /* Asegura que nada se muestre fuera del contenedor circular */
+}
+
+.image-container img {
+  width: 100%; /* Ajusta la imagen para que llene el contenedor */
+  height: 100%; /* Ajusta la imagen para que llene el contenedor */
+  object-fit: cover; /* O 'contain', dependiendo de tus preferencias */
+  border-radius: inherit; /* Hereda el border-radius del contenedor */
+}
