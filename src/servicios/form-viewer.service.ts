@@ -55,7 +55,7 @@ export class FormViewerService {
     } else if (errors?.['maxlength']) {
       errorMessage = "Máximo " + errors?.['maxlength'].requiredLength + " caracteres.";
     } else if (errors?.['email']) {
-      errorMessage = "Formato de email inválido.";
+      errorMessage = 'Error, debe ingresar un correo válido';
     } else if (errors?.['min']) {
       errorMessage = "El valor mínimo es " + errors?.['min'].min + ".";
     } else if (errors?.['max']) {

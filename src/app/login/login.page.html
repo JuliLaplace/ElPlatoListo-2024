@@ -1,12 +1,15 @@
 <div class="centrado">
   <div class="container">
-    <!-- <ion-card-header>
-      <img src="../../../assets/icon-logo.png" class="logo-imagen" />
-    </ion-card-header> -->
     <ion-card-content>
-      <div class="spinner" *ngIf="cargando">
-        <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" />
+      <div class="logo">
+        <img
+          src="../../assets/imagenes/logo-elplatolisto-iso-sin-banda.png"
+          alt="logo"
+        />
       </div>
+      <!-- <div class="spinner" *ngIf="cargando">
+        <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" />
+      </div> -->
       <div class="form-container">
         <div class="container-titulo">
           <img src="../../assets/imagenes/icono-tenedor.png" class="icono" />
@@ -23,15 +26,15 @@
               id="email"
               placeholder="Ingrese su correo electrónico"
               formControlName="email"
-              style="color: black;"
+              style="color: black"
             ></ion-input>
           </ion-item>
 
-          @if (controlError('email')) {
-          <ion-note class="error-mensaje"
-            >{{ obtenerControlMensajeError('email') }}</ion-note
-          >
-          }
+          <div class="error-container">
+            <ion-note class="error-mensaje" *ngIf="controlConErrores('email')">
+              {{ obtenerMensajeError("email") }}
+            </ion-note>
+          </div>
 
           <ion-item class="estilo-input">
             <ion-icon name="key" color="secondary"></ion-icon>
@@ -41,7 +44,7 @@
               id="password"
               placeholder="Ingrese su contraseña"
               formControlName="passwordLogin"
-              style="color: black;"
+              style="color: black"
             >
             </ion-input>
             <ion-button
@@ -58,25 +61,14 @@
               ></ion-icon>
             </ion-button>
           </ion-item>
-
-          <ion-note
-            class="error-mensaje"
-            *ngIf="(formLogin.controls['passwordLogin'].hasError('required')) && formLogin.controls['passwordLogin'].touched"
-          >
-            Error, debe ingresar una contraseña
-          </ion-note>
-          <ion-note
-            class="error-mensaje"
-            *ngIf="(formLogin.controls['passwordLogin'].hasError('minlength')) && formLogin.controls['passwordLogin'].touched"
-          >
-            La contraseña debe tener como minimo de 5 caracteres
-          </ion-note>
-          <ion-note
-            class="error-mensaje"
-            *ngIf="(formLogin.controls['passwordLogin'].hasError('maxlength')) && formLogin.controls['passwordLogin'].touched"
-          >
-            La contraseña debe tener como maximo de 10 caracteres
-          </ion-note>
+          <div class="error-container">
+            <ion-note
+              class="error-mensaje"
+              *ngIf="controlConErrores('passwordLogin')"
+            >
+              {{ obtenerMensajeError("passwordLogin") }}
+            </ion-note>
+          </div>
 
           <ion-button
             expand="block"
@@ -96,16 +88,6 @@
           <div class="linea"></div>
         </div>
         <ion-button
-          type="button"
-          expand="block"
-          color="tertiary"
-          fill="outline"
-          shape="round"
-          class="btn-estilos"
-          (click)="accederComoInvitado()"
-          >Ingresar como Anónimo
-        </ion-button>
-        <ion-button
           shape="round"
           type="button"
           expand="block"
@@ -114,13 +96,13 @@
           class="btn-estilos"
           (click)="registrarse()"
         >
-          Crear cuenta Cliente
+          Crear cuenta
         </ion-button>
       </div>
     </ion-card-content>
   </div>
 </div>
-<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="!cargando">
   <ion-fab-button color="secondary" color="primary">
     <ion-icon name="person-add" class="icon-fab"></ion-icon>
   </ion-fab-button>
@@ -163,3 +145,9 @@
     </ion-fab-button>
   </ion-fab-list>
 </ion-fab>
+
+<div class="spinner-1" *ngIf="cargando">
+  <div class="conteiner-img">
+   <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" /> 
+  </div>
+</div> 
