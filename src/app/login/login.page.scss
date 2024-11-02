@@ -3,7 +3,6 @@
   position: relative;
   left: 0;
   right: 0;
-  top: 10vh;
 }
 
 .centrado {
@@ -29,7 +28,8 @@
   background-color: #ffffffe0;
   padding: 20px;
   border-radius: 10px;
-  height: 70vh;
+  height: 55vh;
+  margin-top: 3vh;
 
   h1 {
     color: #b692c2;
@@ -48,11 +48,12 @@ ion-icon {
 }
 
 .logo {
-  width: 35vh;
+  width: 25vh;
   height: auto;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: auto;
+  padding: 10px 5px;
 }
 
 ion-fab {
@@ -74,6 +75,7 @@ ion-fab-list {
   --border-width: 1px;
   margin: 1.5em auto 1.5em;
   --ion-item-background: transparent !important;
+  margin-bottom: 0;
 }
 
 .btn-estilos {
@@ -112,3 +114,36 @@ ion-fab-list {
   width: auto;
   height: 50px;
 }
+
+.error-container{
+  min-height: 20px; /* Ajusta según sea necesario */
+}
+
+.spinner-1{
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.conteiner-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(90, 90, 90, 0.75);
+
+  img{
+    animation: spin 3s linear infinite;
+  }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+

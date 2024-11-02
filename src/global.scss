@@ -37,19 +37,17 @@
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 .spinner {
-    position: fixed; /* Posiciona el spinner en relación con la ventana del navegador */
+    position: absolute;
+    width: 165px;
+    height: 165px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    top: 35%; /* Centra verticalmente */
-    left: 32%; /* Centra horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta la posición para que el centro del spinner esté en el centro de la pantalla */
-    display: inline-block;
+    z-index: 9999; /* Ensure it's on top */
     animation: spin 2s linear infinite;
-    width: 150px;
-    height: 50px;
-    z-index: 9999; /* Asegura que el spinner esté por encima de otros elementos */
-    pointer-events: none; /* Evita que el spinner interfiera con la interacción del usuario */
-    margin: auto;
+    top: 35%;
+    left: 32%;
+    transform: translate(-50%, -50%)
 }
 
 @keyframes spin {

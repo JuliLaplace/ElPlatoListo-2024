@@ -49,21 +49,17 @@ export class LoginPage implements OnInit {
   ngOnInit(): void {
     if (this.type == 'password') this.isPassword = true;
     this.formLogin = new FormGroup({
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
-      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       passwordLogin: new FormControl('', [
         Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(10),
+        Validators.minLength(4),
       ]),
     });
   }
 
   async iniciarSesion() {
     this.cargando = true;
+
     if (this.formLogin.valid) {
       const { email, passwordLogin } = this.formLogin.value;
       this.loginService.login(email!, passwordLogin!).then((error) => {
@@ -95,10 +91,6 @@ export class LoginPage implements OnInit {
   registrarse() {
     this.formLogin.reset();
     this.router.navigate(['/registro']);
-  }
-
-  accederComoInvitado(){
-    this.router.navigate(['/componente-anonimo']);
   }
 
   accesoAutomatico(perfil: string) {
@@ -142,11 +134,11 @@ export class LoginPage implements OnInit {
     }
   }
 
-  controlError(control: string) {
+  controlConErrores(control: string) {
     return this.formViewer.controlConError(this.formLogin, control);
   }
 
-  obtenerControlMensajeError(control: string) {
+  obtenerMensajeError(control: string) {
     return this.formViewer.mensajeError(this.formLogin, control);
   }
 
