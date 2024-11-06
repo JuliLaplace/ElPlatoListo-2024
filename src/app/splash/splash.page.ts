@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import { AudioService } from 'src/servicios/audio.service';
 
 @Component({
   selector: 'app-splash',
@@ -14,10 +15,12 @@ import { Router } from '@angular/router';
 export class SplashPage implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router, private audioService: AudioService
   ) { }
 
   ngOnInit() {
+
+    this.audioService.reporoduccionSplash();
     this.ocultarLogoPrincipalIso();
     this.mostrarLogoPrincipalTexto();
     this.mostrarNombres();
