@@ -12,7 +12,8 @@
   align-items: center;
   position: relative;
   overflow: hidden; // Asegura que el pseudo-elemento no se desborde
-  background: url("../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
+  background: url("../../assets/imagenes/fondo-patron.png") no-repeat fixed
+    center;
   z-index: -1; // Asegura que el pseudo-elemento esté detrás del contenido
 }
 
@@ -31,16 +32,11 @@
   height: 55vh;
   margin-top: 3vh;
 
-  h1 {
+  .titulo {
     color: #b692c2;
     font-size: 2.5em;
-    margin: 0 20px;
+    margin: 0 1.25rem;
   }
-}
-
-ion-icon {
-  width: 35px;
-  color: #9c1de0;
 }
 
 .logo {
@@ -57,10 +53,12 @@ ion-fab {
 }
 
 ion-fab-list {
-  margin-inline-end: calc(100% + 1px) !important;
-
   ion-fab-button {
-    margin-inline-start: 2px !important;
+    ion-icon {
+      height: 35px;
+      width: 25px;
+      color: #e0e0e0;
+    }
   }
 }
 
@@ -90,8 +88,8 @@ ion-fab-list {
 .horizontal-linea {
   display: flex;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 15px;
+  padding-top: 1.3rem;//padding-top: 20px;
+  padding-bottom: 0.1rem;//padding-bottom: 15px;
 }
 
 .linea {
@@ -110,35 +108,15 @@ ion-fab-list {
   height: 50px;
 }
 
-.error-container{
+.error-container {
   min-height: 20px; /* Ajusta según sea necesario */
 }
 
-.spinner-1{
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-}
-
-.conteiner-img{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgb(90, 90, 90, 0.75);
-
-  img{
-    animation: spin 3s linear infinite;
+@media only screen and (max-width: 400px) {
+  .icon{
+    margin-right: 1.5vw;
+  }
+  .titulo{
+    margin: 0 1rem !important;
   }
 }
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-

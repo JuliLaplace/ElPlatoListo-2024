@@ -7,19 +7,16 @@
           alt="logo"
         />
       </div>
-      <!-- <div class="spinner" *ngIf="cargando">
-        <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" />
-      </div> -->
       <div class="form-container">
         <div class="container-titulo">
           <img src="../../assets/imagenes/icono-tenedor.png" class="icono" />
-          <h1><strong>El Plato Listo</strong></h1>
+          <h1 class="titulo"><strong>El Plato Listo</strong></h1>
           <img src="../../assets/imagenes/icono-cuchara.png" class="icono" />
         </div>
 
         <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
           <ion-item class="estilo-input">
-            <ion-icon name="mail" color="secondary"></ion-icon>
+            <ion-icon name="mail" color="secondary" class="icon"></ion-icon>
             <ion-input
               type="email"
               name="email"
@@ -37,7 +34,7 @@
           </div>
 
           <ion-item class="estilo-input">
-            <ion-icon name="key" color="secondary"></ion-icon>
+            <ion-icon name="key" color="secondary" class="icon"></ion-icon>
             <ion-input
               type="{{type}}"
               name="password"
@@ -58,6 +55,7 @@
                 slot="icon-only"
                 [name]="hide ? 'eye-outline' : 'eye-off-outline' "
                 class="eye-icon"
+                style="width: 2em;"
               ></ion-icon>
             </ion-button>
           </ion-item>
@@ -75,7 +73,7 @@
             shape="round"
             type="submit"
             class="btn-estilos"
-            color="tertiary"
+            class="btn-estilos"
             [disabled]="formLogin.invalid"
           >
             Iniciar Sesión
@@ -84,7 +82,7 @@
 
         <div class="horizontal-linea">
           <div class="linea"></div>
-          <div class="linea-texto">¿Aun no tienes una cuenta?</div>
+          <div class="linea-texto">¿Aún no tienes una cuenta?</div>
           <div class="linea"></div>
         </div>
         <ion-button
@@ -109,44 +107,44 @@
   <ion-fab-list side="start">
     <ion-fab-button
       (click)="accesoAutomatico('duenio')"
-      style="--background: #cbacff"
+       style="--background: #2E073F"
     >
       <ion-icon name="person-circle"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('cliente')"
-      style="--background: #cbacff"
+      style="--background: #7A1CAC"
     >
       <ion-icon name="body"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('maitre')"
-      style="--background: #cbacff"
+      style="--background: #AD49E1"
     >
       <ion-icon name="glasses"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('mozo')"
-      style="--background: #cbacff"
+      style="--background: #4F1787"
     >
       <ion-icon name="footsteps"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('cocinero')"
-      style="--background: #cbacff"
+      style="--background: #180161"
     >
       <ion-icon name="pizza"></ion-icon>
     </ion-fab-button>
     <ion-fab-button
       (click)="accesoAutomatico('barman')"
-      style="--background: #cbacff"
+      style="--background: #4535C1"
     >
       <ion-icon name="beer"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>
 </ion-fab>
 
-<div class="spinner-1" *ngIf="cargando">
+<div class="spinner" *ngIf="cargando">
   <div class="conteiner-img">
    <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" /> 
   </div>
