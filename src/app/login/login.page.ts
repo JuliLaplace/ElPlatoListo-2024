@@ -73,7 +73,7 @@ export class LoginPage implements OnInit {
           });
           this.formLogin.reset();
           this.cargando = false;
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/tabs');
         } else {
           this.cargando = false;
           this.spinnerService.mostrarMensaje({
