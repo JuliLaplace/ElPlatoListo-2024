@@ -25,7 +25,7 @@ export class LoginService {
 
     return createUserWithEmailAndPassword(this.auth, email, pwd)
       .then((res) => {
-        this.router.navigate(['/menu']);
+        
 
         error.errorFlag = false;
         return error;
@@ -87,7 +87,7 @@ export class LoginService {
     console.log(this.auth.currentUser?.email)
     return signOut(this.auth)
       .then(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
       });
   }
 

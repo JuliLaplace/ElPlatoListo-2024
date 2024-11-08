@@ -12,7 +12,7 @@ export interface Usuario{
   email: string,
   tipo : TipoUsuario, 
   fotoPerfil: string,
-  estado : EstadoCliente,
+  estado : EstadoCliente | null,
 
 }
 @Injectable({

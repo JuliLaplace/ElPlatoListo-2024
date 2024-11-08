@@ -1,0 +1,61 @@
+.centrado {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
+    z-index: -1; 
+    color: rgb(34, 30, 30);
+}
+.contenedor {
+    background-color: #b5a8b1;
+    height: 80vh;
+    width: 80vw;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.img-titulo{
+    margin-top: 10px;
+    text-align: center;
+    h1{
+        margin: 20px;
+        font-weight: 700;
+    }
+    img{
+        height: 200px;
+    }
+}
+.texto{
+    
+    margin: 20px;
+    h2{
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+    p{
+        text-align: justify;
+    }
+    h5{
+        margin-top: 10px;
+    }
+
+}
+
+.contenedor-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .btn{
+    
+       
+        font-weight: bold;
+        color: white; 
+        background: #9c7ea7;
+        border-radius: 20px;
+        width: 50%;
+    }
+}
