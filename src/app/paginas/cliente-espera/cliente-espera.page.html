@@ -1,0 +1,28 @@
+<div class="centrado">
+  <ion-card-content>
+    <div class="contenedor">
+      <div class="img-titulo">
+        <h1>¡Hola {{sesion.getUsuario().split('@')[0]}}!</h1>
+        <img src="../../../assets/imagenes/logo-elplatolisto-iso-sin-banda.png" alt="">
+      </div>
+
+      <div class="texto">
+
+        <h2>¡Gracias por registrarte en nuestra aplicación!</h2>
+        <p>
+          Apreciamos tu interés en formar parte de nuestro restaurante. <br> Para poder acceder a la aplicación, tu cuenta debe ser
+          aprobada primero. Te notificaremos por correo electrónico tan pronto como haya una decisión sobre tu solicitud. <br>
+          Por favor, revisa tu casilla de correo para ver el estado de tu registro (aceptado o rechazado).
+        </p>
+        <h5>¡Esperamos darte la bienvenida muy pronto!</h5>
+      
+      </div>
+
+      <div class="contenedor-btn">
+        <button routerLink="/login" class="btn" (click)="cerrarSesion()">
+          Volver
+        </button>
+      </div>
+    </div>
+  </ion-card-content>
+</div>

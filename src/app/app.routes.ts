@@ -25,6 +25,10 @@ export const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsModule)
+  },  {
+    path: 'cliente-espera',
+    loadComponent: () => import('./paginas/cliente-espera/cliente-espera.page').then( m => m.ClienteEsperaPage)
   }
+
   
 ];
