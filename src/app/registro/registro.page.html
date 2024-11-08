@@ -1,110 +1,20 @@
 <div class="centrado">
-    <ion-card-content>
-      <div class="form-container">
-        <form [formGroup]="formRegistro" (ngSubmit)="registrarse()">
-          <div class="form1" *ngIf="!ingresarAnonimo">
-            <div class="contenedor-subidas">
-            
+  <ion-card-content>
+    <div class="form-container">
 
-              <div class="avatar">
-                <ion-avatar class="ion-avatar" *ngIf="formRegistro.value.perfilImagen">
-                  <img [src]="formRegistro.value.perfilImagen" alt="foto-perfil" />
-                </ion-avatar>
-                <ion-avatar class="ion-avatar" *ngIf="!formRegistro.value.perfilImagen">
-                  <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="foto-perfil" />
-                </ion-avatar>
-              </div>
-    
-              <div class="btn-foto">
-                <ion-button  class="btn-scanner">
-                  <ion-icon name="camera"></ion-icon> 
-                  <p>Subir foto</p>
-                </ion-button>
-              </div>
-    
-              <div class="scaner">
-                <ion-button class="btn-scanner">
-                  <ion-icon name="barcode-outline"></ion-icon>
-                  <p>Escanear DNI</p>
-                </ion-button>
-              </div>
-            </div>
-  
-          
-            <ion-input class="estilo-input" formControlName="apellido" label="Apellido" label-placement="floating" fill="outline"></ion-input>
-            <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'apellido')}" class="error-message">
-              <p>{{ formViewer.mensajeError(formRegistro, 'apellido') }}</p>
-            </div>
-  
-            <ion-input  class="estilo-input" formControlName="nombre" label="Nombre" label-placement="floating" fill="outline"></ion-input>
-            <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'nombre')}" class="error-message">
-              <p>{{ formViewer.mensajeError(formRegistro, 'nombre') }}</p>
-            </div>
-  
-  
-            <ion-input  class="estilo-input" formControlName="dni" label="DNI" label-placement="floating" fill="outline"></ion-input>
-            <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'dni')}" class="error-message">
-              <p>{{ formViewer.mensajeError(formRegistro, 'dni') }}</p>
-            </div>
-            
-  
-            <ion-input  class="estilo-input" formControlName="email" label="Correo" label-placement="floating" fill="outline"></ion-input>
-            <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'email')}" class="error-message">
-              <p>{{ formViewer.mensajeError(formRegistro, 'email') }}</p>
-            </div>
-  
-            <ion-input type="password" class="estilo-input" formControlName="passwordLogin" label="Contraseña" label-placement="floating" fill="outline"></ion-input>
-            <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'passwordLogin')}" class="error-message">
-              <p>{{ formViewer.mensajeError(formRegistro, 'passwordLogin') }}</p>
-            </div>
-  
-          
-            <ion-button shape="round" type="button" expand="block" color="tertiary" fill="outline" class="btn-estilos" [disabled]="!this.formRegistro.valid">Crear cuenta</ion-button>
-  
-            <p>{{escaneo}}</p>
-          </div>
-
-          <div class="form2"  *ngIf="ingresarAnonimo">
-            <div class="contenedor-subidas">
-            
-              <div class="avatar">
-                <ion-avatar class="ion-avatar" *ngIf="formRegistro.value.perfilImagen">
-                  <img [src]="formRegistro.value.perfilImagen" alt="foto-perfil" />
-                </ion-avatar>
-                <ion-avatar class="ion-avatar" *ngIf="!formRegistro.value.perfilImagen">
-                  <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="foto-perfil" />
-                </ion-avatar>
-              </div>
-    
-              <div class="btn-foto">
-                <ion-button  class="btn-scanner">
-                  <ion-icon name="camera"></ion-icon> 
-                  <p>Subir foto</p>
-                </ion-button>
-              </div>
-              <ion-input class="estilo-input" formControlName="apellido" label="Apellido" label-placement="floating" fill="outline"></ion-input>
-              <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'apellido')}" class="error-message">
-                <p>{{ formViewer.mensajeError(formRegistro, 'apellido') }}</p>
-              </div>
-
-              <ion-input  class="estilo-input" formControlName="email" label="Correo" label-placement="floating" fill="outline"></ion-input>
-              <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'email')}" class="error-message">
-                <p>{{ formViewer.mensajeError(formRegistro, 'email') }}</p>
-              </div>
-    
-              <ion-input type="password" class="estilo-input" formControlName="passwordLogin" label="Contraseña" label-placement="floating" fill="outline"></ion-input>
-              <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'passwordLogin')}" class="error-message">
-                <p>{{ formViewer.mensajeError(formRegistro, 'passwordLogin') }}</p>
-              </div>
-
-            </div>
-          </div>
-          
-        </form>
-        <div class="toggle">
-          <ion-toggle  [(ngModel)]="ingresarAnonimo" [checked]="false" aria-label="Tertiary toggle" color="tertiary" style="color: black;">Ingresar con usuario Anónimo</ion-toggle>
-        </div>
-
+      <div class="form1" *ngIf="!ingresarAnonimo">
+        <app-registro-cliente></app-registro-cliente>
       </div>
-    </ion-card-content>
-  </div>
+
+      <div class="form2" *ngIf="ingresarAnonimo">
+        <app-registro-cliente-anon></app-registro-cliente-anon>
+      </div>
+
+      <div class="toggle">
+        <ion-toggle [(ngModel)]="ingresarAnonimo" [checked]="false" aria-label="Tertiary toggle" 
+          style="color: black;">Ingresar con usuario Anónimo</ion-toggle>
+      </div>
+
+    </div>
+  </ion-card-content>
+</div>
