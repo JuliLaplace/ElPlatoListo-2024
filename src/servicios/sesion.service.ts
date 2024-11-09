@@ -21,5 +21,4 @@ export class SesionService {
   sesionActiva(): boolean{
     return this.usuarioActual !=null;
   }
-
 }
