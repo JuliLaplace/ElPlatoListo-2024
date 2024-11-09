@@ -99,7 +99,7 @@ export class LoginPage implements OnInit {
       case 'duenio':
         this.formLogin.setValue({
           email: 'admin@gmail.com', //Dueño
-          passwordLogin: '111111',
+          passwordLogin: 'admin12345678',
         });
         break;
       case 'cliente':
