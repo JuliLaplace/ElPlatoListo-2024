@@ -69,9 +69,9 @@ export class LoginService {
         );
         if (usuario) {
           this.usuarioActual = usuario
-          console.log(
-            `Bienvenido ${usuario.nombre}. Estado: ${usuario.estado}. Usuario: ${this.usuarioActual}`
-          );
+          // console.log(
+          //   `Bienvenido ${usuario.nombre}. Estado: ${usuario.estado}. Usuario: ${this.usuarioActual}`
+          // );
           error.errorMsj = `Bienvenido ${resultado.user.email}`;
           
           if (usuario.estado == EstadoCliente.pendiente) {
