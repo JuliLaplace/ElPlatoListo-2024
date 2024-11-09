@@ -31,7 +31,7 @@ export class RegistroClienteComponent  implements OnInit {
   errorFlag: boolean = false;
   errorMsj: string = "";
   urlFoto : string = '../../../assets/imagenes/icono-anonimo.png';
-  mensajeScaner: string = '';
+ 
 
 
   constructor(private loginService: LoginService, private spinnerService: SpinnerService, public formViewer: FormViewerService, private router: Router, private servicioStorage: StorageService, private dataUsuarios: DataUsuariosService, private scanner: QrScannerService) {
@@ -101,6 +101,7 @@ export class RegistroClienteComponent  implements OnInit {
       if(!this.errorFlag){
         this.cargarUsuarioBD();
         this.limpiarDatos();
+        this.router.navigate(['/cliente-espera']);
       }
     })
   }
