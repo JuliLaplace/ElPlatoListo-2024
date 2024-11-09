@@ -73,6 +73,8 @@ export class RegistroClienteAnonComponent  implements OnInit {
   }
 
   registrarse(){
+    this.cargando = true;
+
     let emailIngresado= this.formRegistro.get('email')?.value;
     let password = this.formRegistro.get('passwordLogin')?.value;
     this.loginService.registrar(emailIngresado, password)
@@ -82,8 +84,11 @@ export class RegistroClienteAnonComponent  implements OnInit {
       if(!this.errorFlag){
         this.cargarUsuarioBD();
         this.limpiarDatos();
+        this.cargando = false;
       }
+      this.cargando = false;
     })
+    this.cargando = false;
   }
 
 
