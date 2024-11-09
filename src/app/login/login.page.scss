@@ -26,14 +26,14 @@
 }
 
 .form-container {
-  background-color: #ffffffe0;
+  background-color: #b5a8b1;
   padding: 20px;
   border-radius: 10px;
   height: 55vh;
   margin-top: 3vh;
 
   .titulo {
-    color: #b692c2;
+    color: #9c1de0;
     font-size: 2.5em;
     margin: 0 1.25rem;
   }
@@ -74,7 +74,9 @@ ion-fab-list {
 .btn-estilos {
   margin-top: 1em;
   font-weight: bold;
-  color: azure; //color de letra
+  color: white; //color de letra
+  background: #B692C2;
+  border-radius: 20px;
 }
 
 .error-mensaje {

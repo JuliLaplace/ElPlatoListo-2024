@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { gameControllerOutline, home, menu, person, qrCodeOutline } from 'ionicons/icons';
+import { home, menu, qrCodeOutline, exitSharp } from 'ionicons/icons';
+import { LoginService } from 'src/servicios/login.service';
 
 @Component({
   selector: 'app-tabs',
@@ -12,12 +13,16 @@ import { gameControllerOutline, home, menu, person, qrCodeOutline } from 'ionico
   styleUrls: ['./tabs.component.scss'],
 })
 export class TabsComponent {
-  constructor() {
+  constructor(private loginService: LoginService) {
     addIcons({
       menu,
       home,
-      person,
-      qrCodeOutline
+      qrCodeOutline,
+      exitSharp
     });
+  }
+
+  cerrarSesion(){
+    this.loginService.logout();
   }
 }

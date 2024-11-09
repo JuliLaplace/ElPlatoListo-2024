@@ -75,10 +75,11 @@ export class LoginPage implements OnInit {
           this.cargando = false;
           this.router.navigateByUrl('/tabs');
         } else {
+          this.formLogin.reset();
           this.cargando = false;
           this.spinnerService.mostrarMensaje({
             message: `${error.errorMsj}`,
-            duration: 1500,
+            duration: 2500,
             color: 'danger',
             position: 'middle',
             icon: 'person-circle-outline',

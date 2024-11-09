@@ -6,7 +6,7 @@ import { TabsoutingModule } from './tabs-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    TabsoutingModule
+    TabsoutingModule,
   ]
 })
 export class TabsModule { }
