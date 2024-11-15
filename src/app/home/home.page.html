@@ -17,7 +17,7 @@
   </div>
 
   <div *ngIf="sesion.esCliente()">
-    <!-- <app-home-cliente [usuario]="sesion.usuarioBD"></app-home-cliente> -->
+    <app-home-cliente [usuario]="sesion.usuarioBD"></app-home-cliente>
   </div>
 
   <div *ngIf="sesion.esMaitre()">
