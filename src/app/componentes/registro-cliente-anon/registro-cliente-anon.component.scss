@@ -1,4 +1,9 @@
-
+.container{
+    text-align: center;
+    position: relative;
+    left: 0;
+    right: 0;
+}
 .contenedor-subidas{
     display: flex;
     flex-direction: column;
@@ -6,6 +11,7 @@
     margin-bottom: 5px;
 }
 .form-container {
+    // position: relative;
     --background-color: #b5a8b1;
     padding: 10px;
     border-radius: 10px;
