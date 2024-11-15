@@ -13,13 +13,14 @@ export interface Usuario{
   tipo : TipoUsuario, 
   fotoPerfil: string,
   estado : EstadoCliente | null,
-
 }
 @Injectable({
   providedIn: 'root',
 })
 export class DataUsuariosService {
+
   public coleccionUsuarios: Usuario[] = [];
+  public coleccionClientesPendientes: Usuario[] = [];
 
   constructor(private firestore: Firestore) {}
 
@@ -42,5 +43,16 @@ export class DataUsuariosService {
     
     // Si no encuentra el usuario
     return null;
+  }
+
+  obtenerDatos(){
+    let col = collection(this.firestore, 'usuarios');
+    const observable = collectionData(col, {idField: 'id'});
+    observable.subscribe((respuesta:any) => {
+      this.coleccionUsuarios = respuesta;
+      this.coleccionClientesPendientes = this.coleccionUsuarios.filter((usuario)=>{return ((usuario.tipo == TipoUsuario.cliente) && (usuario.estado == EstadoCliente.pendiente))});
+      console.log(this.coleccionClientesPendientes)
+    })
+
   }
 }
