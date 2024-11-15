@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { home, menu, qrCodeOutline, exitSharp } from 'ionicons/icons';
@@ -9,11 +10,11 @@ import { LoginService } from 'src/servicios/login.service';
 @Component({
   selector: 'app-tabs',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, RouterLink],
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
 })
-export class TabsComponent  {
+export class TabsComponent {
   @Input() usuario!: Usuario | null;
 
   constructor(private loginService: LoginService) {
@@ -21,11 +22,11 @@ export class TabsComponent  {
       menu,
       home,
       qrCodeOutline,
-      exitSharp
+      exitSharp,
     });
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     this.loginService.logout();
   }
 }

@@ -1,4 +1,31 @@
 ion-fab-button {
-    width: 5em;
-    height: 5em;
+  width: 5em;
+  height: 5em;
+}
+.footer-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 60px;
+  background-color: var(--background, #8841c5);
+}
+
+.footer-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  color: var(--color, #ffffff);
+  cursor: pointer;
+}
+
+.footer-button ion-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.footer-button ion-icon {
+  font-size: 24px;
 }
