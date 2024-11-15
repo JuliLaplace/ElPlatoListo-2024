@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { camera} from 'ionicons/icons';
 import { FormViewerService } from 'src/servicios/form-viewer.service';
 import { LoginService } from 'src/servicios/login.service';
-import { SpinnerService } from 'src/servicios/spinner.service';
 import { StorageService } from 'src/servicios/storage.service';
 import { IonicModule } from '@ionic/angular';
 import { DataUsuariosService, Usuario } from 'src/servicios/data-usuarios.service';
@@ -24,14 +23,15 @@ export class RegistroClienteAnonComponent  implements OnInit {
 
   formRegistro!: FormGroup;
   foto!: File;
-  cargando: boolean = false;
+  cargando: boolean = true;
   contrasenaValida:boolean=false;
   errorFlag: boolean = false;
   errorMsj: string = "";
   urlFoto : string = '../../../assets/imagenes/icono-anonimo.png';
+  @Output() spinnerActivo = new EventEmitter<any>();
 
 
-  constructor(private loginService: LoginService, private spinnerService: SpinnerService, public formViewer: FormViewerService, private router: Router, private servicioStorage: StorageService, private dataUsuarios: DataUsuariosService) {
+  constructor(private loginService: LoginService, public formViewer: FormViewerService, private router: Router, private servicioStorage: StorageService, private dataUsuarios: DataUsuariosService) {
 
     addIcons({ camera})
   }
@@ -73,8 +73,7 @@ export class RegistroClienteAnonComponent  implements OnInit {
   }
 
   registrarse(){
-    this.cargando = true;
-
+    this.spinnerActivo.emit(true);
     let emailIngresado= this.formRegistro.get('email')?.value;
     let password = this.formRegistro.get('passwordLogin')?.value;
     this.loginService.registrar(emailIngresado, password)
@@ -84,11 +83,11 @@ export class RegistroClienteAnonComponent  implements OnInit {
       if(!this.errorFlag){
         this.cargarUsuarioBD();
         this.limpiarDatos();
-        this.cargando = false;
+        this.spinnerActivo.emit(false);
       }
-      this.cargando = false;
+      this.spinnerActivo.emit(false);
     })
-    this.cargando = false;
+    // this.cargando = false;
   }
 
 
@@ -110,7 +109,6 @@ export class RegistroClienteAnonComponent  implements OnInit {
       this.dataUsuarios.crearRegistro(cliente)
       .then((id)=>{
         cliente.id =  id;
-        this.subirFoto();
         this.limpiarDatos();
       });
 

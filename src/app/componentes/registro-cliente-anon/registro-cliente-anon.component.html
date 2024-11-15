@@ -1,68 +1,67 @@
-<div class="form-container">
+<div class="container">
 
-  <form [formGroup]="formRegistro" (ngSubmit)="registrarse()">
-
-    <div class="contenedor-subidas">
-
-      <div class="avatar">
-        <ion-avatar class="ion-avatar">
-          <img [src]="urlFoto" alt="foto-perfil" />
-        </ion-avatar>
+  <div class="form-container">
+  
+    <form [formGroup]="formRegistro" (ngSubmit)="registrarse()">
+  
+      <div class="contenedor-subidas">
+  
+        <div class="avatar">
+          <ion-avatar class="ion-avatar">
+            <img [src]="urlFoto" alt="foto-perfil" />
+          </ion-avatar>
+        </div>
+  
+        <div class="btn-foto">
+          <ion-button class="btn-scanner" (click)="subirFotoClick()">
+            <ion-icon name="camera"></ion-icon>
+            <p>Subir foto</p>
+          </ion-button>
+          <input type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;">
+        </div>
+      
       </div>
-
-      <div class="btn-foto">
-        <ion-button class="btn-scanner" (click)="subirFotoClick()">
-          <ion-icon name="camera"></ion-icon>
-          <p>Subir foto</p>
-        </ion-button>
-        <input type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;">
-      </div>
-    
-    </div>
-
-      <ion-input class="estilo-input" formControlName="nombre" label="Nombre" label-placement="floating"
-        fill="outline"></ion-input>
-      <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'nombre')}" class="error-message">
-        <p>{{ formViewer.mensajeError(formRegistro, 'nombre') }}</p>
-      </div>
-
-      <ion-input class="estilo-input" formControlName="email" label="Correo" label-placement="floating"
-        fill="outline"></ion-input>
-      <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'email')}" class="error-message">
-        <p>{{ formViewer.mensajeError(formRegistro, 'email') }}</p>
-
-      </div>
-
-      <ion-input type="password" class="estilo-input" formControlName="passwordLogin" label="Contraseña"
-        label-placement="floating" fill="outline"></ion-input>
-      <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'passwordLogin')}" class="error-message">
-        <p>{{ formViewer.mensajeError(formRegistro, 'passwordLogin') }}</p>
-      </div>
-
-      <ion-input type="password" class="estilo-input" formControlName="passwordLogin2" label="Reingrese contraseña"
-        label-placement="floating" fill="outline"></ion-input>
-      <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'passwordLogin2') }" class="error-message">
-        <p>
-          {{ formViewer.mensajeError(formRegistro, 'passwordLogin2') }}
-        </p>
-      </div>
-
-    <ion-button shape="round" type="submit" expand="block" fill="outline" class="btn-estilos "
-      [disabled]="!this.formRegistro.valid || !foto || !contrasenaValida">Crear cuenta</ion-button>
-
-      <!-- <div *ngIf="errorFlag" class="msjErrorGeneral">
-        <p>{{errorMsj}}</p>
-      </div> -->
-      <div [ngClass]="{'visible': errorFlag}" class="error-message">
-        <p>{{ errorMsj }}</p>
-      </div>
-
-
-
-  </form>
-</div>
-<div class="spinner" *ngIf="cargando">
-  <div class="conteiner-img">
-   <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" /> 
+  
+        <ion-input class="estilo-input" formControlName="nombre" label="Nombre" label-placement="floating"
+          fill="outline"></ion-input>
+        <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'nombre')}" class="error-message">
+          <p>{{ formViewer.mensajeError(formRegistro, 'nombre') }}</p>
+        </div>
+  
+        <ion-input class="estilo-input" formControlName="email" label="Correo" label-placement="floating"
+          fill="outline"></ion-input>
+        <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'email')}" class="error-message">
+          <p>{{ formViewer.mensajeError(formRegistro, 'email') }}</p>
+  
+        </div>
+  
+        <ion-input type="password" class="estilo-input" formControlName="passwordLogin" label="Contraseña"
+          label-placement="floating" fill="outline"></ion-input>
+        <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'passwordLogin')}" class="error-message">
+          <p>{{ formViewer.mensajeError(formRegistro, 'passwordLogin') }}</p>
+        </div>
+  
+        <ion-input type="password" class="estilo-input" formControlName="passwordLogin2" label="Reingrese contraseña"
+          label-placement="floating" fill="outline"></ion-input>
+        <div [ngClass]="{'visible': formViewer.controlConError(formRegistro, 'passwordLogin2') }" class="error-message">
+          <p>
+            {{ formViewer.mensajeError(formRegistro, 'passwordLogin2') }}
+          </p>
+        </div>
+  
+      <ion-button shape="round" type="submit" expand="block" class="btn-estilos "
+        [disabled]="!this.formRegistro.valid || !foto || !contrasenaValida">Crear cuenta</ion-button>
+  
+        <!-- <div *ngIf="errorFlag" class="msjErrorGeneral">
+          <p>{{errorMsj}}</p>
+        </div> -->
+        <div [ngClass]="{'visible': errorFlag}" class="error-message">
+          <p>{{ errorMsj }}</p>
+        </div>
+  
+  
+  
+    </form>
   </div>
-</div> 
+</div>
+

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
@@ -31,6 +31,8 @@ export class RegistroClienteComponent  implements OnInit {
   errorFlag: boolean = false;
   errorMsj: string = "";
   urlFoto : string = '../../../assets/imagenes/icono-anonimo.png';
+  
+  @Output() spinnerActivo = new EventEmitter<any>();
  
 
 
@@ -92,6 +94,7 @@ export class RegistroClienteComponent  implements OnInit {
 
 
   registrarse(){
+    this.spinnerActivo.emit(true);
     let emailIngresado = this.formRegistro.get('email')?.value;
     let password = this.formRegistro.get('passwordLogin')?.value;
     this.loginService.registrar(emailIngresado, password)
@@ -101,8 +104,10 @@ export class RegistroClienteComponent  implements OnInit {
       if(!this.errorFlag){
         this.cargarUsuarioBD();
         this.limpiarDatos();
+        this.spinnerActivo.emit(false);
         this.router.navigate(['/cliente-espera']);
       }
+      this.spinnerActivo.emit(false);
     })
   }
 
