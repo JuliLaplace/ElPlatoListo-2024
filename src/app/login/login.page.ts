@@ -98,38 +98,38 @@ export class LoginPage implements OnInit {
     switch (perfil) {
       case 'duenio':
         this.formLogin.setValue({
-          email: 'admin@gmail.com', //Dueño
+          email: 'duenio@gmail.com', //Dueño
           passwordLogin: 'admin12345678',
         });
         break;
       case 'cliente':
         this.formLogin.setValue({
-          email: 'supervisor@gmail.com', //Supervisor
-          passwordLogin: '222222',
+          email: 'princess@yopmail.com', //Supervisor
+          passwordLogin: 'pescaditos',
         });
         break;
       case 'maitre':
         this.formLogin.setValue({
           email: 'maitre@gmail.com', //Maitre
-          passwordLogin: '111111',
+          passwordLogin: '4444444444',
         });
         break;
       case 'mozo':
         this.formLogin.setValue({
           email: 'mozo@gmail.com', //Mozo
-          passwordLogin: '333333',
+          passwordLogin: '3333333333',
         });
         break;
       case 'cocinero':
         this.formLogin.setValue({
           email: 'cocinero@gmail.com', //Cocinero
-          passwordLogin: '123123',
+          passwordLogin: '1111111111',
         });
         break;
       case 'barman':
         this.formLogin.setValue({
-          email: 'barman@gmail.com', //Barman
-          passwordLogin: '111111',
+          email: 'bartender@gmail.com', //Barman
+          passwordLogin: '2222222222',
         });
         break;
     }

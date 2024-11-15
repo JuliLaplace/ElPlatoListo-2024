@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SpinnerService } from 'src/servicios/spinner.service';
 import { IonicModule } from '@ionic/angular';
 import { RegistroClienteAnonComponent } from '../componentes/registro-cliente-anon/registro-cliente-anon.component';
 import { RegistroClienteComponent } from '../componentes/registro-cliente/registro-cliente.component';
@@ -20,11 +19,14 @@ export class RegistroPage  {
   cargando: boolean = false;
 
 
-  constructor(private spinnerService: SpinnerService) {
+  constructor() {
 
     
   }
 
+  obtenerEstadoSpinner( estadoSpiinner : boolean){
+    this.cargando =estadoSpiinner;
+  }
   
 
 

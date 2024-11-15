@@ -7,11 +7,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">El plato listo</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngIf="sesion.esSupervisor() || sesion.esDueno() ">
+    <!-- <app-home-dueno [usuario]="sesion.usuarioBD"></app-home-dueno> -->
+     <p> hola supervisor</p>
+  </div>
 
-
+  <div *ngIf="sesion.esMozo()">
+    <!-- <app-home-mozo [usuario]="sesion.usuarioBD"></app-home-mozo> -->
+     <p>hola mozo</p>
+  </div>
+  
+  <div *ngIf="sesion.esCliente()">
+    <!-- <app-home-cliente [usuario]="sesion.usuarioBD"></app-home-cliente> -->
+  </div>
+  
+  <div *ngIf="sesion.esMaitre()">
+    <!-- <app-home-maitre [usuario]="sesion.usuarioBD"></app-home-maitre> -->
+  </div>
+  
+  <div *ngIf="sesion.esCocinero()">
+    <!-- <app-home-cocinero [usuario]="sesion.usuarioBD"></app-home-cocinero> -->
+  </div>
+  
+  <div *ngIf="sesion.esBartender()">
+    <!-- <app-home-bartender [usuario]="sesion.usuarioBD"></app-home-bartender> -->
+  
+  </div>
 </ion-content>
+

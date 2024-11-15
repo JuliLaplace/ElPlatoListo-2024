@@ -1,6 +1,11 @@
 export enum TipoUsuario {
     cliente = 'Cliente',
-    clienteAnon = 'Cliente Anonimo',
+    clienteAnon = 'Anonimo',
     mozo = 'Mozo',
+    dueno = "Dueño",
+    supervisor = "Supervisor",
+    maitre = "Maitre",
+    bartender = "Bartender",
+    cocinero = "Cocinero"
 
 }

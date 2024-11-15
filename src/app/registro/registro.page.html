@@ -3,11 +3,11 @@
     <div class="form-container">
 
       <div class="form1" *ngIf="!ingresarAnonimo">
-        <app-registro-cliente></app-registro-cliente>
+        <app-registro-cliente (spinnerActivo)="obtenerEstadoSpinner($event)"></app-registro-cliente>
       </div>
 
       <div class="form2" *ngIf="ingresarAnonimo">
-        <app-registro-cliente-anon></app-registro-cliente-anon>
+        <app-registro-cliente-anon (spinnerActivo)="obtenerEstadoSpinner($event)"></app-registro-cliente-anon>
       </div>
 
       <div class="toggle">
@@ -18,3 +18,9 @@
     </div>
   </ion-card-content>
 </div>
+
+<div class="spinner" *ngIf="cargando">
+  <div class="conteiner-img">
+   <img src="../../assets/imagenes/spinner-icono.png" alt="Spinner" /> 
+  </div>
+</div> 
