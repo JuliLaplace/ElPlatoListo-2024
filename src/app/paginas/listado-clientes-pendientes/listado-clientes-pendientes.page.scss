@@ -4,7 +4,21 @@ ion-toolbar {
     font-size: 1.2em;
   }
 }
+.centrado {
+  overflow: hidden; // Asegura que el pseudo-elemento no se desborde
+  background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 88vh;
+  padding: 20px;
+  
+}
 
+.contenido-general{
+  overflow-y: auto;
+}
 .cards-contenedor {
   display: flex;
   flex-direction: column;
