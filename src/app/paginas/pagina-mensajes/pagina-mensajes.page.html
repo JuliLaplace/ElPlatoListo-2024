@@ -1,0 +1,26 @@
+<div class="centrado">
+  <ion-card-content>
+    <div class="contenedor">
+      <div class="img-titulo">
+        <h1>¡Hola {{sesion.getUsuario().split('@')[0]}}!</h1>
+        <img src="../../../assets/imagenes/logo-elplatolisto-iso-sin-banda.png" alt="">
+      </div>
+
+      <div class="texto">
+
+        <h2>¡Te encontras en la lista de espera!</h2>
+        <p>
+         Esperá unos minutos hasta que un maitre te asigne una mesa para poder ubicarte y realizar el pedido.
+        </p>
+        <h5>¡Esperamos que disfrutes tu paso por El Plato Listo!</h5>
+      
+      </div>
+
+      <div class="contenedor-btn">
+        <button routerLink="/home" class="btn">
+          Volver
+        </button>
+      </div>
+    </div>
+  </ion-card-content>
+</div>

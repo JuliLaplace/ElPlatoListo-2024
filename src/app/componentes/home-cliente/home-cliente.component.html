@@ -1,8 +1,14 @@
 <div class="centrado">
   <div class="delimitador-botones">
     <div class="botones-container">
-      <button ion-button class="option-btn" routerLink="/juego/simple"><span class="boton-texto">Escanear</span></button>
-      <button ion-button class="option-btn" routerLink="/juego/intermedio"><span class="boton-texto">Ver encuestas anteriores</span></button>
+      <button ion-button class="option-btn" (click)="escanear()">
+        <img src="../../../assets/iconos/pago.png" alt="">
+        <span class="boton-texto">Escanear</span>
+      </button>
+      <button ion-button class="option-btn" routerLink="/juego/intermedio">
+        <img src="../../../assets/iconos/satisfaccion.png" alt="">
+        <span class="boton-texto">Ver encuestas anteriores</span>
+      </button>
     </div>
   </div>
 </div>
