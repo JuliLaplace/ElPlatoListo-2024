@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Inicio | Bienvenido, {{ sesion.usuarioBD?.nombre}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="cards-contenedor" *ngIf="dataUsuario.coleccionClientesPendientes">
+
+    <div *ngFor="let cliente of dataUsuario.coleccionClientesPendientes" class="card">
+      <div class="card-content">
+        <div class="contenedor-datos">
+          <div class="card-imagen">
+            <img [src]="cliente.fotoPerfil" alt="{{cliente.nombre}} {{cliente.apellido}}" />
+          </div>
+          <div class="card-info">
+            <h3>{{cliente.nombre}} {{cliente.apellido}}</h3>
+            <p>Estado: {{cliente.estado}}</p>
+          </div>
+        </div>
+
+        <div class="card-botones">
+          <button  class="btn-aceptar" (click)="aceptarCliente(cliente)">Aceptar</button>
+          <button ion-button class="btn-rechazar" (click)="rechazarCliente(cliente)">Rechazar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</ion-content>
+
+<!-- <app-tabs [usuario]="sesion.usuarioBD"></app-tabs> -->
