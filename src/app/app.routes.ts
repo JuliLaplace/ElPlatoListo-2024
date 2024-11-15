@@ -25,5 +25,16 @@ export const routes: Routes = [
   {
     path: 'cliente-espera',
     loadComponent: () => import('./paginas/cliente-espera/cliente-espera.page').then( m => m.ClienteEsperaPage)
-  }
+  },
+  {
+    path: 'listado-clientes-pendientes',
+    loadComponent: () => import('./paginas/listado-clientes-pendientes/listado-clientes-pendientes.page').then( m => m.ListadoClientesPendientesPage)
+  },  {
+    path: 'pagina-mensajes',
+    loadComponent: () => import('./paginas/pagina-mensajes/pagina-mensajes.page').then( m => m.PaginaMensajesPage)
+  },
+
+  
+
+
 ];

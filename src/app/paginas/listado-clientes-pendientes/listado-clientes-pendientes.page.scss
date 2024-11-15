@@ -1,0 +1,76 @@
+ion-toolbar {
+  ion-title {
+    --color: white;
+    font-size: 1.2em;
+  }
+}
+
+.cards-contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.card {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contenedor-datos {
+  display: flex; 
+  align-items: center; 
+  gap: 16px; 
+}
+
+.card-imagen img {
+  width: 100px; 
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-info {
+  flex-grow: 1; 
+}
+
+.card-info h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #333;
+}
+
+.card-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.card-botones {
+  display: flex; 
+  justify-content: space-around; 
+  gap: 16px;
+}
+
+.btn-aceptar,
+.btn-rechazar {
+  flex: 1; 
+  font-size: 14px;
+  height: 20px;
+}
+
+.btn-aceptar{
+  background-color: green;
+}
+.btn-rechazar{
+  background-color: red;
+}

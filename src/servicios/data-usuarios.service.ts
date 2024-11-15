@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, Firestore, collectionData, query, where, getDocs } from '@angular/fire/firestore';
+import { addDoc, collection, Firestore, collectionData, query, where, getDocs, doc, updateDoc } from '@angular/fire/firestore';
 import { EstadoCliente } from 'src/app/enumerados/estado-cliente';
 import { TipoUsuario } from 'src/app/enumerados/tipo-usuario';
 
@@ -22,7 +22,10 @@ export class DataUsuariosService {
   public coleccionUsuarios: Usuario[] = [];
   public coleccionClientesPendientes: Usuario[] = [];
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore) {
+
+    this.obtenerDatos();
+  }
 
   async crearRegistro(cliente: Usuario): Promise<string> {
     let col = collection(this.firestore, 'usuarios');
@@ -51,8 +54,19 @@ export class DataUsuariosService {
     observable.subscribe((respuesta:any) => {
       this.coleccionUsuarios = respuesta;
       this.coleccionClientesPendientes = this.coleccionUsuarios.filter((usuario)=>{return ((usuario.tipo == TipoUsuario.cliente) && (usuario.estado == EstadoCliente.pendiente))});
-      console.log(this.coleccionClientesPendientes)
     })
 
   }
+
+  private modificarRegistro(usuario : Usuario, data: any) {
+    console.log(usuario);
+    let col = collection(this.firestore, 'usuarios');
+    const docRef = doc(col, usuario.id);
+    
+    updateDoc(docRef, data);
+  }
+  cambiarEstadoCliente(usuario : Usuario, estado: EstadoCliente ){
+    this.modificarRegistro(usuario, {estado : estado});
+  }
+
 }
