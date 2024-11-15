@@ -1,37 +1,37 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      El plato listo
+      Inicio | Bienvenido, {{ sesion.usuarioBD?.nombre}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <div *ngIf="sesion.esSupervisor() || sesion.esDueno() ">
-    <!-- <app-home-dueno [usuario]="sesion.usuarioBD"></app-home-dueno> -->
-     <p> hola supervisor</p>
+    <app-home-admin [usuario]="sesion.usuarioBD"></app-home-admin>
   </div>
 
   <div *ngIf="sesion.esMozo()">
     <!-- <app-home-mozo [usuario]="sesion.usuarioBD"></app-home-mozo> -->
-     <p>hola mozo</p>
+    <p>hola mozo</p>
   </div>
-  
+
   <div *ngIf="sesion.esCliente()">
     <!-- <app-home-cliente [usuario]="sesion.usuarioBD"></app-home-cliente> -->
   </div>
-  
+
   <div *ngIf="sesion.esMaitre()">
     <!-- <app-home-maitre [usuario]="sesion.usuarioBD"></app-home-maitre> -->
   </div>
-  
+
   <div *ngIf="sesion.esCocinero()">
     <!-- <app-home-cocinero [usuario]="sesion.usuarioBD"></app-home-cocinero> -->
   </div>
-  
+
   <div *ngIf="sesion.esBartender()">
     <!-- <app-home-bartender [usuario]="sesion.usuarioBD"></app-home-bartender> -->
-  
+
   </div>
 </ion-content>
 
+<app-tabs [usuario]="sesion.usuarioBD"></app-tabs>

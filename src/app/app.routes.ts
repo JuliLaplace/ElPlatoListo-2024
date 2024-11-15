@@ -11,10 +11,6 @@ export const routes: Routes = [
     loadComponent: () => import('./splash/splash.page').then( m => m.SplashPage)
   },
   {
-    path: 'menu',
-    loadComponent: () => import('./menu/menu.page').then( m => m.MenuPage)
-  },
-  {
     path: 'login',
     loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
   },
@@ -23,12 +19,11 @@ export const routes: Routes = [
     loadComponent: () => import('./registro/registro.page').then( m => m.RegistroPage)
   },
   {
-    path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsModule)
-  },  {
+    path: 'home',
+    loadComponent: () => import('./home/home.page').then(p => p.HomePage)
+  },
+  {
     path: 'cliente-espera',
     loadComponent: () => import('./paginas/cliente-espera/cliente-espera.page').then( m => m.ClienteEsperaPage)
   }
-
-  
 ];
