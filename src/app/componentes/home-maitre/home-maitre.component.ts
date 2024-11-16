@@ -23,7 +23,10 @@ export class HomeMaitreComponent  implements OnInit {
   }
 
   asignarMesa (pedido: Pedido, numeroMesa: number) {
-    //Actualiza el pedido con el número de mesa asignada
+    
+    this.pedidosService.esperandoMozo(pedido, numeroMesa); //en esa funcion se cambia el estado de la mesa y el estado del pedido al mismo tiempo
   }
+
+ 
 
 }
