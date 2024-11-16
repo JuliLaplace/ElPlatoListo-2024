@@ -37,6 +37,20 @@
    /* Ajusta el tamaño del texto según prefieras */
    padding: 1em;
    border-radius: 10px;
-   background-color: #CDC1FF;
-   color: rgb(83, 78, 85);
+   background-color: #a090dd;
+   color: white;
+   display: flex;
+   align-items: center;
+ }
+
+ .icono {
+  display: inline-block;
+  width: 15%;
+  // width: 2.2em;
+  height: auto;
+ }
+
+ .boton-texto {
+  width: 85%;
+  text-align: center;
  }

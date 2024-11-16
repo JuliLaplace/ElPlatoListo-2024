@@ -1,46 +1,46 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      Inicio | Bienvenido, {{ sesion.usuarioBD?.nombre}}
+      Verificación de Clientes
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 
-  <ion-content >
-    <div class="centrado">
-      <div class="contenido-general">
-        <div *ngIf="dataUsuario.coleccionClientesPendientes">
-    
-          <div *ngFor="let cliente of dataUsuario.coleccionClientesPendientes" class="card">
-            <div class="card-content">
-              <div class="contenedor-datos">
-                <div class="card-imagen">
-                  <img [src]="cliente.fotoPerfil" alt="{{cliente.nombre}} {{cliente.apellido}}" />
-                </div>
-                <div class="card-info">
-                  <h3>{{cliente.nombre}} {{cliente.apellido}}</h3>
-                  <p>Estado: {{cliente.estado}}</p>
-                </div>
+<ion-content>
+  <div class="centrado">
+    <div class="contenido-general">
+      <div *ngIf="dataUsuario.coleccionClientesPendientes">
+
+        <div *ngFor="let cliente of dataUsuario.coleccionClientesPendientes" class="card">
+          <div class="card-content">
+            <div class="contenedor-datos">
+              <div class="card-imagen">
+                <img [src]="cliente.fotoPerfil" alt="{{cliente.nombre}} {{cliente.apellido}}" />
               </div>
-    
-              <div class="card-botones">
-                <button  class="btn" (click)="aceptarCliente(cliente)">
-                  <img src="../../../assets/iconos/lista-de-verificacion.png" alt="">
-         
-                </button>
-                <button ion-button class="btn" (click)="rechazarCliente(cliente)">
-                  <img src="../../../assets/iconos/boton-eliminar.png" alt="">
-                </button>
+              <div class="card-info">
+                <h3>{{cliente.nombre}} {{cliente.apellido}}</h3>
+                <p>Estado: {{cliente.estado}}</p>
               </div>
             </div>
+
+            <div class="card-botones">
+              <button class="btn" (click)="aceptarCliente(cliente)">
+                <img src="../../../assets/iconos/lista-de-verificacion.png" alt="">
+
+              </button>
+              <button ion-button class="btn" (click)="rechazarCliente(cliente)">
+                <img src="../../../assets/iconos/boton-eliminar.png" alt="">
+              </button>
+            </div>
           </div>
-    
         </div>
+
       </div>
+    </div>
   </div>
-  </ion-content>
+</ion-content>
 
 
 <app-tabs [usuario]="sesion.usuarioBD"></app-tabs>
