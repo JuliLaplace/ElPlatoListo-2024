@@ -8,7 +8,7 @@ import { TipoUsuario } from 'src/app/enumerados/tipo-usuario';
 })
 export class SesionService {
   
-  private usuarioActual : User | null = null;  //guardo el usuario
+  public usuarioActual : User | null = null;  //guardo el usuario
   public usuarioBD : Usuario | null = null;
 
   constructor(private auth: Auth, private datosUsuario: DataUsuariosService) {

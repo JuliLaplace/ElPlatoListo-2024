@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>
+    <ion-title *ngIf="sesion.usuarioActual">
       Inicio | Bienvenido, {{ sesion.usuarioBD?.nombre}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="sesion.usuarioActual">
   <div *ngIf="sesion.esSupervisor() || sesion.esDueno() ">
     <app-home-admin [usuario]="sesion.usuarioBD"></app-home-admin>
   </div>
