@@ -181,9 +181,9 @@ Detalles de la construcción 🛠️
 | ------ | ------ | 
 |  <img src="/src/assets/qr/QR-Ingreso Local.png"> | Valor: "listaEspera" | 
 | <img src="/src/assets/qr/QR - Mesa_1.png">  | Valor: "Mesa1" | 
-| <img src="/src/assets/qr/QR - Mesa_2.png>  | Valor: "Mesa2" | 
-| <img src="/src/assets/qr/QR - Mesa_3.png>  | Valor: "Mesa3" | 
-| <img src="/src/assets/qr/QR - Mesa_4.png>  | Valor: "Mesa4" | 
-| <img src="/src/assets/qr/QR - Mesa_5.png>  | Valor: "Mesa5" | 
-| <img src="/src/assets/qr/QR-Menu.png>  | Valor: "menu" | 
+| <img src="/src/assets/qr/QR - Mesa_2.png">  | Valor: "Mesa2" | 
+| <img src="/src/assets/qr/QR - Mesa_3.png">  | Valor: "Mesa3" | 
+| <img src="/src/assets/qr/QR - Mesa_4.png">  | Valor: "Mesa4" | 
+| <img src="/src/assets/qr/QR - Mesa_5.png">  | Valor: "Mesa5" | 
+| <img src="/src/assets/qr/QR-Menu.png">  | Valor: "menu" | 
 | ------ | ------ |
