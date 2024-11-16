@@ -1,0 +1,20 @@
+<div class="centrado">
+
+  <div class="contenido-general">
+    <div *ngIf="pedidosService.coleccionPedidosEnEspera">
+
+      <div *ngFor="let pedido of pedidosService.coleccionPedidosEnEspera; let i = index" class="card">
+
+        <div class="card text-center">
+          <div class="card-header">Prioridad: {{ i + 1}}</div>
+          <div class="card-body">
+            <h5 class="card-title"> {{ pedido.emailUsuario }}</h5>
+            <!-- <p class="card-text">Cantidad de comensales: </p> -->
+            <a href="#" class="btn btn-primary" (click)="asignarMesa(pedido, 4)">Asignar mesa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
