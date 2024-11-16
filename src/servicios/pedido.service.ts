@@ -76,6 +76,7 @@ export class PedidoService {
 
   public esperandoMozo(pedido: Pedido){
     this.cambiarEstadoPedido(pedido, EstadoPedido.esperandoMozo);
+    //llamar a servicio mesas y cambiar el estado de la mesa acá
     
   }
   public realizarPedido(pedido: Pedido){
