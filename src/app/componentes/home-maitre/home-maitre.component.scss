@@ -3,85 +3,87 @@
     background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     height: 88vh;
     padding: 20px;
 
 }
 
-.contenido-general {
-    overflow-y: auto;
+h3 {
+    background-color: #b5a8b1;
+    padding: 0.3em 1em;
+    border-radius: 10px;
+    margin-top: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.05em;
 }
 
-.cards-contenedor {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px;
+.contenido-general {
+    overflow-y: auto;
 }
 
 .card {
     width: 100%;
     /* Ocupa todo el ancho del contenedor */
-    border: 1px solid #ddd;
+    border: 1px solid rgb(228, 228, 228);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 16px;
+    padding: 1em;
+    margin-bottom: 1em;
 }
 
-.card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.card-interior {
+    width: 100%;
+    /* Ocupa todo el ancho del contenedor */
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.contenedor-datos {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.card-header {
+    background-color: rgb(189, 107, 233);
+    color: rgb(255, 255, 255);
+    letter-spacing: 0.03em;
+    font-size: 1.1em;
+    font-weight: 600;
 }
 
-.card-imagen img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
+.card-title {
+    margin-top: 0;
 }
 
-.card-info {
-    flex-grow: 1;
+.card-text {
+    color: rgb(156, 29, 224);
+    font-weight: 600;
 }
 
-.card-info h3 {
-    margin: 0 0 8px;
-    font-size: 20px;
-    color: #333;
+.btn-outline-primary {
+    --bs-btn-color: rgb(156, 29, 224);
+    --bs-btn-border-color: rgb(156, 29, 224);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: rgb(156, 29, 224);
+    --bs-btn-hover-border-color: rgb(156, 29, 224);
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: rgb(156, 29, 224);
+    --bs-btn-active-border-color: rgb(156, 29, 224);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: rgb(156, 29, 224);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: rgb(156, 29, 224);
+    --bs-gradient: none;
 }
 
-.card-info p {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
+.boton-seleccionar-mesa {
+    margin-right: 0.2em;
 }
 
-.card-botones {
-    display: flex;
-    justify-content: space-around;
-    gap: 16px;
-}
-
-.btn-aceptar,
-.btn-rechazar {
-    flex: 1;
-    font-size: 14px;
-    height: 20px;
-}
-
-.btn-aceptar {
-    background-color: green;
-}
-
-.btn-rechazar {
-    background-color: red;
+.asignar-mesa {
+    display: block;
+    background-color: rgb(156, 29, 224);
+    color: rgb(255, 255, 255);
+    margin: 0.8em auto 0;
 }
