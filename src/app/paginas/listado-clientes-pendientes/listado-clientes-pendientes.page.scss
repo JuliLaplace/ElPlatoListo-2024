@@ -69,22 +69,30 @@ ion-toolbar {
   color: #666;
 }
 
+
 .card-botones {
-  display: flex; 
-  justify-content: space-around; 
+  display: flex;
+  justify-content: space-around;
   gap: 16px;
 }
 
-.btn-aceptar,
-.btn-rechazar {
-  flex: 1; 
-  font-size: 14px;
-  height: 20px;
+.btn {
+  width: 40px; 
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+ 
 }
 
-.btn-aceptar{
-  background-color: green;
-}
-.btn-rechazar{
-  background-color: red;
+.btn img {
+  width: 100%; 
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 50%; 
 }
