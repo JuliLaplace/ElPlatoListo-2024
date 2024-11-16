@@ -3,6 +3,7 @@ import { DataUsuariosService, Usuario } from './data-usuarios.service';
 import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
 import { addDoc, collection, collectionData, doc, Firestore, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { SesionService } from './sesion.service';
+import { MesaService } from './mesa.service';
 
 export interface Pedido{
   id: string,
@@ -19,7 +20,7 @@ export class PedidoService {
   public coleccionPedidosEnEspera: Pedido[] = [];
   public pedidoUsuario : Pedido | null = null;
 
-  constructor(private firestore: Firestore, private sesion : SesionService) { 
+  constructor(private firestore: Firestore, private sesion : SesionService, public servicioMesa : MesaService) { 
 
     this.obtenerDatos();
   }
@@ -52,6 +53,7 @@ export class PedidoService {
     observable.subscribe((respuesta:any) => {
       this.coleccionPedidos = respuesta;
       this.coleccionPedidosEnEspera = this.coleccionPedidos.filter((pedido)=>{return (pedido.estadoPedido == EstadoPedido.sinMesa)});
+      
       if(this.sesion.usuarioBD){
         let array = this.coleccionPedidos.filter((pedido)=>{return (pedido.estadoPedido != EstadoPedido.finalizado && pedido.emailUsuario == this.sesion.usuarioBD?.email)});
         if(array.length == 0){
@@ -64,27 +66,27 @@ export class PedidoService {
 
   }
   private modificarRegistro(pedido : Pedido, data: any) {
-    console.log(pedido);
+    
     let col = collection(this.firestore, 'pedidos');
     const docRef = doc(col, pedido.id);
     
     updateDoc(docRef, data);
   }
-  private cambiarEstadoPedido(pedido : Pedido, estado: EstadoPedido ){
-    this.modificarRegistro(pedido, {estado : estado});
+  private cambiarEstadoPedido(pedido : Pedido, data : any ){
+    this.modificarRegistro(pedido, data);
   }
 
-  public esperandoMozo(pedido: Pedido){
-    this.cambiarEstadoPedido(pedido, EstadoPedido.esperandoMozo);
-    //llamar a servicio mesas y cambiar el estado de la mesa acá
+  public esperandoMozo(pedido: Pedido, numeroMesa : number){
+    this.cambiarEstadoPedido(pedido, {estadoPedido: EstadoPedido.esperandoMozo, mesa: numeroMesa});
+    this.servicioMesa.cambiarMesaOcupada(numeroMesa); 
     
   }
   public realizarPedido(pedido: Pedido){
-    this.cambiarEstadoPedido(pedido, EstadoPedido.realizandoPedido);
+    this.cambiarEstadoPedido(pedido, {estadoPedido : EstadoPedido.realizandoPedido});
   }
-  public finalizarPedido(pedido: Pedido){
-    this.cambiarEstadoPedido(pedido, EstadoPedido.finalizado);
-    //cambiar estado de mesa a mesa libre
+  public finalizarPedido(pedido: Pedido, numeroMesa : number){
+    this.cambiarEstadoPedido(pedido, {estadoPedido: EstadoPedido.finalizado, mesa: numeroMesa});
+    this.servicioMesa.cambiarMesaLibre(numeroMesa); 
   }
 
   
