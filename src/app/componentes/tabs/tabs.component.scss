@@ -21,9 +21,12 @@ ion-fab-button {
 }
 
 .footer-button ion-avatar img {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
+  position: absolute;
+  top: -1em;
+  border: 5px solid rgb(189, 107, 233);
 }
 
 .footer-button ion-icon {
