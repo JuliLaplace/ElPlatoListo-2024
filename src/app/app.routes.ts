@@ -29,12 +29,19 @@ export const routes: Routes = [
   {
     path: 'listado-clientes-pendientes',
     loadComponent: () => import('./paginas/listado-clientes-pendientes/listado-clientes-pendientes.page').then( m => m.ListadoClientesPendientesPage)
-  },  {
-    path: 'pagina-mensajes',
-    loadComponent: () => import('./paginas/pagina-mensajes/pagina-mensajes.page').then( m => m.PaginaMensajesPage)
   },
-
-  
-
+  {
+    path: 'pagina-mensajes',
+    children: [
+      {
+        path: ':mensajeId',
+        loadComponent: () => import('./paginas/pagina-mensajes/pagina-mensajes.page').then( m => m.PaginaMensajesPage)
+      }
+    ]
+  },
+  {
+    path: 'cliente-pedido-en-curso',
+    loadComponent: () => import('./componentes/cliente-pedido-en-curso/cliente-pedido-en-curso.component').then( c => c.ClientePedidoEnCursoComponent)
+  },
 
 ];

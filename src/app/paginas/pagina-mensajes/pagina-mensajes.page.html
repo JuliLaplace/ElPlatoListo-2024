@@ -6,11 +6,31 @@
         <img src="../../../assets/imagenes/logo-elplatolisto-iso-sin-banda.png" alt="">
       </div>
 
-      <div class="texto">
+      <div *ngIf="mensajeAMostrar === 'listaEspera'" class="texto">
 
         <h2>¡Te encontras en la lista de espera!</h2>
         <p>
          Esperá unos minutos hasta que un maitre te asigne una mesa para poder ubicarte y realizar el pedido.
+        </p>
+        <h5>¡Esperamos que disfrutes tu paso por El Plato Listo!</h5>
+      
+      </div>
+
+      <div *ngIf="mensajeAMostrar === 'mesaNoAsignada'" class="texto">
+
+        <h2>¡Tu mesa aún no fue asignada!</h2>
+        <p>
+         Esperá unos minutos hasta que un maitre te asigne una mesa para poder ubicarte y realizar el pedido.
+        </p>
+        <h5>¡Esperamos que disfrutes tu paso por El Plato Listo!</h5>
+      
+      </div>
+
+      <div *ngIf="mensajeAMostrar === 'mesaIncorrecta'" class="texto">
+
+        <h2>¡Esta no es la mesa que te asignaron!</h2>
+        <p>
+         Por favor, hablá con el maitre y confirmá el número de mesa al que tenés que dirigirte.
         </p>
         <h5>¡Esperamos que disfrutes tu paso por El Plato Listo!</h5>
       
