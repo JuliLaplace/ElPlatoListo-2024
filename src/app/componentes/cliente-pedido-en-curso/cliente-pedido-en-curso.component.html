@@ -1,3 +1,41 @@
-<p>
-  cliente-pedido-en-curso works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="sesion.usuarioActual">
+      Inicio | Bienvenido, {{ sesion.usuarioBD?.nombre}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="centrado">
+    <h4>Estado del pedido: {{ pedidoService.pedidoUsuario?.estadoPedido }}</h4>
+  
+    <div class="delimitador-botones">
+      <div class="botones-container">
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido !== 'finalizado'" ion-button  class="option-btn" >
+          <img src="../../../assets/iconos/plato.png" alt="ícono verificación clientes" class="icono">
+          <span class="boton-texto">Realizar el pedido</span>
+        </button>
+  
+        <button ion-button class="option-btn" [routerLink]="['/chat', pedidoService.pedidoUsuario?.id]">
+          <img src="../../../assets/iconos/chat.png" alt="ícono verificación clientes" class="icono">
+          <span class="boton-texto">Consultas a los mozos</span>
+        </button>
+  
+        <button ion-button class="option-btn" routerLink="/juego/complicado">
+          <img src="../../../assets/iconos/juegos.png" alt="ícono verificación clientes" class="icono">
+          <span class="boton-texto">Juegos</span>
+        </button>
+
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'finalizado'" ion-button  class="option-btn" >
+          <img src="../../../assets/iconos/encuesta.png" alt="ícono verificación clientes" class="icono">
+          <span class="boton-texto">Completar Encuesta</span>
+        </button>
+  
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<app-tabs [usuario]="sesion.usuarioBD"></app-tabs>
