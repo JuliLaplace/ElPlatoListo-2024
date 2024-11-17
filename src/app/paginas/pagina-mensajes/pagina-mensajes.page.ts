@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SesionService } from 'src/servicios/sesion.service';
 import { LoginService } from 'src/servicios/login.service';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pagina-mensajes',
@@ -14,10 +14,15 @@ import { RouterLink } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule, RouterLink]
 })
 export class PaginaMensajesPage implements OnInit {
+  mensajeAMostrar?: string;
 
-  constructor(public sesion: SesionService, private login: LoginService) { }
+  constructor(
+    public sesion: SesionService,
+    private login: LoginService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.mensajeAMostrar = this.route.snapshot.paramMap.get('mensajeId') || '';
   }
   cerrarSesion() {
     this.login.logout().then(() => { });
