@@ -56,7 +56,7 @@ export class HomeClienteComponent {
       this.router.navigate(['/pagina-mensajes/listaEspera']);
       this.pedidoService.nuevoPedido(this.usuario!.email);
     } else {
-      this.router.navigate(['/encuestas']);
+      this.router.navigate(['/pagina-mensajes/yaEstasEnListaEspera']);
     }
   }
 

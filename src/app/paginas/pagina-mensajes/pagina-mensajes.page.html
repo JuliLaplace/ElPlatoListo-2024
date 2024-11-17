@@ -16,6 +16,16 @@
       
       </div>
 
+      <div *ngIf="mensajeAMostrar === 'yaEstasEnListaEspera'" class="texto">
+
+        <h2>¡Ya estás en la lista de espera!</h2>
+        <p>
+         Falta menos para que te asignen una mesa y puedas realizar tu pedido.
+        </p>
+        <h5>¡Esperamos que disfrutes tu paso por El Plato Listo!</h5>
+      
+      </div>
+
       <div *ngIf="mensajeAMostrar === 'mesaNoAsignada'" class="texto">
 
         <h2>¡Tu mesa aún no fue asignada!</h2>
