@@ -85,7 +85,7 @@ export class RegistroClienteAnonComponent  implements OnInit {
         this.cargarUsuarioBD();
         this.limpiarDatos();
         this.spinnerActivo.emit(false);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
       }
       this.spinnerActivo.emit(false);
     })

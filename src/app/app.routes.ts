@@ -43,5 +43,10 @@ export const routes: Routes = [
     path: 'cliente-pedido-en-curso',
     loadComponent: () => import('./componentes/cliente-pedido-en-curso/cliente-pedido-en-curso.component').then( c => c.ClientePedidoEnCursoComponent)
   },
+  {
+    path: 'pagina-formulario-encuesta',
+    loadComponent: () => import('./paginas/pagina-formulario-encuesta/pagina-formulario-encuesta.page').then( m => m.PaginaFormularioEncuestaPage)
+  },
+
 
 ];
