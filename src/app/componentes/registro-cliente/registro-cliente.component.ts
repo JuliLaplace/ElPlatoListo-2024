@@ -131,7 +131,6 @@ export class RegistroClienteComponent  implements OnInit {
       this.dataUsuarios.crearRegistro(cliente)
       .then((id)=>{
         cliente.id =  id;
-        this.subirFoto();
         this.limpiarDatos();
       });
 
