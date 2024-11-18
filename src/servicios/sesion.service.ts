@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 import { DataUsuariosService, Usuario } from './data-usuarios.service';
 import { TipoUsuario } from 'src/app/enumerados/tipo-usuario';
+import { Capacitor } from '@capacitor/core';
+import { PushNotificationsService } from './push-notifications.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +12,17 @@ export class SesionService {
   
   public usuarioActual : User | null = null;  //guardo el usuario
   public usuarioBD : Usuario | null = null;
+  private readonly isPushNotificationsAvailable: boolean = Capacitor.isPluginAvailable('PushNotifications');
 
-  constructor(private auth: Auth, private datosUsuario: DataUsuariosService) {
+  constructor(private auth: Auth, private datosUsuario: DataUsuariosService, private pushNotifications : PushNotificationsService) {
 
     onAuthStateChanged(auth, async(usuario)=>{
       this.usuarioActual = usuario;  //es como un listener para escuchar el estado del usuario (si sigue logueado o no)
       if(usuario && usuario.email){
         this.usuarioBD = await datosUsuario.obtenerUsuario(usuario.email);
+        if (this.isPushNotificationsAvailable) {
+          this.pushNotifications.registerNotifications();
+        }
       }else{
         this.usuarioBD = null;
       }

@@ -10,6 +10,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { IonicModule } from '@ionic/angular';
 import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -20,5 +21,6 @@ bootstrapApplication(AppComponent, {
     provideFirebaseApp(() => initializeApp({"projectId":"el-plato-listo","appId":"1:672867578350:web:792bc52f8bd8002c619eff","storageBucket":"el-plato-listo.appspot.com","apiKey":"AIzaSyAWtH8J6rQU1LZ-8ixY063tXBtesswlw3g","authDomain":"el-plato-listo.firebaseapp.com","messagingSenderId":"672867578350"})), 
     provideAuth(() => getAuth()), 
     provideFirestore(() => getFirestore()),
+    provideHttpClient(),
   ],
 });
