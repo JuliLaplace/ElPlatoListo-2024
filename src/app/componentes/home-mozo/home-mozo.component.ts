@@ -60,10 +60,10 @@ export class HomeMozoComponent implements OnInit {
   //Filtrar Pedidos -> Mesa activas
 
   aceptarPedido(unPedido: Pedido) {
-    this.pedidoServicio.asignarPedidoMozo(
-      unPedido,
-      this.sesionServicio.usuarioBD?.id
-    );
+    // this.pedidoServicio.asignarPedidoMozo(
+    //   unPedido,
+    //   this.sesionServicio.usuarioBD?.id
+    // );
     this.listaMisPedidos.push();
   }
 

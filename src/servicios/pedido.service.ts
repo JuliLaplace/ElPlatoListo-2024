@@ -84,7 +84,7 @@ export class PedidoService {
     
   }
   public realizarPedido(pedido: Pedido){
-    this.cambiarEstadoPedido(pedido, {estadoPedido : EstadoPedido.realizandoPedido});
+    // this.cambiarEstadoPedido(pedido, {estadoPedido : EstadoPedido.realizandoPedido});
   }
   public finalizarPedido(pedido: Pedido, numeroMesa : number){
     this.cambiarEstadoPedido(pedido, {estadoPedido: EstadoPedido.finalizado, mesa: numeroMesa});
