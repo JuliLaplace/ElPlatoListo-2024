@@ -10,6 +10,7 @@ export interface Pedido{
   mesa: number | null,
   emailUsuario: string,
   estadoPedido: EstadoPedido,
+  encuesta : string,
 }
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class PedidoService {
   }
 
   async nuevoPedido(email: string): Promise<string> {
-    let pedido : Pedido = {id:'', mesa: null, emailUsuario: email, estadoPedido: EstadoPedido.sinMesa};
+    let pedido : Pedido = {id:'', mesa: null, emailUsuario: email, estadoPedido: EstadoPedido.sinMesa, encuesta: ''};
     let col = collection(this.firestore, 'pedidos');
     return await addDoc(col, pedido).then((ref) => {
       return ref.id;
@@ -72,6 +73,7 @@ export class PedidoService {
     
     updateDoc(docRef, data);
   }
+
   private cambiarEstadoPedido(pedido : Pedido, data : any ){
     this.modificarRegistro(pedido, data);
   }
@@ -87,6 +89,12 @@ export class PedidoService {
   public finalizarPedido(pedido: Pedido, numeroMesa : number){
     this.cambiarEstadoPedido(pedido, {estadoPedido: EstadoPedido.finalizado, mesa: numeroMesa});
     this.servicioMesa.cambiarMesaLibre(numeroMesa); 
+  }
+
+  public cargarEncuesta(idEncuesta: string){
+    if(this.pedidoUsuario){
+      this.modificarRegistro( this.pedidoUsuario, {idEncuesta : idEncuesta});
+    }
   }
 
   

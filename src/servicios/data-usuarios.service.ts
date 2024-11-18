@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, Firestore, collectionData, query, where, getDocs, doc, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, Firestore, collectionData, query, where, getDocs, doc, updateDoc, getDoc } from '@angular/fire/firestore';
 import { EstadoCliente } from 'src/app/enumerados/estado-cliente';
 import { TipoUsuario } from 'src/app/enumerados/tipo-usuario';
 
@@ -62,7 +62,6 @@ export class DataUsuariosService {
     console.log(usuario);
     let col = collection(this.firestore, 'usuarios');
     const docRef = doc(col, usuario.id);
-    
     updateDoc(docRef, data);
   }
   cambiarEstadoCliente(usuario : Usuario, estado: EstadoCliente ){
