@@ -29,7 +29,7 @@ export class HomeMaitreComponent implements OnInit {
 
   asignarMesa(pedido: Pedido, numeroMesa: number) {
     if (numeroMesa) {
-      this.pedidosService.esperandoMozo(pedido, numeroMesa); //en esa funcion se cambia el estado de la mesa y el estado del pedido al mismo tiempo
+      this.pedidosService.cambiarEstadoSinPedido(pedido, numeroMesa); //en esa funcion se cambia el estado de la mesa y el estado del pedido al mismo tiempo
     } else {
       console.log('No se seleccionó ninguna mesa.');
     }

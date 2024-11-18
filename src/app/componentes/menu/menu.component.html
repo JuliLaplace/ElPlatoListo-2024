@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title *ngIf="sesion.usuarioActual">
-      Precio acumulado: {{ pedidoService.pedidoUsuario?.estadoPedido }}
+      Precio acumulado: ${{ precioAcumulado }}
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="finalizarPedido()" fill="solid">
+        <ion-icon name="checkbox" slot="icon-only" style="font-size: 45px;" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -37,7 +42,7 @@
                 <span class="value">{{ cantidadesPedido[producto.id] || 0 }}</span>
                 <button (click)="incrementarCantidad(producto.id)" class="btn">+</button>
               </div>
-              <button class="btn agregar-producto" (click)="agregarProducto(producto.id)">
+              <button class="btn agregar-producto" (click)="agregarProducto(producto.id, producto.precio)">
                 <span>+</span>
               </button>
             </div>

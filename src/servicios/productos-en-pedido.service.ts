@@ -26,7 +26,7 @@ export class ProductoEnPedidoService {
   }
 
   async agregarProductoEnPedido(idPedido: string, idProducto: string, cantidad:number): Promise<string> {
-    let productoEnPedido : ProductoEnPedido = {id:'', idPedido: idPedido, idProducto: idProducto, cantidad: cantidad, estado: EstadoProductoEnPedido.pendiente};
+    let productoEnPedido : ProductoEnPedido = {id:'', idPedido: idPedido, idProducto: idProducto, cantidad: cantidad, estado: EstadoProductoEnPedido.sinConfirmar};
     let col = collection(this.firestore, 'productosEnPedido');
     return await addDoc(col, productoEnPedido).then((ref) => {
       return ref.id;
