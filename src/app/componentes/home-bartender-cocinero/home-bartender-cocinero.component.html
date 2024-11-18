@@ -4,17 +4,15 @@
 </ion-segment>
 
 <!---------------------- VISTA COCINERO , BARTENDER -------------------------------->
-<div *ngIf="( sesionServicio.esBartender() || sesionServicio.esCocinero() )"> 
+<div> 
    <!-------------LISTADO DE PEDIDOS PENDIENTES------->
     <div *ngIf="opcionSeleccionada === 'Pedidos'">
-      <ion-card class="ion-margin">
-        <!--<ion-img class="card-image" [src]="unaFoto.url"></ion-img>-->
+      <ion-card class="ion-margin" *ngFor="let unProducto of listaProductos">
         <ion-card-content>
           <div class="detalles-producto">
             <div class="productos detalles-producto">
-              <label><strong>Producto:</strong>Cafe</label>
-              <label><strong>Cantidad:</strong>2</label>
-              <label><strong>Tiempo Estimado:</strong> 90 min</label>
+              <label><strong>Nombre:{{unProducto.nombreProducto}}</strong></label>
+              <label><strong>Cantidad:{{unProducto.cantidad}}</strong></label>
             </div>         
             <ion-button (click)="confirmarProducto()" expand="block" size="small">
               <ion-text color="light">EN PREPARACIÓN</ion-text> <!---SI ACEPTO CAMBIA ESTADO A 'Listo para entregar'-->
