@@ -12,13 +12,14 @@ import { chatbubbleEllipsesOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { RouterLink } from '@angular/router';
 import { HomeMozoComponent } from '../componentes/home-mozo/home-mozo.component';
+import { HomeBartenderCocineroComponent } from '../componentes/home-bartender-cocinero/home-bartender-cocinero.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, HomeAdminComponent, TabsComponent, HomeClienteComponent, HomeMaitreComponent, RouterLink, HomeMozoComponent],
+  imports: [IonicModule, CommonModule, FormsModule, HomeAdminComponent, TabsComponent, HomeClienteComponent, HomeMaitreComponent, RouterLink, HomeMozoComponent, HomeBartenderCocineroComponent],
 })
 export class HomePage {
 

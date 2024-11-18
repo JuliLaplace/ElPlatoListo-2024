@@ -32,15 +32,15 @@ ion-segment-button.ios {
   overflow: hidden; // Asegura que el pseudo-elemento no se desborde
   background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed
     center;
+  z-index: -1; // Asegura que el pseudo-elemento esté detrás del contenido
 }
 
-.chats-mesas {
-  --background: deeppink;
-  color: white;
+.detalles-producto{
+  display: flex;
+  flex-direction: column;
+}
+
+.productos{
   font-size: large;
-  font-weight: bold;
   margin: 1em;
-  height: 10vh;
-  justify-content: center;
 }
-
