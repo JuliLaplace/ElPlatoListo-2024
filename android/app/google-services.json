@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "672867578350",
+    "project_id": "el-plato-listo",
+    "storage_bucket": "el-plato-listo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672867578350:android:47c76fcd29daefac619eff",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9vKvdF6UmlRbdt-QC2re23mBAb4CqwuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
