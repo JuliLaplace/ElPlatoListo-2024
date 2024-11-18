@@ -5,17 +5,6 @@ ion-toolbar {
     }
 }
 
-h4 {
-    background-color: #b5a8b1;
-    padding: 0.3em 1em;
-    border-radius: 10px;
-    margin-top: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: white;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-}
-
 .centrado {
     overflow: hidden; // Asegura que el pseudo-elemento no se desborde
     background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
