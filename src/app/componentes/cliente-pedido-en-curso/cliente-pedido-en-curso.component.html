@@ -11,7 +11,7 @@
   
     <div class="delimitador-botones">
       <div class="botones-container">
-        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido !== 'finalizado'" ion-button  class="option-btn" [routerLink]="['/menu', pedidoService.pedidoUsuario?.id]">
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido !== 'Finalizado'" ion-button  class="option-btn" [routerLink]="['/menu', pedidoService.pedidoUsuario?.id]">
           <img src="../../../assets/iconos/plato.png" alt="ícono verificación clientes" class="icono">
           <span class="boton-texto">Realizar el pedido</span>
         </button>
@@ -26,7 +26,7 @@
           <span class="boton-texto">Juegos</span>
         </button>
 
-        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'finalizado'" ion-button  class="option-btn" >
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Finalizado'" ion-button  class="option-btn" >
           <img src="../../../assets/iconos/encuesta.png" alt="ícono verificación clientes" class="icono">
           <span class="boton-texto">Completar Encuesta</span>
         </button>
