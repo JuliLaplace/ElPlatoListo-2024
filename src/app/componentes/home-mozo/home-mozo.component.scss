@@ -30,8 +30,7 @@ ion-segment-button.ios {
   align-items: center;
   position: relative;
   overflow: hidden; // Asegura que el pseudo-elemento no se desborde
-  background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed
-    center;
+  background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
 }
 
 .chats-mesas {
@@ -43,4 +42,3 @@ ion-segment-button.ios {
   height: 10vh;
   justify-content: center;
 }
-

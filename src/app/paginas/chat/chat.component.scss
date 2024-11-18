@@ -1,46 +1,13 @@
-.contenido {
-  width: 100vw;
-  height: 100vh;
-  flex: auto;
-  align-items: center;
-  background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed
-    center;
-}
-
-.container-mensaje {
-  height: calc(100% - 100px);
-  overflow: scroll;
-}
-
-.mozo {
-  float: left;
-  background: #eee;
-  color: #8013f5;
-  min-width: 160px;
-}
-
-ion-content {
-  --padding-top: 0;
-  --padding-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.sala-4a {
-  --background: rgba(3, 5, 122, 1);
-}
-
-.sala-4b {
-  --background: rgba(11, 71, 3, 1);
-}
-
 .imagen {
   background-image: url("../../../assets/imagenes/fondo-patron.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .chat-body {
@@ -48,7 +15,7 @@ ion-content {
   overflow-y: auto;
   padding: 10px;
   background: transparent;
-  height: calc(100vh - 45px - 80px - 20px);
+  height: calc(100vh - 56px - 60px - 95px);
   /* Resta espacio para el input de enviar y  el footer */
 }
 
@@ -68,19 +35,17 @@ ion-content {
 
 .my-message {
   align-self: flex-end;
-  background: rgba(7, 108, 126, 0.9);
+  background: rgb(174, 22, 240);
   color: gainsboro;
 }
 
 .other-message {
   align-self: flex-start;
-  background: rgba(255, 251, 251, 0.9);
-  color: rgb(174, 22, 240);
-
-  .mensaje{
-    color: #070707;
-  }
+  background: #b5a8b1;
+  ;
+  color: #070707;
 }
+
 .message-content p {
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
@@ -108,7 +73,8 @@ ion-content {
   height: 45px;
   width: calc(100% - 55px);
   font-size: 16px;
-  background-color: #ffffff;;
+  background-color: #ffffff;
+  ;
   border-radius: 15px;
   padding-left: 10px;
   padding-right: 10px;
@@ -120,7 +86,7 @@ ion-content {
   /* Controla la visibilidad del placeholder */
 }
 
-.input-texto{
+.input-texto {
   border-color: #8013f5;
 }
 
@@ -142,12 +108,4 @@ ion-content {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-div.sala-4a {
-  background-color: rgba(11, 71, 3, 1);
-}
-
-div.sala-4b {
-  background-color: rgba(3, 5, 122, 1);
 }

@@ -32,8 +32,8 @@
               </ion-note>
             </div>
             <ion-button (click)="confirmarPedido(pedido)" expand="block" size="small">
-              <ion-text color="light">{{ 
-                pedido.estadoPedido === 'Esperando mozo' ? 'Aceptar' : 
+              <ion-text color="light">{{
+                pedido.estadoPedido === 'Esperando mozo' ? 'Aceptar' :
                 (pedido.estadoPedido === 'Pedido en preparación' ? 'En preparación' : 'Listo') }}
               </ion-text> <!---SI ACEPTO CAMBIA ESTADO A 'Pedido en preparación'-->
             </ion-button>
@@ -43,17 +43,13 @@
     </div>
     <!-------------CHATS - DE LOS PEDIDOS EN CURSO----->
     <div *ngIf="opcionSeleccionada === 'ChatsMesas'">
-      <div *ngFor="let pedido of listaPedidos">
+      <div *ngFor="let pedido of pedidoServicio.coleccionPedidosEnCurso">
         <div style="display: flex; flex-direction: column;">
-          <ion-chip class="chats-mesas">
+          <ion-chip class="chats-mesas" [routerLink]="['/chat', pedido.id]">
             {{ 'Mesa: ' + pedido.mesa }}
           </ion-chip>
         </div>
       </div>
-    </div>  
+    </div>
   </div>
 </div>
-
-
-
-
