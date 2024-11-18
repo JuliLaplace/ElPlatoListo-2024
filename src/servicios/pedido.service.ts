@@ -4,11 +4,12 @@ import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
 import { addDoc, collection, collectionData, doc, Firestore, getDocs, query, Timestamp, updateDoc, where, orderBy } from '@angular/fire/firestore';
 import { SesionService } from './sesion.service';
 import { MesaService } from './mesa.service';
-import { timestamp } from 'rxjs';
+import { map, Observable, timestamp } from 'rxjs';
+import { EstadoMesa } from 'src/app/enumerados/estado-mesa';
 
 export interface Pedido {
   id: string,
-  mesa: number | null,
+  mesa: number,
   fechaIngreso?: Timestamp,
   emailUsuario: string,
   estadoPedido: EstadoPedido,
@@ -26,6 +27,7 @@ export class PedidoService {
   public coleccionPedidos: Pedido[] = [];
   public coleccionPedidosEnEspera: Pedido[] = [];
   public pedidoUsuario: Pedido | null = null;
+  estadoPedido = 'ACEPTAR';
 
   constructor(
     private firestore: Firestore,
@@ -38,7 +40,7 @@ export class PedidoService {
   async nuevoPedido(email: string): Promise<string> {
     let pedido: Pedido = {
       id: '',
-      mesa: null,
+      mesa: 0,
       fechaIngreso: Timestamp.fromDate(new Date()),
       emailUsuario: email,
       estadoPedido: EstadoPedido.sinMesa,
@@ -102,7 +104,7 @@ export class PedidoService {
     // Realizar la actualización del campo `precioTotal`
     return updateDoc(docRef, {
       precioTotal: precioAModificar,
-      estadoPedido: EstadoPedido.esperandoMozo
+      estadoPedido: EstadoPedido.esperandoMozo,
     })
       .then(() => {
         console.log('Pedido actualizado correctamente');
@@ -116,14 +118,20 @@ export class PedidoService {
     let col = collection(this.firestore, 'pedidos');
     const docRef = doc(col, pedido.id);
 
-    updateDoc(docRef, data);
+    updateDoc(docRef, data)
+      .then(() => {
+        console.log(`Pedido ${pedido.id} actualizado a ${data.estadoPedido}.`);
+      })
+      .catch((error) => {
+        console.error('Error al actualizar el pedido: ', error);
+      });
   }
 
   private cambiarEstadoPedido(pedido: Pedido, data: any) {
     this.modificarRegistro(pedido, data);
   }
 
-  public cambiarEstadoSinPedido (pedido: Pedido, numeroMesa: number) {
+  public cambiarEstadoSinPedido(pedido: Pedido, numeroMesa: number) {
     this.cambiarEstadoPedido(pedido, {
       estadoPedido: EstadoPedido.sinPedido,
       mesa: numeroMesa,
@@ -139,8 +147,10 @@ export class PedidoService {
     this.servicioMesa.cambiarMesaOcupada(numeroMesa);
   }
 
-  public realizarPedido(pedido: Pedido) {
-    // this.cambiarEstadoPedido(pedido, {estadoPedido : EstadoPedido.realizandoPedido});
+  public pedidoAceptado(pedido: Pedido) {
+    this.cambiarEstadoPedido(pedido, {
+      estadoPedido: EstadoPedido.enPreparacion,
+    });
   }
 
   public finalizarPedido(pedido: Pedido, numeroMesa: number) {
@@ -181,5 +191,40 @@ export class PedidoService {
   //     propina: propina,
   //     total: total,
   //   });
+  // }
+
+  // obtenerPedidosPendientes(): Observable<any[]> {
+  //   let col = collection(this.firestore, 'pedidos');
+  //   let consulta = query(col, orderBy('fechaIngreso'));
+
+  //   return collectionData(consulta, { idField: 'id' }).pipe(
+  //     // Filtrar los pedidos con estado 'esperandoMozo'
+  //     map((pedidos: any[]) =>
+  //       pedidos.filter(
+  //         (pedido) => pedido.estadoPedido === EstadoPedido.esperandoMozo
+  //       )
+  //     )
+  //   );
+  // }
+
+  obtenerTodosLosPedidos(): Observable<any[]> {
+    let col = collection(this.firestore, 'pedidos');
+    const filteredQuery = query(col, orderBy('fechaIngreso', 'asc'));
+    const observable = collectionData(filteredQuery);
+    return observable;
+  }
+
+  // obtenerPedidosProductos(): Observable<any[]> {
+  //   let col = collection(this.firestore, 'pedidos');
+  //   let consulta = query(col, orderBy('fechaIngreso'));
+
+  //   return collectionData(consulta, { idField: 'id' }).pipe(
+  //     // Filtrar los pedidos con estado 'esperandoMozo'
+  //     map((pedidos: any[]) =>
+  //       pedidos.filter(
+  //         (pedido) => pedido.estadoPedido === EstadoPedido.esperandoMozo
+  //       )
+  //     )
+  //   );
   // }
 }

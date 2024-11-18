@@ -23,13 +23,8 @@
     <app-home-maitre [usuario]="sesion.usuarioBD"></app-home-maitre>
   </div>
 
-  <div *ngIf="sesion.esCocinero()">
-    <!-- <app-home-cocinero [usuario]="sesion.usuarioBD"></app-home-cocinero> -->
-  </div>
-
-  <div *ngIf="sesion.esBartender()">
-    <!-- <app-home-bartender [usuario]="sesion.usuarioBD"></app-home-bartender> -->
-
+  <div *ngIf="sesion.esCocinero() || sesion.esBartender()">
+    <app-home-bartender-cocinero [usuario]="sesion.usuarioBD"></app-home-bartender-cocinero>
   </div>
 </ion-content>
 
