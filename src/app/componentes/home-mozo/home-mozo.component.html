@@ -1,0 +1,120 @@
+
+  <ion-segment mode="ios" (ionChange)="cambiarVista($event)" [value]="opcionSeleccionada">
+  <ion-segment-button value="Pendientes"> Pendientes </ion-segment-button>
+  <ion-segment-button value="MisPedidos"> Mis Pedidos </ion-segment-button>
+  <ion-segment-button value="ChatsMesas"> Mesas </ion-segment-button>
+</ion-segment>
+
+
+<!---------------------- VISTA MOZO ------------------------------>
+<div class="centrado">
+  <div class="container">
+    <!-------------LISTADO DE PEDIDOS PENDIENTES------->
+    <div *ngIf="opcionSeleccionada === 'Pendientes'">
+      <h1>Pendientes</h1>
+      <ion-list>
+        <ion-item-sliding *ngFor="let pedido of listaPedidosPendientes">
+          <ion-item>
+            <ion-label>
+              <div class="pedido-info">
+                <div class="cliente-nombre">
+                </div>
+                <div class="detalles-estado-mesa">
+                </div>
+                <div class="fecha-total-pedido">
+                </div>
+              </div>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    <!-------------LISTADO DE ASIGNADOS---------------->
+    <div *ngIf="opcionSeleccionada === 'MisPedidos'">
+    <ion-list class="listaPedidos">
+      <ion-item-sliding *ngFor="let pedido of listaPedidosPendientes">
+        <ion-item>
+          <ion-label>
+            <div class="pedido-info">
+              <div class="cliente-nombre">
+                {{ pedido.emailUsuario }}
+                <ion-chip style="font-size: medium;">
+                  {{ 'Mesa: ' + pedido.mesa }}
+                </ion-chip>
+              </div>
+              <div class="detalles-estado-mesa">
+                <ion-chip>
+                  {{ 'Estado Pedido: ' + pedido.estadoPedido }}
+                </ion-chip>
+              </div>
+              <div class="fecha-total-pedido">
+                <ion-note style="font-size: medium; color: black" color="medium">
+                  {{ 'Fecha Pedido: ' + pedido.fecha }}
+                </ion-note>
+                <ion-note style="font-size: medium; color: black ; margin: 2px 5px; font-weight: bold;">
+                  {{ 'Total: ' + pedido.total }}
+                </ion-note>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    </div>
+    <!-------------CHATS - DE LOS PEDIDOS EN CURSO----->
+    <div *ngIf="opcionSeleccionada === 'ChatsMesas'">
+      <div *ngFor="let pedido of listaPedidosPendientes">
+        <div style="display: flex; flex-direction: column;">
+          <ion-chip class="chats-mesas">
+            {{ 'Mesa: ' + pedido.mesa }}
+          </ion-chip>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+
+
+<!---------------------- VISTA COCINERO , BARTENDER -------------------------------->
+<!-- <div *ngIf="opcionSeleccionada === 'Pendientes' && ( this.sesionServicio.esBartender() || this.sesionServicio.esCocinero() )"> -->
+   <!-------------LISTADO DE PEDIDOS PENDIENTES------->
+    <!-- <div *ngIf="opcionSeleccionada === 'Pendientes'">
+      <h1>Pendientes</h1>
+      <ion-list>
+        <ion-item-sliding *ngFor="let pedido of listaPedidosPendientes">
+          <ion-item>
+            <ion-label>
+              <div class="pedido-info">
+                <div class="detalles">
+                </div>
+              </div>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+    </div> -->
+    <!-------------LISTADO DE ASIGNADOS---------------->
+    <!-- <div *ngIf="opcionSeleccionada === 'MisPedidos'">
+    <ion-list class="listaPedidos">
+      <ion-item-sliding *ngFor="let pedido of listaPedidosPendientes">
+        <ion-item>
+          <ion-label>
+            <div class="pedido-info">
+              <div class="cliente-nombre">
+                <ion-chip style="font-size: medium;">
+                  {{ 'Mesa: ' + pedido.mesa }}
+                </ion-chip>
+              </div>
+              <div class="detalles-productos">
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    </div>
+</div> -->
+
+
+

@@ -1,0 +1,61 @@
+ion-segment {
+  margin-top: 5px;
+  padding-bottom: 5px;
+  color: aliceblue;
+}
+
+ion-segment-button {
+  --indicator-color: #ce00ea;
+}
+
+ion-segment-button.ios {
+  --color: #ce00ea;
+  --color-checked: #fff;
+  font-size: 17px;
+  font-weight: bold;
+  --border-radius: 20px;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+.centrado {
+  width: 100vw;
+  height: 100vh;
+  flex: auto;
+  align-items: center;
+  position: relative;
+  overflow: hidden; // Asegura que el pseudo-elemento no se desborde
+  background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed
+    center;
+  z-index: -1; // Asegura que el pseudo-elemento esté detrás del contenido
+}
+
+.chats-mesas {
+  --background: deeppink;
+  color: white;
+  font-size: large;
+  font-weight: bold;
+  margin: 1em;
+  height: 10vh;
+  justify-content: center;
+}
+
+.listaPedidos{
+  background: transparent;
+}
+
+ion-item::part(native) {
+  background: rgb(204, 127, 255);
+  color: white;
+  font-size: medium;
+}
+
+ion-item-sliding {
+  margin: 10px 0px;
+  border-radius: 10px;
+}

@@ -13,6 +13,7 @@ export class AudioService {
   constructor() {
     try {
       this.splash = 'splash-audio.mp3';
+      this.cierreSesion = 'cerrarSesion.wav';
     } catch (error) {
       console.error(`Error al cargar los audios: ${error}`);
     }
@@ -20,6 +21,10 @@ export class AudioService {
 
   reporoduccionSplash() {
     this.reproducirAuido(this.splash);
+  }
+
+  reporoduccionCerrarSeion() {
+    this.reproducirAuido(this.cierreSesion);
   }
 
   async reproducirAuido(audio: string) {

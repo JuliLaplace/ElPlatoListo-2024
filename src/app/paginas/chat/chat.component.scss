@@ -1,0 +1,153 @@
+.contenido {
+  width: 100vw;
+  height: 100vh;
+  flex: auto;
+  align-items: center;
+  background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed
+    center;
+}
+
+.container-mensaje {
+  height: calc(100% - 100px);
+  overflow: scroll;
+}
+
+.mozo {
+  float: left;
+  background: #eee;
+  color: #8013f5;
+  min-width: 160px;
+}
+
+ion-content {
+  --padding-top: 0;
+  --padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.sala-4a {
+  --background: rgba(3, 5, 122, 1);
+}
+
+.sala-4b {
+  --background: rgba(11, 71, 3, 1);
+}
+
+.imagen {
+  background-image: url("../../../assets/imagenes/fondo-patron.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.chat-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background: transparent;
+  height: calc(100vh - 45px - 80px - 20px);
+  /* Resta espacio para el input de enviar y  el footer */
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.message {
+  max-width: 70%;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 15px;
+  word-wrap: break-word;
+}
+
+.my-message {
+  align-self: flex-end;
+  background: rgba(7, 108, 126, 0.9);
+  color: gainsboro;
+}
+
+.other-message {
+  align-self: flex-start;
+  background: rgba(255, 251, 251, 0.9);
+  color: rgb(174, 22, 240);
+
+  .mensaje{
+    color: #070707;
+  }
+}
+.message-content p {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.nombre-usuario {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-right: 0.2rem;
+}
+
+.fecha {
+  display: inline-block;
+  margin-bottom: 0.2rem;
+}
+
+.chat-footer {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-footer input {
+  height: 45px;
+  width: calc(100% - 55px);
+  font-size: 16px;
+  background-color: #ffffff;;
+  border-radius: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.chat-footer input::placeholder {
+  color: #070707;
+  opacity: 0.8;
+  /* Controla la visibilidad del placeholder */
+}
+
+.input-texto{
+  border-color: #8013f5;
+}
+
+.chat-footer button {
+  height: 45px;
+  width: 45px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background-color: rgb(255, 151, 250);
+  background-image: url("../../../assets/iconos/icono-envio.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 44px;
+}
+
+.footer {
+  height: 80px;
+  /* Tamaño del footer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.sala-4a {
+  background-color: rgba(11, 71, 3, 1);
+}
+
+div.sala-4b {
+  background-color: rgba(3, 5, 122, 1);
+}
