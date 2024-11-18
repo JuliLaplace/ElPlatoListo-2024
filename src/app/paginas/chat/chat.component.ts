@@ -1,14 +1,9 @@
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-//import { Component, OnInit, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatService, Mensaje } from 'src/servicios/chat.service';
 import { SesionService } from 'src/servicios/sesion.service';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
-import { addIcons } from 'ionicons';
-import { send } from 'ionicons/icons';
-
-//-----------------------------------------------
 import {
   Component,
   OnDestroy,
@@ -20,6 +15,7 @@ import {
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/servicios/data-usuarios.service';
 import { Pedido, PedidoService } from 'src/servicios/pedido.service';
+import { TabsComponent } from "../../componentes/tabs/tabs.component";
 
 
 @Component({
@@ -30,20 +26,21 @@ import { Pedido, PedidoService } from 'src/servicios/pedido.service';
     ReactiveFormsModule,
     IonicModule,
     RouterLink,
-    CommonModule
-  ],
+    CommonModule,
+    TabsComponent
+],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnDestroy, OnInit, AfterViewChecked {
-  mensajeAEnviar: string = '';
-  public listaMensajes: Array<Mensaje> = new Array<Mensaje>();
-
+  
   uidPedido: string = '';
+  public listaMensajes: Mensaje[] = [];
   pedido: Pedido | null = null;
   nuevoMensaje: string = '';
   sub?: Subscription;
   @ViewChild('scrollAnchor') private scrollAnchor?: ElementRef;
+
 
   constructor(
     public sesion: SesionService,
@@ -52,16 +49,14 @@ export class ChatComponent implements OnDestroy, OnInit, AfterViewChecked {
     private router: Router,
     private pedidoServicio: PedidoService
   ) {
-    addIcons({
-      send,
-    });
   }
 
   async ngOnInit() {
-    this.uidPedido = this.route.snapshot.paramMap.get('uidPedido') || '';
-    //this.pedido = await this.pedidoServicio.obtenerPedidoPorUid(this.uidPedido);
+    this.uidPedido = this.route.snapshot.paramMap.get('pedidoId') || '';
+    console.log(this.uidPedido);
+    this.pedido = await this.pedidoServicio.obtenerPedidoPorUid(this.uidPedido);
     this.sub = this.chatServicio
-      .getMensajes('ZKRCsWV2RQwSWd6iIBHU')
+      .getMensajes(this.uidPedido)
       .subscribe((respuesta: any) => {
         this.listaMensajes = respuesta;
       });
@@ -79,7 +74,7 @@ export class ChatComponent implements OnDestroy, OnInit, AfterViewChecked {
         nroMesa: this.pedido.mesa,
         uidUsuario: this.sesion.usuarioBD.email,
         mensaje: this.nuevoMensaje,
-        fecha: new Date(),
+        fecha: null,
       };
       this.chatServicio.enviarMensaje(mensaje);
       this.nuevoMensaje = '';

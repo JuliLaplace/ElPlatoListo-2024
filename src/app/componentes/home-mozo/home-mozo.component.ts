@@ -7,12 +7,16 @@ import { Pedido, PedidoService } from 'src/servicios/pedido.service';
 import { SesionService } from 'src/servicios/sesion.service';
 import { addIcons } from 'ionicons';
 import { restaurant } from 'ionicons/icons';
-import { ProductoEnPedido, ProductoEnPedidoService } from 'src/servicios/productos-en-pedido.service';
+import {
+  ProductoEnPedido,
+  ProductoEnPedidoService,
+} from 'src/servicios/productos-en-pedido.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home-mozo',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, RouterModule],
   templateUrl: './home-mozo.component.html',
   styleUrls: ['./home-mozo.component.scss'],
 })
@@ -24,7 +28,11 @@ export class HomeMozoComponent implements OnInit {
   listaPedidos: Pedido[] = [];
   productosPendientes: any[] = [];
 
-  constructor(private pedidoServicio: PedidoService, private productosServicio: ProductoEnPedidoService, public sesionServicio: SesionService) {
+  constructor(
+    public pedidoServicio: PedidoService,
+    private productosServicio: ProductoEnPedidoService,
+    public sesionServicio: SesionService
+  ) {
     addIcons({
       restaurant,
     });
@@ -40,21 +48,16 @@ export class HomeMozoComponent implements OnInit {
     this.opcionSeleccionada = event.detail.value;
   }
 
-  confirmarPedido(unPedido: Pedido){
-    console.log("Pedido", unPedido);
+  confirmarPedido(unPedido: Pedido) {
+    console.log('Pedido', unPedido);
     this.pedidoServicio.pedidoAceptado(unPedido);
     //this.productosServicio.actualizarEstadoPendiente();
   }
 
-  derivarMozo(){
-
-  }
+  derivarMozo() {}
 }
 
-
-
-
-  /*
+/*
     1 - MOZO 
       -> Tiene una lista de los pedidos  
       -> Filtra por Pendientes

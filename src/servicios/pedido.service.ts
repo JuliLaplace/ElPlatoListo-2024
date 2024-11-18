@@ -1,23 +1,36 @@
 import { Injectable } from '@angular/core';
 import { DataUsuariosService, Usuario } from './data-usuarios.service';
 import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
-import { addDoc, collection, collectionData, doc, Firestore, getDocs, query, Timestamp, updateDoc, where, orderBy } from '@angular/fire/firestore';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  doc,
+  Firestore,
+  getDocs,
+  query,
+  Timestamp,
+  updateDoc,
+  where,
+  orderBy,
+  getDoc,
+} from '@angular/fire/firestore';
 import { SesionService } from './sesion.service';
 import { MesaService } from './mesa.service';
 import { map, Observable, timestamp } from 'rxjs';
 import { EstadoMesa } from 'src/app/enumerados/estado-mesa';
 
 export interface Pedido {
-  id: string,
-  mesa: number,
-  fechaIngreso?: Timestamp,
-  emailUsuario: string,
-  estadoPedido: EstadoPedido,
-  precioTotal: number,
-  propina: number,
-  descuentoJuego: number,
-  tiempoPreparacion: number,
-  encuesta: string
+  id: string;
+  mesa: number;
+  fechaIngreso?: Timestamp;
+  emailUsuario: string;
+  estadoPedido: EstadoPedido;
+  precioTotal: number;
+  propina: number;
+  descuentoJuego: number;
+  tiempoPreparacion: number;
+  encuesta: string;
 }
 
 @Injectable({
@@ -28,6 +41,7 @@ export class PedidoService {
   public coleccionPedidosEnEspera: Pedido[] = [];
   public pedidoUsuario: Pedido | null = null;
   estadoPedido = 'ACEPTAR';
+  public coleccionPedidosEnCurso: Pedido[] = [];
 
   constructor(
     private firestore: Firestore,
@@ -80,6 +94,12 @@ export class PedidoService {
       this.coleccionPedidosEnEspera = this.coleccionPedidos.filter((pedido) => {
         return pedido.estadoPedido == EstadoPedido.sinMesa;
       });
+      this.coleccionPedidosEnCurso = this.coleccionPedidos.filter((pedido) => {
+        return (
+          pedido.estadoPedido != EstadoPedido.sinMesa &&
+          pedido.estadoPedido != EstadoPedido.finalizado
+        );
+      });
 
       if (this.sesion.usuarioBD) {
         let array = this.coleccionPedidos.filter((pedido) => {
@@ -111,6 +131,28 @@ export class PedidoService {
       })
       .catch((error) => {
         console.error('Error al actualizar el pedido:', error);
+      });
+  }
+
+  obtenerPedidoPorUid(idPedido: string) {
+    // Referencia al documento en la colección "pedidos" usando el ID
+    const docRef = doc(this.firestore, 'pedidos', idPedido);
+
+    // Obtener los datos del documento
+    return getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          // El documento existe, devolver los datos
+          return docSnap.data() as Pedido;
+        } else {
+          // El documento no existe
+          console.error('No se encontró un pedido con ese ID');
+          return null;
+        }
+      })
+      .catch((error) => {
+        console.error('Error al obtener el pedido:', error);
+        throw error;
       });
   }
 
