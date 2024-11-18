@@ -4,6 +4,8 @@ import { EstadoProductoEnPedido } from 'src/app/enumerados/estado-producto-en-pe
 import { addDoc, collection, collectionData, doc, Firestore, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { SesionService } from './sesion.service';
 import { Pedido } from './pedido.service';
+import { map, Observable } from 'rxjs';
+import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
 
 export interface ProductoEnPedido{
   id: string,
@@ -40,7 +42,7 @@ export class ProductoEnPedidoService {
       cantidad: cantidad,
       estado: EstadoProductoEnPedido.sinConfirmar,
       nombreProducto: nombreProducto,
-      sector: sector
+      sector: sector,
     };
     let col = collection(this.firestore, 'productosEnPedido');
     return await addDoc(col, productoEnPedido).then((ref) => {
@@ -122,21 +124,70 @@ export class ProductoEnPedidoService {
   }
 
   public actualizarEstadoPendiente(producto: ProductoEnPedido) {
-    this.cambiarEstadoProducto(producto, {estadoproducto: EstadoProductoEnPedido.pendiente});
+    this.cambiarEstadoProducto(producto, {
+      estadoproducto: EstadoProductoEnPedido.pendiente,
+    });
   }
 
-  async obtenerProductoPorPedido(unPedido: Pedido){
+  async obtenerProductoPorPedido(unPedido: string) {
     const col = collection(this.firestore, 'productosEnPedido');
-    const pedidoQuery = query(col, where('idPedido', '==', unPedido.id));
+    const pedidoQuery = query(col, where('idPedido', '==', unPedido));
     const pedidoSnapshot = await getDocs(pedidoQuery);
-    
+
     if (!pedidoSnapshot.empty) {
       // Devuelve el primer usuario encontrado, si coindice con el email
       return pedidoSnapshot.docs[0].data() as ProductoEnPedido;
     }
-     // Si no encuentra el usuario
+    // Si no encuentra el usuario
     return null;
   }
 
-  
+  async cambiarEstadoPorIdPedido(idPedido: string, nuevoEstado: EstadoProductoEnPedido): Promise<void> {
+    try {
+      // Referencia a la colección 'productosEnPedido'
+      const productosCollection = collection(this.firestore, 'productosEnPedido');
+      
+      // Crear una query para filtrar los productos con el idPedido
+      const q = query(productosCollection, where('idPedido', '==', idPedido));
+      // Obtener los documentos que coinciden con la query
+      const querySnapshot = await getDocs(q);
+
+      // Recorrer los documentos y actualizar el campo 'estado'
+      const batchUpdates = querySnapshot.docs.map((docSnapshot) => {
+        const productoRef = doc(this.firestore, 'productosEnPedido', docSnapshot.id);
+        return updateDoc(productoRef, { estado: nuevoEstado });
+      });
+      // Esperar a que todas las actualizaciones se completen
+      await Promise.all(batchUpdates);
+
+      console.log(`Se han actualizado los estados de los productos con idPedido: ${idPedido}`);
+    } catch (error) {
+      console.error('Error al cambiar el estado de los productos:', error);
+    }
+  }
+
+
+
+  public actualizarEstadoPreparacion(producto: ProductoEnPedido) {
+    this.cambiarEstadoProducto(producto, {
+      estado: EstadoProductoEnPedido.enPreparacion,
+    });
+  }
+
+  public actualizarEstadoListoEntregar(producto: ProductoEnPedido) {
+    this.cambiarEstadoProducto(producto, {
+      estado: EstadoProductoEnPedido.listoParaEntregar,
+    });
+  }
+
+  obtenerTodosLosProductosPendientes(): Observable<any[]> {
+    let col = collection(this.firestore, 'productosEnPedido');
+    return collectionData(col, { idField: 'id' }).pipe(
+      map((pedidos: any[]) =>
+        pedidos.filter(
+          (pedido) => pedido.estado === EstadoProductoEnPedido.pendiente
+        )
+      )
+    );
+  }
 }

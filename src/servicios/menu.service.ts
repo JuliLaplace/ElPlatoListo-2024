@@ -475,4 +475,20 @@ export class MenuService {
 
   //     updateDoc(docRef, data);
   //   }
+
+  async obtenerMenuPorProducto(unProducto: string) {
+    const col = collection(this.firestore, 'menu');
+    const pedidoQuery = query(col, where('idPedido', '==', unProducto));
+
+    const pedidoSnapshot = await getDocs(pedidoQuery);
+
+    if (!pedidoSnapshot.empty) {
+      // Retornamos el documento con el campo 'id' incluido
+      const producto = pedidoSnapshot.docs[0].data() as Producto;
+      producto.id = pedidoSnapshot.docs[0].id;
+      return producto;
+    }
+
+    return null;
+  }
 }

@@ -12,6 +12,7 @@ import {
   ProductoEnPedidoService,
 } from 'src/servicios/productos-en-pedido.service';
 import { RouterModule } from '@angular/router';
+import { EstadoProductoEnPedido } from 'src/app/enumerados/estado-producto-en-pedido';
 
 @Component({
   selector: 'app-home-mozo',
@@ -27,6 +28,7 @@ export class HomeMozoComponent implements OnInit {
 
   listaPedidos: Pedido[] = [];
   productosPendientes: any[] = [];
+  unProductoPorPedido!: ProductoEnPedido | null;
 
   constructor(
     public pedidoServicio: PedidoService,
@@ -41,6 +43,7 @@ export class HomeMozoComponent implements OnInit {
   ngOnInit() {
     this.pedidoServicio.obtenerTodosLosPedidos().subscribe((pedidos) => {
       this.listaPedidos = pedidos;
+      console.log(this.listaPedidos);
     });
   }
 
@@ -49,9 +52,9 @@ export class HomeMozoComponent implements OnInit {
   }
 
   confirmarPedido(unPedido: Pedido) {
-    console.log('Pedido', unPedido);
+    console.log('Pedidosss', unPedido);
     this.pedidoServicio.pedidoAceptado(unPedido);
-    //this.productosServicio.actualizarEstadoPendiente();
+    this.productosServicio.cambiarEstadoPorIdPedido(unPedido.id, EstadoProductoEnPedido.pendiente);
   }
 
   derivarMozo() {}

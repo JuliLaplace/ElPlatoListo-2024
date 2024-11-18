@@ -25,7 +25,7 @@
             </div>
             <div class="fecha-total-pedido">
               <ion-note style="font-size: medium; color: black" color="medium">
-                {{ 'Fecha Pedido: ' + pedido.fechaIngreso }}
+                Fecha de Pedido: {{ pedido.fechaIngreso?.toDate() | date: 'dd/MM/yy HH:mm' }}
               </ion-note>
               <ion-note style="font-size: medium; color: black ; margin: 2px 5px; font-weight: bold;">
                 {{ 'Total: ' + pedido.precioTotal }}

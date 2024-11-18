@@ -249,13 +249,6 @@ export class PedidoService {
   //   );
   // }
 
-  obtenerTodosLosPedidos(): Observable<any[]> {
-    let col = collection(this.firestore, 'pedidos');
-    const filteredQuery = query(col, orderBy('fechaIngreso', 'asc'));
-    const observable = collectionData(filteredQuery);
-    return observable;
-  }
-
   // obtenerPedidosProductos(): Observable<any[]> {
   //   let col = collection(this.firestore, 'pedidos');
   //   let consulta = query(col, orderBy('fechaIngreso'));
@@ -269,4 +262,18 @@ export class PedidoService {
   //     )
   //   );
   // }
+
+  obtenerTodosLosPedidos(): Observable<any[]> {
+    let col = collection(this.firestore, 'pedidos');
+    let consulta = query(col, orderBy('fechaIngreso'));
+
+    return collectionData(consulta, { idField: 'id' }).pipe(
+      map((pedidos: any[]) =>
+        pedidos.filter(
+          (pedido) =>
+            pedido.estadoPedido !== EstadoPedido.sinMesa && pedido.estadoPedido !== EstadoPedido.finalizado
+        )
+      )
+    );
+  }
 }
