@@ -55,6 +55,8 @@ export class HomeClienteComponent {
     if (this.pedidoService.pedidoUsuario == null) {
       this.router.navigate(['/pagina-mensajes/listaEspera']);
       this.pedidoService.nuevoPedido(this.usuario!.email);
+    } else if (this.pedidoService.pedidoUsuario?.mesa) { 
+      this.router.navigate(['/pagina-mensajes/yaTenesMesaAsignada']);
     } else {
       this.router.navigate(['/pagina-mensajes/yaEstasEnListaEspera']);
     }
