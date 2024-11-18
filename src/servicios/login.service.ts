@@ -3,6 +3,8 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signO
 import { Router } from '@angular/router';
 import { DataUsuariosService, Usuario } from './data-usuarios.service';
 import { EstadoCliente } from 'src/app/enumerados/estado-cliente';
+import { AudioService } from './audio.service';
+import { SpinnerService } from './spinner.service';
 
 export interface LoginError {
   errorFlag: boolean,
@@ -16,7 +18,7 @@ export interface LoginError {
 export class LoginService {
 
   public usuarioActual?: Usuario;
-  constructor(private auth: Auth, private router: Router, private dataUsuario: DataUsuariosService) {
+  constructor(private auth: Auth, private router: Router, private dataUsuario: DataUsuariosService, private audioServicio: AudioService, private spinnerServicio: SpinnerService) {
   }
 
   async registrar(email: string, pwd: string): Promise<LoginError> {
@@ -105,6 +107,13 @@ export class LoginService {
   async logout(): Promise<void> {
     console.log(this.auth.currentUser?.email);
     return signOut(this.auth).then(() => {
+      this.audioServicio.reporoduccionCerrarSeion();
+      this.spinnerServicio.mostrarMensaje({
+        message: "Cerrando sesion...",
+        duration: 1500,
+        color: 'success',
+        position: 'middle',
+      });
       this.router.navigate(['/login']);
     });
   }
