@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="sesion.usuarioActual">
+      Precio acumulado: {{ pedidoService.pedidoUsuario?.estadoPedido }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="centrado">
+
+    <div class="contenido-general">
+      <div *ngIf="menuService.coleccionProductos">
+        <div *ngFor="let producto of menuService.coleccionProductos; let i = index">
+
+          <div class="card" style="width: 18rem;">
+
+            <div class="photo-grid">
+              <img [src]="producto.imagenUno" class="photo-large" [alt]="producto.nombre" />
+              <div class="photo-column">
+                <img [src]="producto.imagenDos" class="photo-small" [alt]="producto.nombre" />
+                <img [src]="producto.imagenTres" class="photo-small" [alt]="producto.nombre" />
+              </div>
+            </div>
+
+            <div class="card-body producto-tituloydesc">
+              <h5 class="card-title">{{ producto.nombre }}</h5>
+            </div>
+            <ul class="list-group list-group-light list-group-small">
+              <li class="list-group-item px-4">{{producto.descripcion}}</li>
+              <li class="list-group-item px-4">Tiempo de preparación: {{producto.tiempo_preparacion}} min.</li>
+              <li class="list-group-item px-4"><strong>Precio: ${{producto.precio}}</strong></li>
+            </ul>
+            <div class="card-body contenedor-agregar">
+              <div class="counter">
+                <button (click)="decrementarCantidad(producto.id)" class="btn">-</button>
+                <span class="value">{{ cantidadesPedido[producto.id] || 0 }}</span>
+                <button (click)="incrementarCantidad(producto.id)" class="btn">+</button>
+              </div>
+              <button class="btn agregar-producto" (click)="agregarProducto(producto.id)">
+                <span>+</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<app-tabs [usuario]="sesion.usuarioBD"></app-tabs>

@@ -40,6 +40,15 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'menu',
+    children: [
+      {
+        path: ':pedidoId',
+        loadComponent: () => import('./componentes/menu/menu.component').then( c => c.MenuComponent)
+      }
+    ]
+  },
+  {
     path: 'cliente-pedido-en-curso',
     loadComponent: () => import('./componentes/cliente-pedido-en-curso/cliente-pedido-en-curso.component').then( c => c.ClientePedidoEnCursoComponent)
   },
