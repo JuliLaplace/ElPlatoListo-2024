@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataUsuariosService, Usuario } from './data-usuarios.service';
 import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
-import { addDoc, collection, collectionData, doc, Firestore, getDocs, query, Timestamp, updateDoc, where } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, doc, Firestore, getDocs, query, Timestamp, updateDoc, where, orderBy } from '@angular/fire/firestore';
 import { SesionService } from './sesion.service';
 import { MesaService } from './mesa.service';
 import { timestamp } from 'rxjs';
@@ -70,7 +70,9 @@ export class PedidoService {
 
   obtenerDatos() {
     let col = collection(this.firestore, 'pedidos');
-    const observable = collectionData(col, { idField: 'id' });
+    let consulta = query(col, orderBy('fechaIngreso'));
+    const observable = collectionData(consulta, { idField: 'id' });
+
     observable.subscribe((respuesta: any) => {
       this.coleccionPedidos = respuesta;
       this.coleccionPedidosEnEspera = this.coleccionPedidos.filter((pedido) => {
@@ -92,6 +94,24 @@ export class PedidoService {
       }
     });
   }
+
+  modificarPrecioTotalPedido(idPedido: string, precioAModificar: number) {
+    // Referencia al documento en la colección "pedidos" con el ID proporcionado
+    const docRef = doc(this.firestore, 'pedidos', idPedido);
+
+    // Realizar la actualización del campo `precioTotal`
+    return updateDoc(docRef, {
+      precioTotal: precioAModificar,
+      estadoPedido: EstadoPedido.esperandoMozo
+    })
+      .then(() => {
+        console.log('Pedido actualizado correctamente');
+      })
+      .catch((error) => {
+        console.error('Error al actualizar el pedido:', error);
+      });
+  }
+
   private modificarRegistro(pedido: Pedido, data: any) {
     let col = collection(this.firestore, 'pedidos');
     const docRef = doc(col, pedido.id);
@@ -103,6 +123,14 @@ export class PedidoService {
     this.modificarRegistro(pedido, data);
   }
 
+  public cambiarEstadoSinPedido (pedido: Pedido, numeroMesa: number) {
+    this.cambiarEstadoPedido(pedido, {
+      estadoPedido: EstadoPedido.sinPedido,
+      mesa: numeroMesa,
+    });
+    this.servicioMesa.cambiarMesaOcupada(numeroMesa);
+  }
+
   public esperandoMozo(pedido: Pedido, numeroMesa: number) {
     this.cambiarEstadoPedido(pedido, {
       estadoPedido: EstadoPedido.esperandoMozo,
@@ -110,9 +138,11 @@ export class PedidoService {
     });
     this.servicioMesa.cambiarMesaOcupada(numeroMesa);
   }
+
   public realizarPedido(pedido: Pedido) {
     // this.cambiarEstadoPedido(pedido, {estadoPedido : EstadoPedido.realizandoPedido});
   }
+
   public finalizarPedido(pedido: Pedido, numeroMesa: number) {
     this.cambiarEstadoPedido(pedido, {
       estadoPedido: EstadoPedido.finalizado,

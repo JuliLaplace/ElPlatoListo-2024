@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, doc, Firestore, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, doc, Firestore, getDocs, query, updateDoc, where, orderBy } from '@angular/fire/firestore';
 import { EstadoMesa } from 'src/app/enumerados/estado-mesa';
 
 export interface Mesa {
@@ -45,13 +45,12 @@ export class MesaService {
 
   obtenerDatos() {
     let col = collection(this.firestore, 'mesas');
-    const observable = collectionData(col, { idField: 'id' });
+    let consulta = query(col, orderBy('numero'));
+    const observable = collectionData(consulta, { idField: 'id' });
     observable.subscribe((respuesta: any) => {
       this.coleccionMesas = respuesta;
-      this.coleccionMesasLibres = this.coleccionMesas.filter((mesa) => { return (mesa.estado == EstadoMesa.libre) });
-      
+      this.coleccionMesasLibres = this.coleccionMesas.filter((mesa) => { return (mesa.estado == EstadoMesa.libre) }); 
     })
-
   }
 
   private modificarRegistro(mesa: Mesa, data: any) {
@@ -77,6 +76,5 @@ export class MesaService {
   public cambiarMesaLibre(numero: number) {
     this.cambiarEstadoMesa(numero, EstadoMesa.libre);
   }
-
 
 }
