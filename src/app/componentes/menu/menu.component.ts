@@ -51,14 +51,14 @@ export class MenuComponent  implements OnInit {
     this.router.navigateByUrl('/cliente-pedido-en-curso');
   }
 
-  agregarProducto (idProducto: string, precioProducto: number) {
+  agregarProducto (idProducto: string, precioProducto: number, nombreProducto: string, sector: string) {
     const cantidad = this.cantidadesPedido[idProducto] || 0;
     console.log(`Producto agregado: ${idProducto}, cantidad: ${cantidad}`);
     this.precioAcumulado += (precioProducto * cantidad);
 
     // Aquí procesas el producto y la cantidad, guardándolo en el pedido
     if (this.idPedido) {
-      this.productosEnPedidoService.agregarProductoEnPedido(this.idPedido, idProducto, this.cantidadesPedido[idProducto]);
+      this.productosEnPedidoService.agregarProductoEnPedido(this.idPedido, idProducto, this.cantidadesPedido[idProducto], nombreProducto, sector);
     }
   }
 

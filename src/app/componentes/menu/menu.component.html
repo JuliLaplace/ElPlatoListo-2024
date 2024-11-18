@@ -42,7 +42,7 @@
                 <span class="value">{{ cantidadesPedido[producto.id] || 0 }}</span>
                 <button (click)="incrementarCantidad(producto.id)" class="btn">+</button>
               </div>
-              <button class="btn agregar-producto" (click)="agregarProducto(producto.id, producto.precio)">
+              <button class="btn agregar-producto" (click)="agregarProducto(producto.id, producto.precio, producto.nombre, producto.sector)">
                 <span>+</span>
               </button>
             </div>
