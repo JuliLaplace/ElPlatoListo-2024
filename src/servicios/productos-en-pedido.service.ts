@@ -10,7 +10,9 @@ export interface ProductoEnPedido{
   idPedido: string,
   idProducto: string,
   cantidad: number,
-  estado: EstadoProductoEnPedido
+  estado: EstadoProductoEnPedido,
+  nombreProducto: string,
+  sector: string
 }
 @Injectable({
   providedIn: 'root',
@@ -27,7 +29,9 @@ export class ProductoEnPedidoService {
   async agregarProductoEnPedido(
     idPedido: string,
     idProducto: string,
-    cantidad: number
+    cantidad: number,
+    nombreProducto: string,
+    sector: string
   ): Promise<string> {
     let productoEnPedido: ProductoEnPedido = {
       id: '',
@@ -35,6 +39,8 @@ export class ProductoEnPedidoService {
       idProducto: idProducto,
       cantidad: cantidad,
       estado: EstadoProductoEnPedido.sinConfirmar,
+      nombreProducto: nombreProducto,
+      sector: sector
     };
     let col = collection(this.firestore, 'productosEnPedido');
     return await addDoc(col, productoEnPedido).then((ref) => {
