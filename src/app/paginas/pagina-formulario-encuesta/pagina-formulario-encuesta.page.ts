@@ -10,6 +10,7 @@ import { StorageService } from 'src/servicios/storage.service';
 import { Encuesta, EncuestaService, ServiciosAdicionales } from 'src/servicios/encuesta.service';
 import { addIcons } from 'ionicons';
 import { happyOutline, sadOutline } from 'ionicons/icons';
+import { PedidoService } from 'src/servicios/pedido.service';
 
 @Component({
   selector: 'app-pagina-formulario-encuesta',
@@ -26,7 +27,7 @@ export class PaginaFormularioEncuestaPage implements OnInit {
   urlFotos : string[] = [this.url_defecto, this.url_defecto, this.url_defecto];
 
 
-  constructor( public sesion : SesionService, public formViewer : FormViewerService, private camaraService : CamaraService, private servicioStorage: StorageService, private encuestaService : EncuestaService) { 
+  constructor( public sesion : SesionService, public formViewer : FormViewerService, private camaraService : CamaraService, private servicioStorage: StorageService, private encuestaService : EncuestaService, private pedidoService: PedidoService) { 
     addIcons({ happyOutline, sadOutline });
   }
 
@@ -82,6 +83,7 @@ export class PaginaFormularioEncuestaPage implements OnInit {
       this.encuestaService.crearRegistro(encuesta)
       .then((id)=>{
         encuesta.id =  id;
+        this.pedidoService.cargarEncuesta(encuesta.id);
         this.limpiarDatos();
       });
 

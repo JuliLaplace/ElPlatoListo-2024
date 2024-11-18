@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, doc, Firestore, getDoc } from '@angular/fire/firestore';
 
 export interface Encuesta{
   id: string,
@@ -34,5 +34,10 @@ export class EncuestaService {
     return await addDoc(col, encuesta).then((ref) => {
       return ref.id;
     });
+  }
+
+  obtenerEncuesta(idEncuesta : string){
+    let col = collection(this.firestore, 'encuestas');
+    return getDoc(doc(col, idEncuesta));
   }
 }
