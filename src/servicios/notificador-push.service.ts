@@ -79,5 +79,27 @@ export class NotificadorPushService {
     this.notificarPorRol(mensaje, TipoUsuario.cocinero);
     this.notificarPorRol(mensaje, TipoUsuario.bartender);
   }
+
+  notificarMozoPedidoParaServir() {
+    let mensaje: string = 'Tenés un pedido listo para servir.';
+    this.notificarPorRol(mensaje, TipoUsuario.mozo);
+  }
+
+  notificarMozoPedidoDeCuenta(mesa: number) {
+    let mensaje: string = 'Pedido de cuenta en mesa ' + mesa + '.';
+    this.notificarPorRol(mensaje, TipoUsuario.mozo);
+  }
+
+  enviarMailRegistro(nombreUsuario: string, mail: string) {
+    this.http
+      .post(this.servidor + '/send-register-mail', {
+        nombreUsuario: nombreUsuario,
+        mail: mail,
+      })
+      .pipe(take(1))
+      .subscribe((r) => {
+        console.log(r);
+      });
+  }
 }
 
