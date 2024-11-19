@@ -156,6 +156,23 @@ export class PedidoService {
       });
   }
 
+  async modificarEstadoPedidoPorID(
+    id: string,
+    nuevoEstado: string
+  ): Promise<void> {
+    try {
+      // Referencia al documento en Firestore
+      const pedidoRef = doc(this.firestore, 'pedidos', id);
+
+      // Actualizar el campo `estadoPedido`
+      await updateDoc(pedidoRef, { estadoPedido: nuevoEstado });
+
+      console.log(`Estado del pedido ${id} actualizado a ${nuevoEstado}`);
+    } catch (error) {
+      console.error(`Error al actualizar el estado del pedido ${id}:`, error);
+    }
+  }
+
   private modificarRegistro(pedido: Pedido, data: any) {
     let col = collection(this.firestore, 'pedidos');
     const docRef = doc(col, pedido.id);
@@ -195,6 +212,12 @@ export class PedidoService {
     });
   }
 
+  public pedidoAceptadoPorCliente(pedido: Pedido) {
+    this.cambiarEstadoPedido(pedido, {
+      estadoPedido: EstadoPedido.aceptoPedido,
+    });
+  }
+
   public finalizarPedido(pedido: Pedido, numeroMesa: number) {
     this.cambiarEstadoPedido(pedido, {
       estadoPedido: EstadoPedido.finalizado,
@@ -209,60 +232,6 @@ export class PedidoService {
     }
   }
 
-  // aplicarDescuentoPorJuego(pedido: Pedido, porcentaje: number) {
-  //   const coleccion = collection(this.firestore, 'pedidos');
-  //   const documento = doc(coleccion, pedido.id);
-
-  //   updateDoc(documento, {
-  //     descuentoJuego: porcentaje,
-  //     total: pedido.total - (pedido.total * porcentaje) / 100 + pedido.propina,
-  //   });
-  // }
-
-  // aplicarPropina(pedido: Pedido, propina: number): Promise<void> {
-  //   const coleccion = collection(this.firestore, 'pedidos');
-  //   const documento = doc(coleccion, pedido.id);
-  //   const propinaTotal = pedido.total * (propina / 100);
-  //   // Aplica el descuento si existe, de lo contrario, no aplica ningún descuento
-  //   const descuentoJuegos = pedido.descuentoJuego ? pedido.descuentoJuego : 0;
-
-  //   // Calcula el total incluyendo propina y descuento
-  //   const total = pedido.total + propinaTotal - (descuentoJuegos * pedido.total) / 100;
-
-  //   return updateDoc(documento, {
-  //     propina: propina,
-  //     total: total,
-  //   });
-  // }
-
-  // obtenerPedidosPendientes(): Observable<any[]> {
-  //   let col = collection(this.firestore, 'pedidos');
-  //   let consulta = query(col, orderBy('fechaIngreso'));
-
-  //   return collectionData(consulta, { idField: 'id' }).pipe(
-  //     // Filtrar los pedidos con estado 'esperandoMozo'
-  //     map((pedidos: any[]) =>
-  //       pedidos.filter(
-  //         (pedido) => pedido.estadoPedido === EstadoPedido.esperandoMozo
-  //       )
-  //     )
-  //   );
-  // }
-
-  // obtenerPedidosProductos(): Observable<any[]> {
-  //   let col = collection(this.firestore, 'pedidos');
-  //   let consulta = query(col, orderBy('fechaIngreso'));
-
-  //   return collectionData(consulta, { idField: 'id' }).pipe(
-  //     // Filtrar los pedidos con estado 'esperandoMozo'
-  //     map((pedidos: any[]) =>
-  //       pedidos.filter(
-  //         (pedido) => pedido.estadoPedido === EstadoPedido.esperandoMozo
-  //       )
-  //     )
-  //   );
-  // }
-
   obtenerTodosLosPedidos(): Observable<any[]> {
     let col = collection(this.firestore, 'pedidos');
     let consulta = query(col, orderBy('fechaIngreso'));
@@ -271,7 +240,8 @@ export class PedidoService {
       map((pedidos: any[]) =>
         pedidos.filter(
           (pedido) =>
-            pedido.estadoPedido !== EstadoPedido.sinMesa && pedido.estadoPedido !== EstadoPedido.finalizado
+            pedido.estadoPedido !== EstadoPedido.sinMesa &&
+            pedido.estadoPedido !== EstadoPedido.finalizado
         )
       )
     );

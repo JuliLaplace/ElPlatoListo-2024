@@ -27,15 +27,14 @@
               <ion-note style="font-size: medium; color: black" color="medium">
                 Fecha de Pedido: {{ pedido.fechaIngreso?.toDate() | date: 'dd/MM/yy HH:mm' }}
               </ion-note>
+              <br />
               <ion-note style="font-size: medium; color: black ; margin: 2px 5px; font-weight: bold;">
-                {{ 'Total: ' + pedido.precioTotal }}
+                {{ 'Total: $' + pedido.precioTotal }}
               </ion-note>
             </div>
             <ion-button (click)="confirmarPedido(pedido)" expand="block" size="small">
-              <ion-text color="light">{{
-                pedido.estadoPedido === 'Esperando mozo' ? 'Aceptar' :
-                (pedido.estadoPedido === 'Pedido en preparación' ? 'En preparación' : 'Listo') }}
-              </ion-text> <!---SI ACEPTO CAMBIA ESTADO A 'Pedido en preparación'-->
+              <ion-text color="light">{{ pedido.estadoPedido }}
+              </ion-text>
             </ion-button>
           </div>
         </ion-card-content>
