@@ -22,12 +22,12 @@ export class ListadoClientesPendientesPage implements OnInit {
   }
 
   aceptarCliente(usuario: Usuario){
-    this.dataUsuario.cambiarEstadoCliente(usuario, EstadoCliente.aceptado);
+    this.dataUsuario.aceptarCliente(usuario);
     console.log("entre");
   }
 
   rechazarCliente(usuario: Usuario){
-    this.dataUsuario.cambiarEstadoCliente(usuario, EstadoCliente.rechazado);
+    this.dataUsuario.rechazarCliente(usuario);
   }
 
 }
