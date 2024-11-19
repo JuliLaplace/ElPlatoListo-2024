@@ -19,6 +19,7 @@ import { SesionService } from './sesion.service';
 import { MesaService } from './mesa.service';
 import { map, Observable, timestamp } from 'rxjs';
 import { EstadoMesa } from 'src/app/enumerados/estado-mesa';
+import { NotificadorPushService } from './notificador-push.service';
 
 export interface Pedido {
   id: string;
@@ -46,7 +47,8 @@ export class PedidoService {
   constructor(
     private firestore: Firestore,
     private sesion: SesionService,
-    public servicioMesa: MesaService
+    public servicioMesa: MesaService,
+    private notificacionPush : NotificadorPushService
   ) {
     this.obtenerDatos();
   }
@@ -64,6 +66,7 @@ export class PedidoService {
       tiempoPreparacion: 0,
       encuesta: '',
     };
+    this.notificacionPush.notificarMaitreClienteEnListaEspera();
     let col = collection(this.firestore, 'pedidos');
     return await addDoc(col, pedido).then((ref) => {
       return ref.id;
