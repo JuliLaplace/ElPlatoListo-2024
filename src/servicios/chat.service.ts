@@ -9,6 +9,7 @@ import {
   Timestamp,
   where,
 } from '@angular/fire/firestore';
+import { NotificadorPushService } from './notificador-push.service';
 
 export interface Mensaje {
   uidPedido: string;
@@ -24,9 +25,15 @@ export interface Mensaje {
 export class ChatService {
   private coleccion: string = 'chats';
 
-  constructor(private firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private notificacionPush: NotificadorPushService
+  ) {}
 
   async enviarMensaje(mensaje: Mensaje) {
+    if (mensaje.nroMesa) {
+      this.notificacionPush.notificarMozoConsultaDeCliente(mensaje.nroMesa);
+    }
     mensaje.fecha = Timestamp.fromDate(new Date());
     console.log(mensaje);
     const ref = collection(this.firestore, this.coleccion);
