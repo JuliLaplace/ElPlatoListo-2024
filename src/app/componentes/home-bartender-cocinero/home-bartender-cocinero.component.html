@@ -3,40 +3,25 @@
   <ion-segment-button value="PedidosPendientes"> Pedidos Pendientes </ion-segment-button>
 </ion-segment>
 
-<!---------------------- VISTA COCINERO , BARTENDER -------------------------------->
-<div> 
-   <!-------------LISTADO DE PEDIDOS PENDIENTES------->
+
+
+<div class="centrado">
+  <div class="container">
     <div *ngIf="opcionSeleccionada === 'Pedidos'">
-      <ion-card class="ion-margin" *ngFor="let unProducto of listaProductos">
+      <ion-card class="ion-margin" *ngFor="let unProducto of listaFiltradaPorTipoUsuario">
         <ion-card-content>
           <div class="detalles-producto">
             <div class="productos detalles-producto">
               <label><strong>Nombre:{{unProducto.nombreProducto}}</strong></label>
               <label><strong>Cantidad:{{unProducto.cantidad}}</strong></label>
-            </div>         
-            <ion-button (click)="confirmarProducto()" expand="block" size="small">
-              <ion-text color="light">EN PREPARACIÓN</ion-text> <!---SI ACEPTO CAMBIA ESTADO A 'Listo para entregar'-->
+            </div>
+            <ion-button (click)="cambiarEstadoProducto(unProducto.idProducto, unProducto.idPedido, unProducto.estado)"
+              expand="block" size="small">
+              <ion-text color="light">{{unProducto.estado}}</ion-text>
             </ion-button>
           </div>
         </ion-card-content>
       </ion-card>
     </div>
-    <!-------------LISTADO DE ASIGNADOS---------------->
-    <div *ngIf="opcionSeleccionada === 'PedidosPendientes'">
-      <ion-card class="ion-margin"><!--*ngFor="let unProducto of listaProductos"-->
-        <!--<ion-img class="card-image" [src]="unaFoto.url"></ion-img>-->
-        <ion-card-content>
-          <div class="detalles-producto">
-            <div class="productos detalles-producto">
-              <label><strong>Producto:</strong>Cafe</label>
-              <label><strong>Cantidad:</strong>2</label>
-              <label><strong>Tiempo Estimado:</strong> 90 min</label>
-            </div>         
-            <ion-button (click)="confirmarProducto()" expand="block" size="small">
-              <ion-text color="light">ACEPTAR</ion-text> <!---CAMBIARIA A 'En preparación'-->
-            </ion-button>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </div>
+  </div>
 </div>

@@ -30,17 +30,15 @@ ion-segment-button.ios {
   align-items: center;
   position: relative;
   overflow: hidden; // Asegura que el pseudo-elemento no se desborde
-  background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed
-    center;
-  z-index: -1; // Asegura que el pseudo-elemento esté detrás del contenido
+  background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
 }
 
-.detalles-producto{
+.detalles-producto {
   display: flex;
   flex-direction: column;
 }
 
-.productos{
+.productos {
   font-size: large;
   margin: 1em;
 }

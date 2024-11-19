@@ -11,7 +11,7 @@
     <app-home-admin [usuario]="sesion.usuarioBD"></app-home-admin>
   </div>
 
-  <div *ngIf="sesion.esMozo() || sesion.esBartender()">
+  <div *ngIf="sesion.esMozo()">
     <app-home-mozo [usuario]="sesion.usuarioBD"></app-home-mozo>
   </div>
 

@@ -4,7 +4,11 @@ import { Usuario } from 'src/servicios/data-usuarios.service';
 import { IonicModule } from '@ionic/angular';
 import { SesionService } from 'src/servicios/sesion.service';
 import { MenuService, Producto } from 'src/servicios/menu.service';
-import { ProductoEnPedidoService } from 'src/servicios/productos-en-pedido.service';
+import {
+  ProductoEnPedido,
+  ProductoEnPedidoService,
+} from 'src/servicios/productos-en-pedido.service';
+import { EstadoProductoEnPedido } from 'src/app/enumerados/estado-producto-en-pedido';
 
 @Component({
   selector: 'app-home-bartender-cocinero',
@@ -16,25 +20,34 @@ import { ProductoEnPedidoService } from 'src/servicios/productos-en-pedido.servi
 export class HomeBartenderCocineroComponent implements OnInit {
   @Input() usuario!: Usuario | null;
   opcionSeleccionada: string = 'Pedidos';
-  listaProductos: any[] = [];
-  listaProductosBartender: Producto[] = [];
-  listaProductosCocinero: Producto[] = [];
+  listaProductos: ProductoEnPedido[] = [];
+  listaFiltradaPorTipoUsuario: ProductoEnPedido[] = [];
 
   constructor(
     public sesionServicio: SesionService,
     private productoServicio: ProductoEnPedidoService,
-    private menuServicio: MenuService,
+    private menuServicio: MenuService
   ) {}
 
   ngOnInit() {
     this.productoServicio
       .obtenerTodosLosProductosPendientes()
       .subscribe((productos) => {
+        this.listaFiltradaPorTipoUsuario = [];
         this.listaProductos = productos;
-        console.log("Productos en esatdo pendiente",this.listaProductos);
-        //DESPUES DE OBTENER LA CONFIRMACIÓN DEL MOZO -> GUARDO EN LA LISTA QUE PRODUCTO PERTENECE A CADA SECTOR
-        //this.derivarAsuSector();
-
+        if (this.sesionServicio.usuarioBD?.tipo === 'Cocinero') {
+          this.listaProductos.filter((producto) => {
+            if (producto.sector !== 'barra') {
+              this.listaFiltradaPorTipoUsuario.push(producto);
+            }
+          });
+        } else if (this.sesionServicio.usuarioBD?.tipo === 'Bartender') {
+          this.listaProductos.filter((producto) => {
+            if (producto.sector === 'barra') {
+              this.listaFiltradaPorTipoUsuario.push(producto);
+            }
+          });
+        }
       });
   }
 
@@ -42,35 +55,26 @@ export class HomeBartenderCocineroComponent implements OnInit {
     this.opcionSeleccionada = event.detail.value;
   }
 
-  confirmarProducto() {}
-
-  async derivarAsuSector() {
-    //Recorrer mi lista de los prodcutos que estan pendientes
-    console.log("Lista de Productos",this.listaProductos);
-    //Obtener el id de cada producto
-    //Recorro mi listaProductos para obtener el idProducto
-    //Busco en mi collecion de Menu el idProducto
-    //Verifico a que sector pertene: cocinero o bar
-
-    for (let productoPendiente of this.listaProductos) {
-      console.log(this.menuServicio.coleccionProductos);
-
-      for (let menuProdcuto of this.menuServicio.coleccionProductos) {
-        const producto = await this.menuServicio.obtenerMenuPorProducto(
-          productoPendiente.idProducto
-        );
-        console.log('producto menu', producto);
-        if (producto) {
-          if (producto.sector === 'barra') {
-            this.listaProductosBartender.push(producto);
-          } else if (producto.sector === 'cocina') {
-            this.listaProductosCocinero.push(producto);
-          }
-        }
-      }
+  async cambiarEstadoProducto(
+    idProducto: string,
+    idPedido: string,
+    estado: string
+  ) {
+    console.log(idProducto, idPedido, estado);
+    let nuevoEstado = '';
+    switch (estado) {
+      case EstadoProductoEnPedido.pendiente:
+        nuevoEstado = EstadoProductoEnPedido.enPreparacion;
+        break;
+      case EstadoProductoEnPedido.enPreparacion:
+        nuevoEstado = EstadoProductoEnPedido.listoParaEntregar;
+        break;
     }
 
-    console.log('Productos Bartender:', this.listaProductosBartender);
-    console.log('Productos Cocinero:', this.listaProductosCocinero);
+    await this.productoServicio.modificarEstadoProducto(
+      idProducto,
+      idPedido,
+      nuevoEstado
+    );
   }
 }
