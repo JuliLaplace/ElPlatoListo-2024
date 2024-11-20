@@ -152,7 +152,7 @@ Detalles de la construcción 🛠️
 
 (Desde el Sábado 16/11 al Lunes 18/11)
 > Realizamos una reunión las tres integrantes del proyecto para la creación de nuestro servidor, para así poder incorporar a nuestro proyecto push notifications y el envío de correos electrónicos automáticos (desde nuestra cuenta como empresa: elplatolisto@gmail.com). 
-> Creamos un repositorio aparte [LINK AL REPOSITORIO] (https://github.com/JuliLaplace/ElPlatoListo-backend) y dedicimos utilizar [RENDER] (https://render.com/). Render es una plataforma que aloja y ejecuta nuestra aplicación. Además de manejar el servidor donde se encuentra el código, Render permite que nuestra aplicación realice tareas como el envío de notificaciones push en los celulares que tengan instalada la aplicación, además de enviar correos electrónicos de forma automática.
+> Creamos un repositorio aparte [LINK AL REPOSITORIO](https://github.com/JuliLaplace/ElPlatoListo-backend) y dedicimos utilizar [RENDER](https://render.com/). Render es una plataforma que aloja y ejecuta nuestra aplicación. Además de manejar el servidor donde se encuentra el código, Render permite que nuestra aplicación realice tareas como el envío de notificaciones push en los celulares que tengan instalada la aplicación, además de enviar correos electrónicos de forma automática.
 
 > Después de realizar el hosting de nuestro proyecto, decidimos generar cada una las funciónes necesarias de push notifications (según rol y acción que genera la notificación) y el envío de tres emails con distintas notificaciones para el cliente (registro exitoso en la plataforma, ingreso aceptado, ingreso rechazado).
 
