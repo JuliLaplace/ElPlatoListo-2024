@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="sesion.usuarioActual">Detalle de tu Pedido</ion-title>
+    <ion-icon name="qr-code-outline" slot="end" color="light" (click)="agregarPropina()" class="icono-qr"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="centrado">
+    <ion-card class="ion-margin">
+      <ion-card-content style="width: 40vh;">
+        <div class="detalles-pedidos" *ngFor="let producto of listaPedidos">
+          <p><strong>{{ producto.nombreProducto }}</strong></p>
+          <p>Precio Unitario: <ion-chip color="primary" mode="ios" outline="true">
+            <ion-label>{{ producto.precioUnitario | currency }} x {{ producto.cantidad }}</ion-label></ion-chip>
+          <p><strong>Subtotal:</strong> <ion-chip color="primary" mode="ios" outline="true"><ion-label>{{ producto.subtotal | currency }}</ion-label></ion-chip>
+          <hr style="margin: 1px; border: 1px;">
+        </div>
+
+        <ion-item lines="none">
+          <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center;" *ngIf="propina > 0">
+              <ion-label class="total-label" color="dark" style="font-size: 18px; font-weight: bold;">Propina:</ion-label>
+              <ion-badge style=" font-size: 15px">{{ propina }}%</ion-badge>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <ion-label class="total-label" color="dark"><h2>Total:</h2></ion-label>
+              <ion-badge color="secondary" slot="end" style="font-size: 1.2em;">{{ pedidoService.pedidoUsuario?.precioTotal | currency }}</ion-badge>
+            </div>
+          </div>
+        </ion-item>
+        <ion-label slot="end" color="dark" class="subtitulo">Escanea el código QR para agregar propina</ion-label>
+        <ion-button expand="block" color="primary" (click)="pagarCuenta(pedidoService.pedidoUsuario!)" style="margin-top: 16px;">
+          <ion-text color="light">Pagar cuenta</ion-text>
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<app-tabs [usuario]="sesion.usuarioBD"></app-tabs>

@@ -101,5 +101,10 @@ export class NotificadorPushService {
         console.log(r);
       });
   }
+
+  notificarMozoPedirCuenta(mesa: number) {
+    let mensaje: string = 'La mesa ' + mesa + 'solicito pagar la cuenta';
+    this.notificarPorRol(mensaje, TipoUsuario.mozo);
+  }
 }
 

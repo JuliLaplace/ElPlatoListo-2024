@@ -47,10 +47,14 @@
           <span class="boton-texto">Completar Encuesta</span>
         </button>
 
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado'" ion-button class="option-btn" routerLink="/detalle-cuenta">
+          <img src="../../../assets/iconos/pedir-cuenta.png" alt="ícono verificación clientes" class="icono">
+          <span class="boton-texto">Pedir Cuenta</span>
+        </button>
+
       </div>
     </div>
   </div>
-
 </ion-content>
 
 <app-tabs [usuario]="sesion.usuarioBD"></app-tabs>
