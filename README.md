@@ -98,14 +98,17 @@ Detalles de la construcción 🛠️
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ### 📆 Semana 2: Sábado 02/11 al 09/11 
 
-> Realizamos una reunión las tres integrantes del proyecto y decidimos abordar las correcciones: <br>
+> Realizamos una reunión las tres integrantes del proyecto y decidimos abordar las correcciones:
+
 > Laplace von Hinke, María Julieta: 
 > 1. Cambiar los colores claros en los formularios de registro.
 > 2. Crear campo nuevo para verificar contraseña.
 > 3. Generar la validación para que las contraseñas sean iguales.
+
 > Bogado Candela:
 > 1. Agregar imagen con ícono de aplicación.
 > 2. Modificar tipografía y tamaño de fuente en splash.
+
 > Colque Laura:
 > 1. Modificar los botónes de acceso rápido (tamaño mayor, colores distintos)
 > 2. Cambiar los colores claros en formularios de inicio de sesión.
@@ -131,18 +134,14 @@ Detalles de la construcción 🛠️
 - Creación de componente HomeCliente / Funcionalidad de escanear QR - Laplace von Hinke María Julieta.
 - Creación de Lista de clientes en espera / Funcionalidad de aceptar-rechazar clientes - Laplace von Hinke María Julieta.
 
-
-
 ##### Diseño
 - Modificación de footer y header - Bogado Candela.
 - Modificación, creación y diseño de pantallas Home (diseño final) -  Bogado Candela.
-- 
 
 ##### Códigos QR’s
 - QR de ingreso al local - Colque Laura.
 - QR de Mesas (de mesa 1 a mesa 5) - Colque Laura.
 - QR de Menú - Colque Laura.
-
 
 
 ✅ Se entregó video con puntos 1, 2, 3.
@@ -152,26 +151,47 @@ Detalles de la construcción 🛠️
 ### 📆 Semana 4: Sábado 16/11 al 23/11 
 
 (Desde el Sábado 16/11 al Lunes 18/11)
+> Realizamos una reunión las tres integrantes del proyecto para la creación de nuestro servidor, para así poder incorporar a nuestro proyecto push notifications y el envío de correos electrónicos automáticos (desde nuestra cuenta como empresa: elplatolisto@gmail.com). 
+> Creamos un repositorio aparte [LINK AL REPOSITORIO] (https://github.com/JuliLaplace/ElPlatoListo-backend) y dedicimos utilizar [RENDER] (https://render.com/). Render es una plataforma que aloja y ejecuta nuestra aplicación. Además de manejar el servidor donde se encuentra el código, Render permite que nuestra aplicación realice tareas como el envío de notificaciones push en los celulares que tengan instalada la aplicación, además de enviar correos electrónicos de forma automática.
+
+> Después de realizar el hosting de nuestro proyecto, decidimos generar cada una las funciónes necesarias de push notifications (según rol y acción que genera la notificación) y el envío de tres emails con distintas notificaciones para el cliente (registro exitoso en la plataforma, ingreso aceptado, ingreso rechazado).
+
+>Luego de generar el hosting y todo lo relacionado a notificaciones, se prosiguió con nuestro proyecto:
 
 ##### Gestión
-- Push notification de pre registro de clientes (supervisor/dueño) - Laplace von Hinke MAría Julieta
-- Correo electrónico automático (cliente) - Colque Laura.
+- Push notification de pre registro de clientes (supervisor/dueño) - Laplace von Hinke María Julieta.
 - Push notification de ingreso a local de cliente (Maitre) - Bogado Candela.
-- Gestión de ingreso a local - Bogado Candela.
-- Gestión de pedido - Colque Laura.
+- Push notification de mensaje de cliente (Mozo) - Colque, Laura.
+- Correo electrónico automático (Registro) - Colque Laura.
+- Correo electrónico automático (Aceptación de cliente) - Bogado, Candela.
+- Correo electrónico automático (Rechazo de cliente) - Laplace von Hinke María Julieta.
+- Gestión de ingreso a local - Bogado Candela - Laplace von Hinke María Julieta.
+- Gestión de pedido - Colque Laura - Bogado, Candela - Laplace von Hinke María Julieta..
 - Gestión Menú - Bogado Candela.
 - Chat cliente y mozo - Colque Laura.
+- Encuestas Cliente - Laplace von Hinke María Julieta.
 
+##### Diseño
+- Diseño de pantalla de mensajes para cliente - Bogado, Candela.
+- Diseño de pantalla de mozo - Colque, Laura.
+- Diseño de pantalla de encuesta - Laplace von Hinke María Julieta.
+- 
 
 (Desde Martes 19/11 al Sábado 23/11)
 
 ##### Gestión
-- Gestión correspondiente a cocina y bar - a definir
-- Gestión de pedido entregado (mozo) - a definir
-- Gestión pago (cliente)- a definir.
+- Gestión de preparación de pedido (cocina/bartender) - Bogado, Candela.
+- Gestión de pedido entregado (mozo) - Bogado, Candela.
+- Gestión pago - Colque, Laura.
+- Gestión de gráficos de encuestas - Laplace von Hinke María Julieta.
+- Gestión de propina - Colque, Laura.
+- Push notification de pedido para preparar en cocina (bartender/cocinero) - Laplace von Hinke María Julieta.
 
-##### Encuestas
-- Clientes - a definir.
+##### Diseño
+- Diseño de encuestas y gráficos de encuestas -  Laplace von Hinke María Julieta.
+- Diseño pantalla bartender/cocinero -  Bogado, Candela.
+
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -179,11 +199,24 @@ Detalles de la construcción 🛠️
 ## 📲 _Imágenes QR y valores_ 📲
 | Imágen | Valor | 
 | ------ | ------ | 
-|  <img src="/src/assets/qr/QR-Ingreso Local.png"> | Valor: "listaEspera" | 
+| <img src="/src/assets/qr/QR-Ingreso Local_Prueba.png"> | Valor: "listaEspera" | 
 | <img src="/src/assets/qr/QR - Mesa_1.png">  | Valor: "Mesa1" | 
 | <img src="/src/assets/qr/QR - Mesa_2.png">  | Valor: "Mesa2" | 
 | <img src="/src/assets/qr/QR - Mesa_3.png">  | Valor: "Mesa3" | 
 | <img src="/src/assets/qr/QR - Mesa_4.png">  | Valor: "Mesa4" | 
 | <img src="/src/assets/qr/QR - Mesa_5.png">  | Valor: "Mesa5" | 
 | <img src="/src/assets/qr/QR-Menu.png">  | Valor: "menu" | 
-| ------ | ------ |
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+## 📸 _Imágenes de la aplicación_ 📸
+| Imágen | Valor | 
+| ------ | ------ | 
+| <img src="src\assets\Imagenes-Aplicacion-Celular\Login.jpeg"> | Pantalla login con botón de usuarios (acceso rápido) desplegado | 
+| <img src="src\assets\Imagenes-Aplicacion-Celular\Registro.jpeg">  | Pantalla de registro de cliente nuevo | 
+| <img src="src\assets\Imagenes-Aplicacion-Celular\Pantalla Dueño-Supervisor.jpeg">  | Pantalla inicio de dueño/supervisor | 
+| <img src="src\assets\Imagenes-Aplicacion-Celular\Pantalla-Clientes-Espera-Dueño.jpeg">  | Pantalla de clientes en espera para dueño/supervisor | 
+| <img src="src\assets\Imagenes-Aplicacion-Celular\Pantalla-Ingreso-Cliente.jpeg">  | Pantalla inicio de Cliente | 
+| <img src="src\assets\Imagenes-Aplicacion-Celular\Pantalla-Pedidos-Mozo.jpeg">  | Pantalla de pedidos en espera/preparando/listo para mozo | 
+| <img src="src\assets\Imagenes-Aplicacion-Celular\Pantalla-CHat-Mozo-Cliente.jpeg">  | Pantalla de chat entre mozo y cliente | 
+
