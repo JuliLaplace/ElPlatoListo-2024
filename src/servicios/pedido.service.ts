@@ -48,7 +48,7 @@ export class PedidoService {
     private firestore: Firestore,
     private sesion: SesionService,
     public servicioMesa: MesaService,
-    private notificacionPush : NotificadorPushService
+    private notificacionPush: NotificadorPushService
   ) {
     this.obtenerDatos();
   }
@@ -229,6 +229,13 @@ export class PedidoService {
     this.servicioMesa.cambiarMesaLibre(numeroMesa);
   }
 
+  public pagarPedido(pedido: Pedido, numeroMesa: number) {
+    this.cambiarEstadoPedido(pedido, {
+      estadoPedido: EstadoPedido.pagado,
+      mesa: numeroMesa,
+    });
+  }
+
   public cargarEncuesta(idEncuesta: string) {
     if (this.pedidoUsuario) {
       this.modificarRegistro(this.pedidoUsuario, { idEncuesta: idEncuesta });
@@ -248,5 +255,27 @@ export class PedidoService {
         )
       )
     );
+  }
+
+  aplicarPropina(pedido: Pedido, propina: number): Promise<void> {
+    const coleccion = collection(this.firestore, 'pedidos');
+    const documento = doc(coleccion, pedido.id);
+    console.log('total: ' + pedido.precioTotal);
+    console.log('Porcentaje de propina: ' + propina);
+
+    const propinaTotal = pedido.precioTotal * (propina / 100);
+    console.log('propina : ' + propinaTotal);
+
+    const descuentoJuegos = pedido.descuentoJuego ? pedido.descuentoJuego : 0;
+    console.log('Juegos: ' + descuentoJuegos);
+
+    const total = pedido.precioTotal + propinaTotal - (descuentoJuegos * pedido.precioTotal) / 100;
+
+    console.log('Total: ' + total);
+
+    return updateDoc(documento, {
+      propina: propina,
+      precioTotal: total,
+    });
   }
 }

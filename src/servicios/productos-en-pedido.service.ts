@@ -195,4 +195,32 @@ export class ProductoEnPedidoService {
       )
     );
   }
+
+  async obtenerProductosPorPedido(idPedido: string | undefined): Promise<any[]> {
+    try {
+      // Referencia a la colección
+      const productosCollection = collection(
+        this.firestore,
+        'productosEnPedido'
+      );
+
+      // Crear una query para buscar los productos con el idPedido especificado
+      const q = query(productosCollection, where('idPedido', '==', idPedido));
+
+      // Obtener los documentos que cumplen con el criterio
+      const querySnapshot = await getDocs(q);
+
+      // Convertir los documentos en un array de datos
+      const productos = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      console.log('Productos obtenidos:', productos);
+      return productos;
+    } catch (error) {
+      console.error('Error al obtener productos:', error);
+      return [];
+    }
+  }
 }

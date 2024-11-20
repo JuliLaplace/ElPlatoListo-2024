@@ -10,6 +10,7 @@ import {
   doc,
   updateDoc,
   orderBy,
+  getDoc,
 } from '@angular/fire/firestore';
 
 export interface Producto {
@@ -490,5 +491,26 @@ export class MenuService {
     }
 
     return null;
+  }
+
+  async obtenerPrecioProducto(idProducto: string): Promise<number | null> {
+    try {
+      // Referencia al documento en la colección 'menu' usando el idProducto
+      const productoDocRef = doc(this.firestore, 'menu', idProducto);
+      const productoDoc = await getDoc(productoDocRef);
+
+      // Verifica que el documento exista
+      if (productoDoc.exists()) {
+        // Devuelve el precio del producto
+        const data = productoDoc.data() as Producto;
+        return data?.precio || null; 
+      } else {
+        console.warn(`Producto con id ${idProducto} no encontrado en el menú.`);
+        return null;
+      }
+    } catch (error) {
+      console.error('Error al obtener el precio del producto:', error);
+      return null;
+    }
   }
 }
