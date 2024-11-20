@@ -1,0 +1,41 @@
+.centrado {
+    overflow: hidden; // Asegura que el pseudo-elemento no se desborde
+    background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
+    z-index: -1; // Asegura que el pseudo-elemento esté detrás del contenido
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 88vh;
+}
+
+.pedido-info {
+    background-color: #a090dd;
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.detalles-pedidos{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.total-label h2 {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+p{
+    font-size: 1.3em;
+    margin-right: 5px;
+}
+
+.icono-qr{
+    width: 30px;
+    height: 30px;
+    margin-right: 1em;
+}

@@ -86,4 +86,8 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'detalle-cuenta',
+    loadComponent: () => import('./componentes/detalle-cuenta/detalle-cuenta.component').then((c) => c.DetalleCuentaComponent)
+  },
 ];
