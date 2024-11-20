@@ -6,14 +6,14 @@ import { Injectable } from '@angular/core';
 export class AudioService {
   public splash!: string;
   public cierreSesion!: string;
-  public success!: string;
-  public pagina!: string;
+  public pagarCuenta!: string;
   public sonidoActivo: boolean = true;
 
   constructor() {
     try {
       this.splash = 'splash-audio.mp3';
       this.cierreSesion = 'cerrarSesion.wav';
+      this.pagarCuenta = 'pagoRealizado.wav';
     } catch (error) {
       console.error(`Error al cargar los audios: ${error}`);
     }
@@ -25,6 +25,10 @@ export class AudioService {
 
   reporoduccionCerrarSeion() {
     this.reproducirAuido(this.cierreSesion);
+  }
+
+  reporoduccionPago() {
+    this.reproducirAuido(this.pagarCuenta);
   }
 
   async reproducirAuido(audio: string) {
