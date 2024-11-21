@@ -11,6 +11,8 @@ import { Encuesta, EncuestaService, ServiciosAdicionales } from 'src/servicios/e
 import { addIcons } from 'ionicons';
 import { happyOutline, sadOutline } from 'ionicons/icons';
 import { PedidoService } from 'src/servicios/pedido.service';
+import { Timestamp } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagina-formulario-encuesta',
@@ -27,7 +29,7 @@ export class PaginaFormularioEncuestaPage implements OnInit {
   urlFotos : string[] = [this.url_defecto, this.url_defecto, this.url_defecto];
 
 
-  constructor( public sesion : SesionService, public formViewer : FormViewerService, private camaraService : CamaraService, private servicioStorage: StorageService, private encuestaService : EncuestaService, private pedidoService: PedidoService) { 
+  constructor( public sesion : SesionService, public formViewer : FormViewerService, private camaraService : CamaraService, private servicioStorage: StorageService, private encuestaService : EncuestaService, private pedidoService: PedidoService, private router : Router) { 
     addIcons({ happyOutline, sadOutline });
   }
 
@@ -50,11 +52,11 @@ export class PaginaFormularioEncuestaPage implements OnInit {
 
   subirEncuesta(){
     if (this.formEncuesta.valid) {
-      this.cargarEncuestaBD();
-      
-    } else {
-      console.log("Formulario inválido");
-    }
+      this.cargarEncuestaBD()
+      .then(()=>{
+        this.router.navigate(['/pagina-mensajes/encuestaCompletada']);
+      })
+    } 
   }
 
   async cargarEncuestaBD() {
@@ -77,14 +79,16 @@ export class PaginaFormularioEncuestaPage implements OnInit {
         foto1: this.fotos[0] ? await this.subirFoto(0) : '',
         foto2: this.fotos[1] ? await this.subirFoto(1) : '',
         foto3: this.fotos[2] ? await this.subirFoto(2) : '',
+        fecha: new Date() as unknown as Timestamp,
 
-        
+        //date: Date = new Date(fecha);
       };
       this.encuestaService.crearRegistro(encuesta)
       .then((id)=>{
         encuesta.id =  id;
         this.pedidoService.cargarEncuesta(encuesta.id);
         this.limpiarDatos();
+        
       });
 
     }
