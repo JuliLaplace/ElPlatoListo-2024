@@ -2,10 +2,12 @@
   <ion-toolbar color="primary">
     <ion-title *ngIf="sesion.usuarioActual">
       Precio acumulado: ${{ precioAcumulado }}
+      <br />
+      Tiempo estimado: {{ tiempoDeEspera }} min.
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="finalizarPedido()" fill="solid">
-        <ion-icon name="checkbox" slot="icon-only" style="font-size: 45px;" color="primary"></ion-icon>
+    <ion-buttons>
+      <ion-button (click)="finalizarPedido()" fill="solid" style="--background: transparent;">
+        <ion-icon name="checkbox" slot="icon-only" style="font-size: 45px;" color="tertiary"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -20,13 +22,20 @@
 
           <div class="card" style="width: 18rem;">
 
-            <div class="photo-grid">
-              <img [src]="producto.imagenUno" class="photo-large" [alt]="producto.nombre" />
-              <div class="photo-column">
-                <img [src]="producto.imagenDos" class="photo-small" [alt]="producto.nombre" />
-                <img [src]="producto.imagenTres" class="photo-small" [alt]="producto.nombre" />
-              </div>
-            </div>
+            <swiper-container effect="cube" loop="true" class="photo-grid" pagination="true">
+              <swiper-slide>
+                <div class="foto" [style.background-image]="'url(' + producto.imagenUno + ')'">
+                </div>
+              </swiper-slide>
+              <swiper-slide>
+                <div class="foto" [style.background-image]="'url(' + producto.imagenDos + ')'">
+                </div>
+              </swiper-slide>
+              <swiper-slide>
+                <div class="foto" [style.background-image]="'url(' + producto.imagenTres + ')'">
+                </div>
+              </swiper-slide>
+            </swiper-container>
 
             <div class="card-body producto-tituloydesc">
               <h5 class="card-title">{{ producto.nombre }}</h5>
@@ -34,15 +43,17 @@
             <ul class="list-group list-group-light list-group-small">
               <li class="list-group-item px-4">{{producto.descripcion}}</li>
               <li class="list-group-item px-4">Tiempo de preparación: {{producto.tiempo_preparacion}} min.</li>
-              <li class="list-group-item px-4"><strong>Precio: ${{producto.precio}}</strong></li>
+              <li class="list-group-item px-4 precio"><strong class="inner-precio">Precio: ${{producto.precio}}</strong></li>
             </ul>
+
             <div class="card-body contenedor-agregar">
               <div class="counter">
                 <button (click)="decrementarCantidad(producto.id)" class="btn">-</button>
                 <span class="value">{{ cantidadesPedido[producto.id] || 0 }}</span>
                 <button (click)="incrementarCantidad(producto.id)" class="btn">+</button>
               </div>
-              <button class="btn agregar-producto" (click)="agregarProducto(producto.id, producto.precio, producto.nombre, producto.sector)">
+              <button class="btn agregar-producto"
+                (click)="agregarProducto(producto.id, producto.precio, producto.nombre, producto.sector, producto.tiempo_preparacion)">
                 <span>+</span>
               </button>
             </div>

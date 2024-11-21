@@ -120,7 +120,7 @@ export class PedidoService {
     });
   }
 
-  modificarPrecioTotalPedido(idPedido: string, precioAModificar: number) {
+  modificarPrecioYTiempoPedido(idPedido: string, precioAModificar: number, tiempoEspera: number) {
     // Referencia al documento en la colección "pedidos" con el ID proporcionado
     const docRef = doc(this.firestore, 'pedidos', idPedido);
 
@@ -128,6 +128,7 @@ export class PedidoService {
     return updateDoc(docRef, {
       precioTotal: precioAModificar,
       estadoPedido: EstadoPedido.esperandoMozo,
+      tiempoPreparacion: tiempoEspera
     })
       .then(() => {
         console.log('Pedido actualizado correctamente');
