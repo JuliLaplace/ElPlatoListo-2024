@@ -11,18 +11,22 @@ import { ProductoEnPedidoService } from 'src/servicios/productos-en-pedido.servi
 import { addIcons } from 'ionicons';
 import { checkbox } from 'ionicons/icons';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { register } from 'swiper/element/bundle';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, TabsComponent, RouterModule]
+  imports: [CommonModule, IonicModule, TabsComponent, RouterModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MenuComponent  implements OnInit {
   idPedido?: string;
   cantidadesPedido: { [idProducto: string]: number } = {};
   precioAcumulado: number = 0;
-  // cantidad: number = 0; // Variable para almacenar el valor del contador
+  tiempoDeEspera: number = 0;
 
   constructor(
     public sesion: SesionService,
@@ -40,21 +44,26 @@ export class MenuComponent  implements OnInit {
 
   ngOnInit() {
     this.idPedido = this.route.snapshot.paramMap.get('pedidoId') || '';
+    register();
   }
 
   finalizarPedido () {
     //guardar en la db el precio del pedido
     if (this.idPedido) {
-      this.pedidoService.modificarPrecioTotalPedido(this.idPedido, this.precioAcumulado);
+      this.pedidoService.modificarPrecioYTiempoPedido(this.idPedido, this.precioAcumulado, this.tiempoDeEspera);
     }
     //redirigir a la página anterior
     this.router.navigateByUrl('/cliente-pedido-en-curso');
   }
 
-  agregarProducto (idProducto: string, precioProducto: number, nombreProducto: string, sector: string) {
+  agregarProducto (idProducto: string, precioProducto: number, nombreProducto: string, sector: string, tiempoPreparacion: number) {
     const cantidad = this.cantidadesPedido[idProducto] || 0;
-    console.log(`Producto agregado: ${idProducto}, cantidad: ${cantidad}`);
+    //Calculo precio acumulado
     this.precioAcumulado += (precioProducto * cantidad);
+    //Calculo tiempo de espera
+    if (this.tiempoDeEspera == 0 || this.tiempoDeEspera < tiempoPreparacion) {
+      this.tiempoDeEspera = tiempoPreparacion;
+    }
 
     // Aquí procesas el producto y la cantidad, guardándolo en el pedido
     if (this.idPedido) {

@@ -15,6 +15,10 @@
           <ion-note style="font-size: medium; color: black ; margin: 2px 5px; font-weight: bold;">
             {{ 'Total: $' + pedidoService.pedidoUsuario?.precioTotal }}
           </ion-note>
+          <br/>
+          <ion-note style="font-size: medium; color: black ; margin: 2px 5px; font-weight: bold;">
+            {{ 'Demora estimada: ' + pedidoService.pedidoUsuario?.tiempoPreparacion + 'min.' }}
+          </ion-note>
         </div>
         <ion-button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido Listo'"
           (click)="confirmarPedido(pedidoService.pedidoUsuario)" expand="block" size="small">
