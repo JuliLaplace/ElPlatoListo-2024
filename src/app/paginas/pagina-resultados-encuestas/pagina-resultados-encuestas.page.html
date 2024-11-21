@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="sesion.usuarioActual">
+      Resultado encuestas | {{ sesion.usuarioBD?.nombre}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="sesion.usuarioActual">
+ 
+
+   
+    <div class="chart">
+      <h2>Calificaciones sobre la limpieza del local</h2>
+      <ngx-charts-bar-vertical
+        [results]="encuesta.dataSetCalificacionLimpieza"
+        [view]="[400,400]"
+        [scheme]="'nightLights'"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [legendTitle]="'Calidicaciones sobre la limpieza del local'"
+        [xAxisLabel]="'eje x'"
+        [yAxisLabel]="'eje y'"
+        [yScaleMax] = 20
+        [legendPosition]="legendPosition"
+        >
+      </ngx-charts-bar-vertical>
+    </div>
+
+    <div class="chart">
+
+      <h2>Aspectos más valorados de nuestro servicio</h2>
+      <ngx-charts-pie-chart
+        [results]="encuesta.dataSetAspectoMasValorado"
+        [view]="[350,350]"
+        [scheme]="'nightLights'"
+        [legend]="true"
+        [legendTitle]="'Aspectos más valorados del local'"
+        [legendPosition]="legendPosition"
+        [labels]="true"
+        [doughnut]="false"
+      >
+      </ngx-charts-pie-chart>
+    </div>
+
+    <div class="chart">
+      <h2>Servicios que los comensales agregarían a El Plato Listo</h2>
+      <ngx-charts-bar-horizontal
+        [results]="encuesta.dataSetServiciosAdicionales" 
+        [view]="[400,400]"
+        [scheme]="'nightLights'"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [legendTitle]="'¿Qué servicios agregaría a El Plato Listo?'"
+        [xAxisLabel]="'eje x'"
+        [yAxisLabel]="'eje y'"
+        [legendPosition]="legendPosition"
+        [xScaleMax]="20"
+        [xScaleMin]=0
+        
+        >
+      </ngx-charts-bar-horizontal>
+    </div>
+    <div class="btn">
+      <ion-button shape="round" type="submit" expand="block" class="btn-estilos" [routerLink]="['/home']" >Volver</ion-button>
+    </div>
+    
+
+</ion-content>
+
+
+<app-tabs [usuario]="sesion.usuarioBD"></app-tabs>

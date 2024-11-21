@@ -1,0 +1,50 @@
+ion-toolbar {
+    // --background: rgb(176, 166, 175);
+  
+    ion-title {
+      --color: white;
+      font-size: 1.2em;
+    }
+  }
+
+  .centrado {
+    overflow-y: auto;
+    background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .chart{
+
+    h2{
+      text-align: center;
+      color: blueviolet;
+      font-weight: 800;
+      margin: 10px 5px;
+
+    }
+    margin-bottom :100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .btn-estilos {
+    --color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  ion-button {
+    --color: white;
+    width: 50%;
+  }

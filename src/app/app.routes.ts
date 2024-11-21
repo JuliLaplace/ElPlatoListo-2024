@@ -90,4 +90,9 @@ export const routes: Routes = [
     path: 'detalle-cuenta',
     loadComponent: () => import('./componentes/detalle-cuenta/detalle-cuenta.component').then((c) => c.DetalleCuentaComponent)
   },
+  {
+    path: 'pagina-resultados-encuestas',
+    loadComponent: () => import('./paginas/pagina-resultados-encuestas/pagina-resultados-encuestas.page').then( m => m.PaginaResultadosEncuestasPage)
+  },
+
 ];

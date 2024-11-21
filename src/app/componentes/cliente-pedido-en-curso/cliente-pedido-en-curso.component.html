@@ -46,7 +46,7 @@
           <span class="boton-texto">Juegos</span>
         </button>
 
-        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado' && pedidoService.pedidoUsuario?.encuesta ==''" ion-button class="option-btn">
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado' && pedidoService.pedidoUsuario?.encuesta ==''" ion-button class="option-btn" [routerLink]="['/pagina-formulario-encuesta']">
           <img src="../../../assets/iconos/encuesta.png" alt="ícono verificación clientes" class="icono">
           <span class="boton-texto">Completar Encuesta</span>
         </button>
