@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title *ngIf="sesion.usuarioActual">
-      Inicio | Bienvenido, {{ sesion.usuarioBD?.nombre}}
+      Encuesta | Bienvenido, {{ sesion.usuarioBD?.nombre}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,26 +11,29 @@
     <div class="form-container">
       <form [formGroup]="formEncuesta" (ngSubmit)="subirEncuesta()">
 
-        <ion-item>
-          <ion-range labelPlacement="start" label="Calidad del servicio:" 
-            formControlName="calidadServicio" min="1" max="10">
-            <ion-icon slot="start" name="sad-outline"></ion-icon>
-            <ion-icon slot="end" name="happy-outline"></ion-icon>
-          </ion-range>
+          
+     
+        <ion-item >
+          <div class="range">
+            <ion-label class="range-label">Calidad del servicio</ion-label>
+            <ion-range 
+              formControlName="calidadServicio" min="1" max="10">
+              <ion-icon slot="start" name="sad-outline"></ion-icon>
+              <ion-icon slot="end" name="happy-outline"></ion-icon>
+            </ion-range>
+          </div>
         </ion-item>
-
 
 
 
         <ion-item>
           <div class="flex centered">
-            <ion-label>¿Cómo calificaría la limpieza del restaurante?</ion-label>
-
+            <ion-label>¿Cómo calificaría la limpieza de nuestro restaurante?</ion-label>
             <ion-radio-group value="excelente" formControlName="calificacionLimpieza">
-              <ion-radio labelPlacement="end" value="excelente">Excelente</ion-radio><br />
-              <ion-radio labelPlacement="end" value="buena">Buena</ion-radio><br />
-              <ion-radio labelPlacement="end" value="Regular">Regular</ion-radio><br />
-              <ion-radio labelPlacement="end" value="mala">Mala</ion-radio>
+              <ion-radio labelPlacement="end" value="excelente">Excelente ✨</ion-radio><br />
+              <ion-radio labelPlacement="end" value="buena">Buena 👍</ion-radio><br />
+              <ion-radio labelPlacement="end" value="Regular">Regular 🤏</ion-radio><br />
+              <ion-radio labelPlacement="end" value="mala">Mala 👎</ion-radio>
             </ion-radio-group>
           </div>
         </ion-item>
@@ -38,11 +41,9 @@
 
         <ion-item>
           <div class="flex">
-
-            <ion-label>¿Qué aspecto valoro más en nuestro restaurante?</ion-label>
-
+            <ion-label>¿Qué aspecto valoró más en nuestro restaurante?</ion-label>
             <ion-select label="Seleccione" formControlName="aspectoMasValorado">
-              <ion-select-option value="calidad_comida">La calidad de la comida</ion-select-option>
+              <ion-select-option value="calidad_comida">La calidad de la comida </ion-select-option>
               <ion-select-option value="rapidez_servicio">La rapidez del servicio</ion-select-option>
               <ion-select-option value="limpieza">La limpieza</ion-select-option>
               <ion-select-option value="precio">El precio</ion-select-option>
@@ -53,27 +54,27 @@
 
 
         <ion-item>
-          <div class="flex">
+          <div class="flex servicios-adicionales">
 
             <ion-label>¿Qué servicios adicionales le gustaría encontrar en nuestro restaurante?</ion-label>
 
             <div class=" flexrow">
               <ion-checkbox slot="start" value="wifi" formControlName="serviciosAdicionales1"></ion-checkbox>
-              <ion-label>Wi-Fi gratuito</ion-label>
+              <ion-label>Wi-Fi gratuito 📲</ion-label>
             </div>
 
             <div class=" flexrow">
               <ion-checkbox slot="start" value="juegos" formControlName="serviciosAdicionales2"></ion-checkbox>
-              <ion-label>Zona de juegos para niños</ion-label>
+              <ion-label>Zona de juegos para niños 🛝</ion-label>
             </div>
             <div class=" flexrow">
               <ion-checkbox slot="start" value="música" formControlName="serviciosAdicionales3"></ion-checkbox>
-              <ion-label>Música en vivo</ion-label>
+              <ion-label>Música en vivo 🎶</ion-label>
             </div>
 
             <div class=" flexrow">
               <ion-checkbox slot="start" value="aire libre" formControlName="serviciosAdicionales4"></ion-checkbox>
-              <ion-label>Espacios al aire libre</ion-label>
+              <ion-label>Espacios al aire libre 🌞</ion-label>
             </div>
           </div>
         </ion-item>
@@ -104,9 +105,10 @@
         </ion-item>
 
 
-
-        <ion-button shape="round" type="submit" expand="block" class="btn-estilos"
-          [disabled]="!this.formEncuesta.valid ">Cargar encuesta</ion-button>
+        <div class="flex centered">
+          <ion-button shape="round" type="submit" expand="block" class="btn-estilos"
+            [disabled]="!this.formEncuesta.valid ">Cargar encuesta</ion-button>
+        </div>
 
 
       </form>
