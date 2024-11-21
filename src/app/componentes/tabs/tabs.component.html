@@ -1,8 +1,12 @@
 <ion-footer>
   <div class="footer-bar" style="--background: #8841c5;">
 
-    <div class="footer-button">
-      <ion-icon name="home" color="light"></ion-icon>
+    <div class="footer-button" *ngIf="!sesion.esCliente()">
+      <ion-icon  name="home" color="light"></ion-icon>
+    </div>
+
+    <div class="footer-button" *ngIf="sesion.esCliente()" (click)="escanearQr()">
+      <ion-icon name="qr-code"></ion-icon>
     </div>
 
 
