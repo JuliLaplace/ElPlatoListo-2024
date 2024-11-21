@@ -34,10 +34,13 @@ export interface ServiciosAdicionales{
 export class EncuestaService {
   public coleccionEncuestas: Encuesta[] = [];
   public dataSetCalificacionLimpieza: DataSet[] = [];
+  public dataSetAspectoMasValorado: DataSet[] = [];
+  public dataSetServiciosAdicionales: DataSet[] = [];
 
   constructor(private firestore: Firestore, private pedidoService : PedidoService) { 
 
     this.obtenerDatos();
+    console.log(this.dataSetCalificacionLimpieza);
   }
 
   async crearRegistro(encuesta: Encuesta): Promise<string> {
@@ -89,6 +92,8 @@ export class EncuestaService {
         value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'mala' ? 1 : 0)},0)
       },
     ]
+
+    this.dataSetCalificacionLimpieza = dataSet;
   }
 
   crearDataSetAspectoMasValorado(){
@@ -110,6 +115,8 @@ export class EncuestaService {
         value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.aspectoMasValorado == 'precio' ? 1 : 0)},0)
       },
     ]
+
+    this.dataSetAspectoMasValorado = dataSet;
   }
 
   crearDataSetServiciosAdicionales(){
@@ -119,17 +126,19 @@ export class EncuestaService {
         value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.serviciosAdicionales.wifi ? 1 : 0)},0)
       },
       {
-        name : 'buena',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.serviciosAdicionales ? 1 : 0)},0)
+        name : 'juegos',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.serviciosAdicionales.juegos ? 1 : 0)},0)
       },
       {
-        name : 'regular',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.serviciosAdicionales ? 1 : 0)},0)
+        name : 'música',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.serviciosAdicionales.musica ? 1 : 0)},0)
       },
       {
-        name : 'mala',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.serviciosAdicionales ? 1 : 0)},0)
+        name : 'aire libre',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.serviciosAdicionales.aireLibre ? 1 : 0)},0)
       },
     ]
+
+    this.dataSetServiciosAdicionales = dataSet;
   }
 }
