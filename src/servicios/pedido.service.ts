@@ -211,6 +211,7 @@ export class PedidoService {
   }
 
   public pedidoAceptado(pedido: Pedido) {
+    this.notificacionPush.notificarCocinaBartenderDePedidosParaRealizar();
     this.cambiarEstadoPedido(pedido, {
       estadoPedido: EstadoPedido.enPreparacion,
     });
@@ -231,6 +232,7 @@ export class PedidoService {
   }
 
   public pagarPedido(pedido: Pedido, numeroMesa: number) {
+    this.notificacionPush.notificarMozoPedidoDeCuenta(numeroMesa);
     this.cambiarEstadoPedido(pedido, {
       estadoPedido: EstadoPedido.pagado,
       mesa: numeroMesa,
