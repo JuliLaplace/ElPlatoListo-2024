@@ -3,6 +3,7 @@ import { QrScannerService } from './qr-scanner.service';
 import { Router } from '@angular/router';
 import { PedidoService } from './pedido.service';
 import { SesionService } from './sesion.service';
+import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,18 @@ export class GestionQrService {
           case 'Mesa5':
             this.gestionarQrMesas(5);
             break;
+            case '5':
+              this.aplicarPropina(5);
+              break;
+            case '10':
+              this.aplicarPropina(10);
+              break;
+            case '15':
+              this.aplicarPropina(15);
+              break;
+            case '20':
+              this.aplicarPropina(20);
+              break;
           default:
             break;
         }
@@ -52,8 +65,10 @@ export class GestionQrService {
       this.pedidoService.nuevoPedido(this.sesion.usuarioBD.email);
     } else if (this.pedidoService.pedidoUsuario?.mesa) { 
       this.router.navigate(['/pagina-mensajes/yaTenesMesaAsignada']);
-    } else {
+    } else if(this.pedidoService.pedidoUsuario && this.sesion.usuarioBD) {
       this.router.navigate(['/pagina-mensajes/yaEstasEnListaEspera']);
+    }else if(this.pedidoService.pedidoUsuario?.estadoPedido == EstadoPedido.pagado && this.sesion.usuarioBD){
+      this.router.navigate(['pagina-resultados-encuestas']);
     }
   }
 
@@ -62,8 +77,22 @@ export class GestionQrService {
       this.router.navigate(['/pagina-mensajes/mesaNoAsignada']);
     } else if (this.pedidoService.pedidoUsuario?.mesa !== nroMesa) {
       this.router.navigate(['/pagina-mensajes/mesaIncorrecta']);
-    } else {
+    }else if(this.pedidoService.pedidoUsuario?.mesa == nroMesa && this.pedidoService.pedidoUsuario?.estadoPedido == EstadoPedido.pagado){
+      this.router.navigate(['pagina-resultados-encuestas']);
+    }else {
       this.router.navigate(['/cliente-pedido-en-curso']);
     }
   }
+  async aplicarPropina(propina: number) {
+    await this.pedidoService.aplicarPropina(
+      this.pedidoService.pedidoUsuario!,
+      propina
+    );
+    // Aquí puedes agregar lógica adicional si es necesario
+    console.log(`Propina de ${propina}% aplicada al pedido.`);
+  }
+
+
+
+ 
 }
