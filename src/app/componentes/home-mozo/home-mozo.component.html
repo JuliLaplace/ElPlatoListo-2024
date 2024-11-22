@@ -15,7 +15,7 @@
               <span>Mesa: {{ pedido.mesa }}</span>
             </div>
             <div class="detalles-estado-mesa">
-              <ion-chip>
+              <ion-chip [style.background-color]="cambioEstadoColor(pedido.estadoPedido)">
                 {{ 'Estado Pedido: ' + pedido.estadoPedido }}
               </ion-chip>
             </div>
@@ -32,8 +32,7 @@
               </ion-note>
             </div>
             <ion-button (click)="confirmarPedido(pedido)" expand="block" size="small" class="boton-mozo">
-              <ion-text color="light">{{ pedido.estadoPedido }}
-              </ion-text>
+              <ion-text color="light">{{ obtenerEstado(pedido.estadoPedido) }}</ion-text>
             </ion-button>
           </div>
       </div>
