@@ -58,7 +58,7 @@ export class HomeMozoComponent implements OnInit {
     if (unPedido.estadoPedido === EstadoPedido.pagado) {
       //Si el Cliente pago la cuenta cambia el Estado a Pagado
       //Confirmo el pago ---> Cambia estado a Finalizado y libero la mesa
-      this.pedidoServicio.finalizarPedido(unPedido,unPedido.mesa);
+      this.pedidoServicio.confirmarPago(unPedido,unPedido.mesa);
 
     }else if(unPedido.estadoPedido === EstadoPedido.esperandoMozo){
       this.pedidoServicio.pedidoAceptado(unPedido);
