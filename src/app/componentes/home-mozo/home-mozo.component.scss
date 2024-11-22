@@ -33,6 +33,37 @@ ion-segment-button.ios {
   background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
 }
 
+.pedido-info {
+  background-color: #c8b5de;
+  border-radius: 10px;
+  margin-top: 20px;
+
+  .card-header {
+      font-size: 1.5em;
+      background-color: rgb(156, 29, 224);
+      color: white;
+
+      span {
+          font-weight: 700;
+      }
+  }
+
+  .detalles-estado-mesa {
+    ion-chip {
+      font-size: 1.3em;
+    }
+  }
+
+  .boton-mozo {
+    height: 2.5em;
+
+    ion-text {
+      font-size: 1.3em;
+      font-weight: 600;
+    }
+  }
+}
+
 .chats-mesas {
   --background: deeppink;
   color: white;
