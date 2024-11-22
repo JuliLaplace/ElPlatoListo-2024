@@ -9,16 +9,17 @@
     color: rgb(34, 30, 30);
 }
 .contenedor {
-    background-color: #b5a8b1;
+    background-color: #a090dd;
     height: 80vh;
     width: 80vw;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     
 }
 .img-titulo{
-    margin-top: 10px;
+
     text-align: center;
     h1{
         margin: 20px;
@@ -34,18 +35,15 @@
     margin: 20px;
     h2{
         text-align: center;
-        margin-bottom: 10px;
+        margin: 20px 0px;
         font-weight: 500;
         font-size: 25px;
     }
-    p{
-        text-align: justify;
-        font-size: 15px;
-    }
-    h5{
-        margin-top: 10px;
-        font-size: 20px;
+    h3{
         text-align: center;
+        margin: 20px 0px;
+        font-weight: 500;
+        font-size: 20px;
     }
 
 }
@@ -54,13 +52,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
     .btn{
     
-       
+       font-size: 20px;
         font-weight: bold;
         color: white; 
         background: #9c1de0;
         border-radius: 20px;
-        width: 50%;
+        width: 70%;
     }
 }
