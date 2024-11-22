@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Usuario } from 'src/servicios/data-usuarios.service';
 import { IonicModule } from '@ionic/angular';
 import { QrScannerService } from 'src/servicios/qr-scanner.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PedidoService } from 'src/servicios/pedido.service';
 import { GestionQrService } from 'src/servicios/gestion-qr.service';
 
@@ -11,7 +11,7 @@ import { GestionQrService } from 'src/servicios/gestion-qr.service';
   templateUrl: './home-cliente.component.html',
   styleUrls: ['./home-cliente.component.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, RouterLink],
 })
 export class HomeClienteComponent {
   @Input() usuario!: Usuario | null;

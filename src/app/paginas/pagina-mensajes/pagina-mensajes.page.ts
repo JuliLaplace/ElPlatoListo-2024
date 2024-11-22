@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SesionService } from 'src/servicios/sesion.service';
 import { LoginService } from 'src/servicios/login.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { PedidoService } from 'src/servicios/pedido.service';
 
 @Component({
   selector: 'app-pagina-mensajes',
@@ -19,7 +20,8 @@ export class PaginaMensajesPage implements OnInit {
   constructor(
     public sesion: SesionService,
     private login: LoginService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, 
+    public pedido: PedidoService) { }
 
   ngOnInit() {
     this.mensajeAMostrar = this.route.snapshot.paramMap.get('mensajeId') || '';

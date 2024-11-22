@@ -16,7 +16,7 @@ ion-toolbar {
     
   }
 
-  .chart{
+  .chart1, .chart2, .chart3{
 
     h2{
       text-align: center;
@@ -25,14 +25,23 @@ ion-toolbar {
       margin: 10px 5px;
 
     }
-    margin-bottom :100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-
+.chart1{
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+.chart2{
+  margin-top: 90px;
+  margin-bottom: 30px;
+}
+.chart3{
+  margin-bottom: 70px;
+}
   .btn{
     display: flex;
     align-items: center;
@@ -47,4 +56,8 @@ ion-toolbar {
   ion-button {
     --color: white;
     width: 50%;
+  }
+
+  ::ng-deep .legend-label-text{
+    color: black !important;
   }
