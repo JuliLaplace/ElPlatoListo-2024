@@ -48,7 +48,6 @@ export class DetalleCuentaComponent implements OnInit {
       .obtenerProductosPorPedido(this.pedidoService.pedidoUsuario?.id)
       .then(async (detalle) => {
         this.listaPedidos = detalle;
-        console.log('Lsita de pedidos del cliente', this.listaPedidos);
         // Iteraro sobre cada producto para obtener su precio unitario desde la colección 'menu'
         for (const producto of this.listaPedidos) {
           const precio = await this.menuServicio.obtenerPrecioProducto(
@@ -61,10 +60,8 @@ export class DetalleCuentaComponent implements OnInit {
             producto.subtotal = producto.cantidad * precio; // Cantidad * Precio Unitario
           }
         }
-        console.log('Lsita de pedidos del cliente', this.listaPedidos);
       });
 
-    console.log(this.pedidoService.pedidoUsuario);
   }
 
   pagarCuenta(unPedido: Pedido) {
@@ -80,41 +77,41 @@ export class DetalleCuentaComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  agregarPropina() {
-    this.scanner.scanQRcode().then((res) => {
-      let codigoQr = res;
-      if (this.sesion.usuarioActual) {
-        switch (codigoQr) {
-          case '5':
-            this.propina = 5;
-            this.aplicarPropina(5);
-            break;
-          case '10':
-            this.propina = 10;
-            this.aplicarPropina(10);
-            break;
-          case '15':
-            this.propina = 15;
-            this.aplicarPropina(15);
-            break;
-          case '20':
-            this.propina = 20;
-            this.aplicarPropina(20);
-            break;
-          default:
-            break;
-        }
-      }
-    });
-  }
+  // agregarPropina() {
+  //   this.scanner.scanQRcode().then((res) => {
+  //     let codigoQr = res;
+  //     if (this.sesion.usuarioActual) {
+  //       switch (codigoQr) {
+  //         case '5':
+  //           this.propina = 5;
+  //           this.aplicarPropina(5);
+  //           break;
+  //         case '10':
+  //           this.propina = 10;
+  //           this.aplicarPropina(10);
+  //           break;
+  //         case '15':
+  //           this.propina = 15;
+  //           this.aplicarPropina(15);
+  //           break;
+  //         case '20':
+  //           this.propina = 20;
+  //           this.aplicarPropina(20);
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     }
+  //   });
+  // }
 
-  // Método para aplicar la propina
-  async aplicarPropina(propina: number) {
-    await this.pedidoService.aplicarPropina(
-      this.pedidoService.pedidoUsuario!,
-      propina
-    );
-    // Aquí puedes agregar lógica adicional si es necesario
-    console.log(`Propina de ${propina}% aplicada al pedido.`);
-  }
+  // // Método para aplicar la propina
+  // async aplicarPropina(propina: number) {
+  //   await this.pedidoService.aplicarPropina(
+  //     this.pedidoService.pedidoUsuario!,
+  //     propina
+  //   );
+  //   // Aquí puedes agregar lógica adicional si es necesario
+  //   console.log(`Propina de ${propina}% aplicada al pedido.`);
+  // }
 }
