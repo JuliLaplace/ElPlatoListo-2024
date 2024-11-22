@@ -1,27 +1,31 @@
 <ion-segment mode="ios" (ionChange)="cambiarVista($event)" [value]="opcionSeleccionada">
   <ion-segment-button value="Pedidos"> Pedidos </ion-segment-button>
-  <ion-segment-button value="PedidosPendientes"> Pedidos Pendientes </ion-segment-button>
 </ion-segment>
-
-
 
 <div class="centrado">
   <div class="container">
     <div *ngIf="opcionSeleccionada === 'Pedidos'">
-      <ion-card class="ion-margin" *ngFor="let unProducto of listaFiltradaPorTipoUsuario">
-        <ion-card-content>
-          <div class="detalles-producto">
-            <div class="productos detalles-producto">
-              <label><strong>Nombre:{{unProducto.nombreProducto}}</strong></label>
-              <label><strong>Cantidad:{{unProducto.cantidad}}</strong></label>
-            </div>
-            <ion-button (click)="cambiarEstadoProducto(unProducto.idProducto, unProducto.idPedido, unProducto.estado)"
-              expand="block" size="small">
-              <ion-text color="light">{{unProducto.estado}}</ion-text>
-            </ion-button>
+      <div *ngFor="let unProducto of listaFiltradaPorTipoUsuario">
+        <div class="detalles-producto">
+          <div class="mesa">
+            Mesa: {{ unProducto.nroMesa }}
           </div>
-        </ion-card-content>
-      </ion-card>
+          <div class="productos">
+            <label><strong>Nombre: </strong>{{unProducto.nombreProducto}}</label>
+            <label><strong>Cantidad: </strong>{{unProducto.cantidad}}</label>
+
+            <label *ngIf="unProducto.estado === 'Pendiente'"><strong>Confirmar tiempo de preparación: </strong></label>
+            <label *ngIf="unProducto.estado !== 'Pendiente'"><strong>Tiempo de preparación: </strong></label>
+            <input type="text" [(ngModel)]="unProducto.tiempoPreparacion" placeholder="Tiempo estimado en minutos"
+              [disabled]="unProducto.estado !== 'Pendiente'">
+          </div>
+          <ion-button
+            (click)="cambiarEstadoProducto(unProducto.idProducto, unProducto.idPedido, unProducto.estado, unProducto.tiempoPreparacion)"
+            expand="block" size="small">
+            <ion-text color="light">{{unProducto.estado}}</ion-text>
+          </ion-button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

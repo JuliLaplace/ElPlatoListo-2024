@@ -7,9 +7,11 @@ import {
   doc,
   Firestore,
   getDocs,
+  orderBy,
   query,
   updateDoc,
   where,
+  getDoc
 } from '@angular/fire/firestore';
 import { Pedido, PedidoService } from './pedido.service';
 import { map, Observable } from 'rxjs';
@@ -22,6 +24,8 @@ export interface ProductoEnPedido {
   estado: EstadoProductoEnPedido;
   nombreProducto: string;
   sector: string;
+  tiempoPreparacion: number | undefined,
+  nroMesa: number | undefined
 }
 
 @Injectable({
@@ -42,7 +46,9 @@ export class ProductoEnPedidoService {
     idProducto: string,
     cantidad: number,
     nombreProducto: string,
-    sector: string
+    sector: string,
+    tiempoPreparacion: number | undefined,
+    nroMesa: number | undefined
   ): Promise<string> {
     let productoEnPedido: ProductoEnPedido = {
       id: '',
@@ -52,6 +58,8 @@ export class ProductoEnPedidoService {
       estado: EstadoProductoEnPedido.sinConfirmar,
       nombreProducto: nombreProducto,
       sector: sector,
+      tiempoPreparacion: tiempoPreparacion,
+      nroMesa: nroMesa
     };
     let col = collection(this.firestore, 'productosEnPedido');
     return await addDoc(col, productoEnPedido).then((ref) => {
@@ -98,7 +106,8 @@ export class ProductoEnPedidoService {
   async modificarEstadoProducto(
     idProducto: string,
     idPedido: string,
-    nuevoEstado: string
+    nuevoEstado: string,
+    tiempoPreparacion: number | undefined
   ): Promise<void> {
     try {
       // Referencia a la colección
@@ -126,10 +135,13 @@ export class ProductoEnPedidoService {
           'productosEnPedido',
           docSnapshot.id
         );
-        await updateDoc(productoRef, { estado: nuevoEstado });
+        await updateDoc(productoRef, { estado: nuevoEstado, tiempoPreparacion: tiempoPreparacion });
 
-        // Chequear si todos los productos del pedido están en el estado listoParaEntregar
-        if (nuevoEstado === EstadoProductoEnPedido.listoParaEntregar) {
+        // Chequear si hay que modificar el tiempo de preparación del pedido general
+        if (nuevoEstado === EstadoProductoEnPedido.enPreparacion) {
+          await this.confirmarSiModificaTiempoPreparacionPedido(idPedido, tiempoPreparacion);
+        } else if (nuevoEstado === EstadoProductoEnPedido.listoParaEntregar) {
+          // Chequear si todos los productos del pedido están en el estado listoParaEntregar
           await this.verificarEstadoPedido(idPedido);
         }
 
@@ -143,6 +155,38 @@ export class ProductoEnPedidoService {
       }
     } catch (error) {
       console.error('Error al modificar el estado del producto:', error);
+    }
+  }
+
+  private async confirmarSiModificaTiempoPreparacionPedido(
+    idPedido: string,
+    tiempoPreparacion: number | undefined
+  ): Promise<void> {
+    try {
+       // Referencia al documento específico usando su ID
+    const pedidoDocRef = doc(this.firestore, 'pedidos', idPedido);
+
+    // Obtener los datos del documento
+    const pedidoSnapshot = await getDoc(pedidoDocRef);
+
+    if (pedidoSnapshot.exists()) {
+      const pedidoData = pedidoSnapshot.data();
+
+      if (tiempoPreparacion) {
+        // Verificar si el tiempoPreparacion actual es menor al recibido por parámetro
+        if (pedidoData['tiempoPreparacion'] < tiempoPreparacion) {
+          // Actualizar el tiempoPreparacion en el documento
+          await updateDoc(pedidoDocRef, { tiempoPreparacion });
+          console.log(`Tiempo de preparación actualizado para pedido ${idPedido}`);
+        } else {
+          console.log(`No se requiere actualización para pedido ${idPedido}`);
+        }
+      }
+    } else {
+      console.log(`No se encontró el pedido con ID ${idPedido}`);
+    }
+    } catch (error) {
+      console.error('Error al verificar o actualizar el tiempo de preparación:', error);
     }
   }
 
@@ -184,8 +228,17 @@ export class ProductoEnPedidoService {
   }
 
   obtenerTodosLosProductosPendientes(): Observable<any[]> {
-    let col = collection(this.firestore, 'productosEnPedido');
-    return collectionData(col, { idField: 'id' }).pipe(
+    // Referencia a la colección
+    const productosCollection = collection(
+      this.firestore,
+      'productosEnPedido'
+    );
+
+    // Crear una query para obtener todos los productos del pedido
+    const q = query(productosCollection, orderBy('nroMesa'));
+    // let col = collection(this.firestore, 'productosEnPedido');
+
+    return collectionData(q, { idField: 'id' }).pipe(
       map((pedidos: any[]) =>
         pedidos.filter(
           (pedido) =>

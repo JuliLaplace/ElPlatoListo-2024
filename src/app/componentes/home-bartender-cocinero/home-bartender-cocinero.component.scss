@@ -16,13 +16,6 @@ ion-segment-button.ios {
   --border-radius: 20px;
 }
 
-.container {
-  text-align: center;
-  position: relative;
-  left: 0;
-  right: 0;
-}
-
 .centrado {
   width: 100vw;
   height: 100vh;
@@ -33,12 +26,40 @@ ion-segment-button.ios {
   background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
 }
 
+.container {
+  text-align: center;
+  position: relative;
+  left: 0;
+  right: 0;
+  // overflow-y: auto;
+}
+
 .detalles-producto {
   display: flex;
   flex-direction: column;
-}
+  background-color: #d2c7ff;
+  margin-top: 20px;
+  border-radius: 20px;
 
-.productos {
-  font-size: large;
-  margin: 1em;
+  .mesa {
+    background-color: rgb(156, 29, 224);
+    color: white;
+    font-size: 1.3em;
+  }
+
+  .productos {
+    font-size: large;
+    padding: 1em;
+
+    label {
+      margin-bottom: 0.5em;
+      display: block;
+    }
+
+    input {
+      background-color: white;
+      color: #333;
+      text-align: center;
+    }
+  }
 }
