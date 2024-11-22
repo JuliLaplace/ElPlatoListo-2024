@@ -10,7 +10,7 @@
  
 
    
-    <div class="chart">
+    <div class="chart1">
       <h2>Calificaciones sobre la limpieza del local</h2>
       <ngx-charts-bar-vertical
         [results]="encuesta.dataSetCalificacionLimpieza"
@@ -28,23 +28,20 @@
       </ngx-charts-bar-vertical>
     </div>
 
-    <div class="chart">
+    <div class="chart2">
 
       <h2>Aspectos más valorados de nuestro servicio</h2>
-      <ngx-charts-pie-chart
+      <ngx-charts-pie-grid
         [results]="encuesta.dataSetAspectoMasValorado"
         [view]="[350,350]"
         [scheme]="'nightLights'"
-        [legend]="true"
-        [legendTitle]="'Aspectos más valorados del local'"
-        [legendPosition]="legendPosition"
-        [labels]="true"
-        [doughnut]="false"
+        
       >
-      </ngx-charts-pie-chart>
+      </ngx-charts-pie-grid>
     </div>
 
-    <div class="chart">
+
+    <div class="chart3">
       <h2>Servicios que los comensales agregarían a El Plato Listo</h2>
       <ngx-charts-bar-horizontal
         [results]="encuesta.dataSetServiciosAdicionales" 

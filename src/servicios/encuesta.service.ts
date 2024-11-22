@@ -40,7 +40,7 @@ export class EncuestaService {
   constructor(private firestore: Firestore, private pedidoService : PedidoService) { 
 
     this.obtenerDatos();
-    console.log(this.dataSetCalificacionLimpieza);
+
   }
 
   async crearRegistro(encuesta: Encuesta): Promise<string> {
@@ -76,20 +76,20 @@ export class EncuestaService {
   crearDataSetCalificacionLimpieza(){
     let dataSet : DataSet[]= [
       {
-        name : 'excelente',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'excelente' ? 1 : 0)},0)
+        name : 'Excelente',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'Excelente' ? 1 : 0)},0)
       },
       {
-        name : 'buena',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'buena' ? 1 : 0)},0)
+        name : 'Buena',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'Buena' ? 1 : 0)},0)
       },
       {
-        name : 'regular',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'regular' ? 1 : 0)},0)
+        name : 'Regular',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'Regular' ? 1 : 0)},0)
       },
       {
-        name : 'mala',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'mala' ? 1 : 0)},0)
+        name : 'Mala',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.calificacionLimpieza == 'Mala' ? 1 : 0)},0)
       },
     ]
 
@@ -98,21 +98,22 @@ export class EncuestaService {
 
   crearDataSetAspectoMasValorado(){
     let dataSet : DataSet[]= [
+      
       {
-        name : 'calidad_comida',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.aspectoMasValorado == 'calidad_comida' ? 1 : 0)},0)
-      },
-      {
-        name : 'rapidez_servicio',
-        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.aspectoMasValorado == 'rapidez_servicio' ? 1 : 0)},0)
-      },
-      {
-        name : 'limpieza',
+        name : 'Limpieza',
         value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.aspectoMasValorado == 'limpieza' ? 1 : 0)},0)
       },
       {
-        name : 'precio',
+        name : 'Precio',
         value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.aspectoMasValorado == 'precio' ? 1 : 0)},0)
+      },
+      {
+        name : 'Calidad comida',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.aspectoMasValorado == 'calidad_comida' ? 1 : 0)},0)
+      },
+      {
+        name : 'Rapidez servicio',
+        value : this.coleccionEncuestas.reduce((acc, e)=>{return acc+ (e.aspectoMasValorado == 'rapidez_servicio' ? 1 : 0)},0)
       },
     ]
 
@@ -140,5 +141,72 @@ export class EncuestaService {
     ]
 
     this.dataSetServiciosAdicionales = dataSet;
+  }
+
+
+  ////////////
+  public subirEncuestas(cantidad: number) {
+    let encuestas: Encuesta[] = this.generarEncuestas(cantidad);
+    encuestas.forEach((e) => {
+      this.crearRegistro(e);
+    });
+  }
+
+  private generarEncuestas(n: number): Encuesta[] {
+    const emails = [
+      "usuario1@example.com",
+      "usuario2@example.com",
+      "usuario3@example.com",
+      "usuario4@example.com",
+      "usuario5@example.com",
+    ]; // Lista de emails para elegir aleatoriamente.
+  
+    const calificacionesLimpieza = ["Excelente", "Buena", "Regular", "Mala"];
+    const aspectosValorados = ["calidad_comida", "rapidez_servicio", "limpieza", "precio"];
+    const mensajesOpiniones = [
+      "La comida fue deliciosa y el ambiente agradable.",
+      "El servicio fue rápido y el personal muy amable.",
+      "La limpieza podría mejorar un poco.",
+      "Excelentes precios para la calidad que ofrecen.",
+      "El wifi es lento, pero la comida compensa.",
+      "El restaurante es muy acogedor y la música es perfecta.",
+      "El área de juegos para niños es fantástica.",
+      "Faltaban algunos servicios adicionales como aire libre.",
+      "Buena experiencia en general, volvería sin duda.",
+      "El menú tiene muchas opciones interesantes.",
+    ]; // Lista de opiniones aleatorias.
+  
+    const randomDate = (start: Date, end: Date): string => {
+      const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+      return date.toISOString();
+    };
+  
+    const start = new Date("2024-11-01");
+    const end = new Date("2024-11-22");
+
+    const encuestas: Encuesta[] = [];
+  
+    for (let i = 1; i <= n; i++) {
+      const encuesta: Encuesta = {
+        id: `encuestaRandom${i}`,
+        email: emails[Math.floor(Math.random() * emails.length)] || null,
+        foto1: '',
+        foto2: '',
+        foto3: '',
+        calidadServicio: Math.floor(Math.random() * 10) + 1,
+        calificacionLimpieza: calificacionesLimpieza[Math.floor(Math.random() * calificacionesLimpieza.length)],
+        aspectoMasValorado: aspectosValorados[Math.floor(Math.random() * aspectosValorados.length)],
+        serviciosAdicionales: {
+          wifi: Math.random() < 0.5,
+          musica: Math.random() < 0.5,
+          juegos: Math.random() < 0.5,
+          aireLibre: Math.random() < 0.5,
+        },
+        mensaje: mensajesOpiniones[Math.floor(Math.random() * mensajesOpiniones.length)],
+        fecha: Timestamp.fromDate(new Date(randomDate(start, end))),
+      };
+      encuestas.push(encuesta);
+    }
+    return encuestas;
   }
 }
