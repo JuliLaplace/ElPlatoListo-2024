@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title *ngIf="sesion.usuarioActual">
-      Estado del pedido: {{ pedidoService.pedidoUsuario?.estadoPedido }}
+      Inicio | Bienvenid&#64;, {{ sesion.usuarioBD?.nombre}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,24 +9,20 @@
 <ion-content>
   <div class="centrado">
 
-    <ion-card-content>
-      <div class="pedido-info">
-        <div class="fecha-total-pedido">
-          <ion-note style="font-size: medium; color: black ; margin: 2px 5px; font-weight: bold;">
-            {{ 'Total: $' + pedidoService.pedidoUsuario?.precioTotal }}
-          </ion-note>
-          <br/>
-          <ion-note style="font-size: medium; color: black ; margin: 2px 5px; font-weight: bold;">
-            {{ 'Demora estimada: ' + pedidoService.pedidoUsuario?.tiempoPreparacion + 'min.' }}
-          </ion-note>
-        </div>
-        <ion-button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido Listo'"
-          (click)="confirmarPedido(pedidoService.pedidoUsuario)" expand="block" size="small">
-          <ion-text color="light">{{ pedidoService.pedidoUsuario?.estadoPedido }}
-          </ion-text>
-        </ion-button>
+    <div class="card text-center pedido-info">
+      <div class="card-header">
+        Estado del pedido:
+        <br/>
+        <span>{{ pedidoService.pedidoUsuario?.estadoPedido }}</span>
       </div>
-    </ion-card-content>
+      <div class="card-body">
+        <!-- <h5 class="card-title">Special title treatment</h5> -->
+        <p class="card-text"><strong>Total: $</strong>{{ pedidoService.pedidoUsuario?.precioTotal }}</p>
+        <p class="card-text"><strong>Demora estimada: </strong>{{ pedidoService.pedidoUsuario?.tiempoPreparacion + 'min.' }}</p>
+        <button class="btn" (click)="confirmarPedido(pedidoService.pedidoUsuario)">Cambia estado pedido</button>
+      </div>
+      <!-- <div class="card-footer text-muted">2 days ago</div> -->
+    </div>
 
     <div class="delimitador-botones">
       <div class="botones-container">
@@ -46,7 +42,7 @@
           <span class="boton-texto">Juegos</span>
         </button>
 
-        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado' && pedidoService.pedidoUsuario?.encuesta ==''" ion-button class="option-btn" [routerLink]="['/pagina-formulario-encuesta']">
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado' && pedidoService.pedidoUsuario?.encuesta === ''" ion-button class="option-btn" [routerLink]="['/pagina-formulario-encuesta']">
           <img src="../../../assets/iconos/encuesta.png" alt="ícono verificación clientes" class="icono">
           <span class="boton-texto">Completar Encuesta</span>
         </button>

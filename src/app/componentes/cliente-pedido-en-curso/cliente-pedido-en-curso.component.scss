@@ -20,9 +20,34 @@ ion-toolbar {
 .pedido-info {
     background-color: #a090dd;
     color: white;
-    padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
+    margin-bottom: 1em;
+
+    .card-header {
+        // font-weight: bold;
+        background-color: rgb(156, 29, 224);
+
+        span {
+            font-weight: 700;
+        }
+    }
+
+    .card-body {
+        background-color: rgba(205, 193, 255, 0.4);
+        
+        .card-text {
+            margin-bottom: 0.5em;
+            text-shadow: 0 2px 2px gray;
+        }
+
+        button {
+            background-color: rgb(156, 29, 224);
+            color: white;
+            font-weight: 600;
+        }
+    }
 }
+
 
 .delimitador-botones {
     height: 75%;
