@@ -1,6 +1,6 @@
 <ion-segment mode="ios" (ionChange)="cambiarVista($event)" [value]="opcionSeleccionada">
   <ion-segment-button value="Pedidos"> Pedidos </ion-segment-button>
-  <ion-segment-button value="ChatsMesas"> Mesas </ion-segment-button>
+  <ion-segment-button value="ChatsMesas"> Consultas </ion-segment-button>
 </ion-segment>
 
 
@@ -9,36 +9,34 @@
   <div class="container">
     <!-------------LISTADO DE ASIGNADOS---------------->
     <div *ngIf="opcionSeleccionada === 'Pedidos'">
-      <ion-card class="ion-margin" *ngFor="let pedido of listaPedidos">
-        <ion-card-content>
+      <div *ngFor="let pedido of listaPedidos; let i = index">
           <div class="pedido-info">
-            <div class="cliente-nombre">
-              {{ pedido.emailUsuario }}
-              <ion-chip style="font-size: medium;">
-                {{ 'Mesa: ' + pedido.mesa }}
-              </ion-chip>
+            <div class="card-header">
+              <span>Mesa: {{ pedido.mesa }}</span>
             </div>
             <div class="detalles-estado-mesa">
               <ion-chip>
                 {{ 'Estado Pedido: ' + pedido.estadoPedido }}
               </ion-chip>
             </div>
+            <div class="cliente-nombre">
+              Cliente: {{ pedido.emailUsuario }}
+            </div>
             <div class="fecha-total-pedido">
               <ion-note style="font-size: medium; color: black" color="medium">
                 Fecha de Pedido: {{ pedido.fechaIngreso?.toDate() | date: 'dd/MM/yy HH:mm' }}
               </ion-note>
               <br />
-              <ion-note style="font-size: medium; color: black ; margin: 2px 5px; font-weight: bold;">
+              <ion-note class="precio-mozo" style="font-size: 1.1em; color: black ; margin: 2px 5px; font-weight: bold;">
                 {{ 'Total: $' + pedido.precioTotal }}
               </ion-note>
             </div>
-            <ion-button (click)="confirmarPedido(pedido)" expand="block" size="small">
+            <ion-button (click)="confirmarPedido(pedido)" expand="block" size="small" class="boton-mozo">
               <ion-text color="light">{{ pedido.estadoPedido }}
               </ion-text>
             </ion-button>
           </div>
-        </ion-card-content>
-      </ion-card>
+      </div>
     </div>
     <!-------------CHATS - DE LOS PEDIDOS EN CURSO----->
     <div *ngIf="opcionSeleccionada === 'ChatsMesas'">
