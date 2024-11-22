@@ -120,7 +120,11 @@ export class PedidoService {
     });
   }
 
-  modificarPrecioYTiempoPedido(idPedido: string, precioAModificar: number, tiempoEspera: number) {
+  modificarPrecioYTiempoPedido(
+    idPedido: string,
+    precioAModificar: number,
+    tiempoEspera: number
+  ) {
     // Referencia al documento en la colección "pedidos" con el ID proporcionado
     const docRef = doc(this.firestore, 'pedidos', idPedido);
 
@@ -128,7 +132,7 @@ export class PedidoService {
     return updateDoc(docRef, {
       precioTotal: precioAModificar,
       estadoPedido: EstadoPedido.esperandoMozo,
-      tiempoPreparacion: tiempoEspera
+      tiempoPreparacion: tiempoEspera,
     })
       .then(() => {
         console.log('Pedido actualizado correctamente');
@@ -228,6 +232,13 @@ export class PedidoService {
       estadoPedido: EstadoPedido.finalizado,
       mesa: numeroMesa,
     });
+  }
+
+  public confirmarPago(pedido: Pedido, numeroMesa: number) {
+    this.cambiarEstadoPedido(pedido, {
+      estadoPedido: EstadoPedido.pagoConfirmado,
+      mesa: numeroMesa,
+    });
     this.servicioMesa.cambiarMesaLibre(numeroMesa);
   }
 
@@ -272,7 +283,10 @@ export class PedidoService {
     const descuentoJuegos = pedido.descuentoJuego ? pedido.descuentoJuego : 0;
     console.log('Juegos: ' + descuentoJuegos);
 
-    const total = pedido.precioTotal + propinaTotal - (descuentoJuegos * pedido.precioTotal) / 100;
+    const total =
+      pedido.precioTotal +
+      propinaTotal -
+      (descuentoJuegos * pedido.precioTotal) / 100;
 
     console.log('Total: ' + total);
 

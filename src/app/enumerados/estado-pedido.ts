@@ -5,6 +5,7 @@ export enum EstadoPedido {
     enPreparacion = "Pedido en preparación", //Mozo confirma el pedido
     pedidoListo = 'Pedido Listo', //Mozo entrega el pedido (Cuando todos los productos del pedido están en listoParaEntregar)
     aceptoPedido = 'Pedido aceptado', //Cliente confirma la recepción del pedido
-    pagado = 'Pagado',
-    finalizado = "Finalizado",
+    pagado = 'Pagado', //Cliente realiza el pago
+    pagoConfirmado = 'Pago confirmado', //Mozo confirma el pago del cliente
+    finalizado = "Finalizado", //Cliente se va del local
 }
