@@ -67,7 +67,7 @@ export class MenuComponent  implements OnInit {
 
     // Aquí procesas el producto y la cantidad, guardándolo en el pedido
     if (this.idPedido) {
-      this.productosEnPedidoService.agregarProductoEnPedido(this.idPedido, idProducto, this.cantidadesPedido[idProducto], nombreProducto, sector);
+      this.productosEnPedidoService.agregarProductoEnPedido(this.idPedido, idProducto, this.cantidadesPedido[idProducto], nombreProducto, sector, tiempoPreparacion, this.pedidoService.pedidoUsuario?.mesa);
     }
   }
 

@@ -3,17 +3,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Usuario } from 'src/servicios/data-usuarios.service';
 import { IonicModule } from '@ionic/angular';
 import { SesionService } from 'src/servicios/sesion.service';
-import { MenuService, Producto } from 'src/servicios/menu.service';
 import {
   ProductoEnPedido,
   ProductoEnPedidoService,
 } from 'src/servicios/productos-en-pedido.service';
 import { EstadoProductoEnPedido } from 'src/app/enumerados/estado-producto-en-pedido';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home-bartender-cocinero',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, FormsModule],
   templateUrl: './home-bartender-cocinero.component.html',
   styleUrls: ['./home-bartender-cocinero.component.scss'],
 })
@@ -25,26 +25,28 @@ export class HomeBartenderCocineroComponent implements OnInit {
 
   constructor(
     public sesionServicio: SesionService,
-    private productoServicio: ProductoEnPedidoService,
-    private menuServicio: MenuService
+    private productoServicio: ProductoEnPedidoService
   ) {}
 
   ngOnInit() {
     this.productoServicio
       .obtenerTodosLosProductosPendientes()
       .subscribe((productos) => {
+        console.log(productos);
         this.listaFiltradaPorTipoUsuario = [];
         this.listaProductos = productos;
         if (this.sesionServicio.usuarioBD?.tipo === 'Cocinero') {
           this.listaProductos.filter((producto) => {
             if (producto.sector !== 'barra') {
               this.listaFiltradaPorTipoUsuario.push(producto);
+              console.log(this.listaFiltradaPorTipoUsuario);
             }
           });
         } else if (this.sesionServicio.usuarioBD?.tipo === 'Bartender') {
           this.listaProductos.filter((producto) => {
             if (producto.sector === 'barra') {
               this.listaFiltradaPorTipoUsuario.push(producto);
+              console.log(this.listaFiltradaPorTipoUsuario);
             }
           });
         }
@@ -58,9 +60,9 @@ export class HomeBartenderCocineroComponent implements OnInit {
   async cambiarEstadoProducto(
     idProducto: string,
     idPedido: string,
-    estado: string
+    estado: string,
+    tiempoPreparacion: number | undefined
   ) {
-    console.log(idProducto, idPedido, estado);
     let nuevoEstado = '';
     switch (estado) {
       case EstadoProductoEnPedido.pendiente:
@@ -74,7 +76,8 @@ export class HomeBartenderCocineroComponent implements OnInit {
     await this.productoServicio.modificarEstadoProducto(
       idProducto,
       idPedido,
-      nuevoEstado
+      nuevoEstado,
+      tiempoPreparacion
     );
   }
 }
