@@ -13,6 +13,7 @@ import {
 } from 'src/servicios/productos-en-pedido.service';
 import { RouterModule } from '@angular/router';
 import { EstadoProductoEnPedido } from 'src/app/enumerados/estado-producto-en-pedido';
+import { EstadoColor } from 'src/app/enumerados/estado-color';
 
 @Component({
   selector: 'app-home-mozo',
@@ -53,10 +54,44 @@ export class HomeMozoComponent implements OnInit {
 
   confirmarPedido(unPedido: Pedido) {
     console.log('Pedidosss', unPedido);
-    this.pedidoServicio.pedidoAceptado(unPedido);
-    this.productosServicio.cambiarEstadoPorIdPedido(
-      unPedido.id,
-      EstadoProductoEnPedido.pendiente
-    );
+
+    if (unPedido.estadoPedido === EstadoPedido.pagado) {
+      //Si el Cliente pago la cuenta cambia el Estado a Pagado
+      //Confirmo el pago ---> Cambia estado a Finalizado y libero la mesa
+      this.pedidoServicio.finalizarPedido(unPedido,unPedido.mesa);
+
+    }else if(unPedido.estadoPedido === EstadoPedido.esperandoMozo){
+      this.pedidoServicio.pedidoAceptado(unPedido);
+      this.productosServicio.cambiarEstadoPorIdPedido(
+        unPedido.id,
+        EstadoProductoEnPedido.pendiente
+      );
+    }
+  }
+
+  cambioEstadoColor(status: string) {
+    let color: string = EstadoColor.SinPedido;
+    switch (status) {
+      case EstadoPedido.esperandoMozo:
+        color = EstadoColor.EsperandoMozo;
+        break;
+      case EstadoPedido.enPreparacion:
+        color = EstadoColor.EnPreparacion;
+        break;
+      case EstadoPedido.pedidoListo:
+        color = EstadoColor.PedidoListo;
+        break;
+      case EstadoPedido.aceptoPedido:
+        color = EstadoColor.Aceptado;
+        break;
+      case EstadoPedido.pagado:
+        color = EstadoColor.Pagado;
+        break;
+    }
+    return color;
+  }
+
+  obtenerEstado(estadoPedido: string): string {
+    return estadoPedido === EstadoPedido.pagado ? 'Verificar Pago' : estadoPedido;
   }
 }
