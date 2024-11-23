@@ -26,7 +26,7 @@
 
         <div>
           <div class="propina">
-            <p>Propina: {{ propina }}%</p>
+            <p>Propina: {{ this.pedidoService.pedidoUsuario?.propina }}%</p>
           </div>
           <div class="total-label">
             <span>Total: {{ pedidoService.pedidoUsuario?.precioTotal | currency }}</span>

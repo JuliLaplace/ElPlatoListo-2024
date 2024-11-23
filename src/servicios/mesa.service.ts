@@ -6,6 +6,9 @@ export interface Mesa {
   id: string,
   numero: number | null,
   estado: EstadoMesa,
+  tipo : string | null,
+  foto : string | null,
+  cantidad: number | null
 }
 @Injectable({
   providedIn: 'root'

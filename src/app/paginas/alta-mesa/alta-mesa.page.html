@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="sesion.usuarioActual">
+      Alta Mesa | {{ sesion.usuarioBD?.nombre}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="sesion.usuarioActual">
+  <div class="centrado">
+    <div class="form-container">
+
+      <form [formGroup]="formAltaMesa" (ngSubmit)="cargarMesa()">
+    
+          <ion-input  class="estilo-input" formControlName="numero" label="Numero de mesa" label-placement="floating" fill="outline"></ion-input>
+          <div [ngClass]="{'visible': formViewer.controlConError(formAltaMesa, 'numero')}" class="error-message">
+            <p>{{ formViewer.mensajeError(formAltaMesa, 'numero') }}</p>
+          </div>
+    
+          <ion-input  class="estilo-input" formControlName="cantidad" label="Cantidad de comensales" label-placement="floating" fill="outline"></ion-input>
+          <div [ngClass]="{'visible': formViewer.controlConError(formAltaMesa, 'cantidad')}" class="error-message">
+            <p>{{ formViewer.mensajeError(formAltaMesa, 'cantidad') }}</p>
+          </div>
+
+  
+            <div class="flex">
+              <ion-label>Tipo de mesa</ion-label>
+              <ion-select label="Seleccione" formControlName="tipo" fill="outline" class="estilo-input">
+                <ion-select-option value="estandar">Estándar </ion-select-option>
+                <ion-select-option value="vip">VIP</ion-select-option>
+                <ion-select-option value="discapacitados">Para discapacitados</ion-select-option>
+                <ion-select-option value="otra">Otra</ion-select-option>
+              </ion-select>
+            </div>
+
+          <ion-item>
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" [src]="urlFoto" />
+              </ion-thumbnail>
+              <ion-button (click)="subirFotoClick()"> Subir foto </ion-button>
+          </ion-item>
+          
+              <div class="botonera">
+                  <ion-button shape="round" type="submit" expand="block"  class="btn-estilos" [disabled]="!this.formAltaMesa.valid || !foto">Cargar</ion-button>
+                  <ion-button shape="round" type="submit" expand="block"  class="btn-estilos" [routerLink]="['/home']">Volver</ion-button>
+              </div>
+              <qr-code
+              class="qr"
+                [value]="'Mesa' + obtenerNumero()"
+                size="300"
+                styleClass="qrCanvas"
+                errorCorrectionLevel="M"
+                darkColor="#9c1de0"/>
+          
+      </form>
+      
+
+</div>
+  </div>
+</ion-content>
+
+<app-tabs [usuario]="sesion.usuarioBD"></app-tabs>

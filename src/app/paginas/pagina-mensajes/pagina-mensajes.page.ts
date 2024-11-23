@@ -6,7 +6,7 @@ import { SesionService } from 'src/servicios/sesion.service';
 import { LoginService } from 'src/servicios/login.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PedidoService } from 'src/servicios/pedido.service';
-
+import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
 @Component({
   selector: 'app-pagina-mensajes',
   templateUrl: './pagina-mensajes.page.html',
@@ -16,7 +16,7 @@ import { PedidoService } from 'src/servicios/pedido.service';
 })
 export class PaginaMensajesPage implements OnInit {
   mensajeAMostrar?: string;
-
+  estadoPedido = EstadoPedido;
   constructor(
     public sesion: SesionService,
     private login: LoginService,
