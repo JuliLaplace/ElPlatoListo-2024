@@ -1,7 +1,7 @@
 <ion-footer>
   <div class="footer-bar" style="--background: #8841c5;">
 
-    <div class="footer-button" *ngIf="sesion.esCliente() || sesion.esMaitre() || sesion.esMozo()" [routerLink]="['/home']">
+    <div class="footer-button" *ngIf="sesion.esMaitre() || sesion.esMozo()" [routerLink]="['/home']">
       <ion-icon  name="home" color="light"></ion-icon>
     </div>
 
