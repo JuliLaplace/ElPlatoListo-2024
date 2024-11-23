@@ -221,6 +221,12 @@ export class PedidoService {
     });
   }
 
+  public entregandoPedido(pedido: Pedido) {
+    this.cambiarEstadoPedido(pedido, {
+      estadoPedido: EstadoPedido.entregandoPedido,
+    });
+  }
+
   public pedidoAceptadoPorCliente(pedido: Pedido) {
     this.cambiarEstadoPedido(pedido, {
       estadoPedido: EstadoPedido.aceptoPedido,
