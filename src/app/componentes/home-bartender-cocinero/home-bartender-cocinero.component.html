@@ -22,7 +22,7 @@
           <ion-button
             (click)="cambiarEstadoProducto(unProducto.idProducto, unProducto.idPedido, unProducto.estado, unProducto.tiempoPreparacion)"
             expand="block" size="small">
-            <ion-text color="light">{{unProducto.estado}}</ion-text>
+            <ion-text color="light">{{unProducto.estado === 'Pendiente' ? 'Empezar a preparar' : 'Finalizar preparación'}}</ion-text>
           </ion-button>
         </div>
       </div>
