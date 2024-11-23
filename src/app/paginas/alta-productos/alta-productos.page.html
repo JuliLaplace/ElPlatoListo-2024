@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="sesion.usuarioActual">
+      Alta Producto | {{ sesion.usuarioBD?.nombre}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="sesion.usuarioActual">
+  <div class="centrado">
+    <div class="form-container">
+
+      <form [formGroup]="formAltaProducto" (ngSubmit)="cargarProducto()">
+    
+          <ion-input  class="estilo-input" formControlName="nombre" label="Nombre" label-placement="floating" fill="outline"></ion-input>
+          <div [ngClass]="{'visible': formViewer.controlConError(formAltaProducto, 'nombre')}" class="error-message">
+            <p>{{ formViewer.mensajeError(formAltaProducto, 'nombre') }}</p>
+          </div>
+    
+          <ion-input class="estilo-input" formControlName="descripcion" label="Descripción del producto" label-placement="floating" fill="outline"></ion-input>
+          <div [ngClass]="{'visible': formViewer.controlConError(formAltaProducto, 'descripcion')}" class="error-message">
+            <p>{{ formViewer.mensajeError(formAltaProducto, 'descripcion') }}</p>
+          </div>
+    
+          <ion-input  class="estilo-input" formControlName="precio" label="Precio" label-placement="floating" fill="outline"></ion-input>
+          <div [ngClass]="{'visible': formViewer.controlConError(formAltaProducto, 'precio')}" class="error-message">
+            <p>{{ formViewer.mensajeError(formAltaProducto, 'precio') }}</p>
+          </div>
+          
+    
+          <ion-input  class="estilo-input" formControlName="tiempo" label="Tiempo estimado (minutos)" label-placement="floating" fill="outline"></ion-input>
+          <div [ngClass]="{'visible': formViewer.controlConError(formAltaProducto, 'tiempo')}" class="error-message">
+            <p>{{ formViewer.mensajeError(formAltaProducto, 'tiempo') }}</p>
+          </div>
+          <ion-item>
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" [src]="urlFotos[0]" />
+              </ion-thumbnail>
+              <ion-button (click)="subirFotoClick(0)"> Subir foto </ion-button>
+            </ion-item>
+    
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" [src]="urlFotos[1]" />
+              </ion-thumbnail>
+              <ion-button (click)="subirFotoClick(1)"> Subir foto </ion-button>
+            </ion-item>
+    
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" [src]="urlFotos[2]" />
+              </ion-thumbnail>
+              <ion-button (click)="subirFotoClick(2)"> Subir foto </ion-button>
+            </ion-item>
+          
+              <div class="botonera">
+                  <ion-button shape="round" type="submit" expand="block"  class="btn-estilos" [disabled]="!this.formAltaProducto.valid || !fotos[0] || !fotos[1] || !fotos[2]">Cargar</ion-button>
+                  <ion-button shape="round" type="submit" expand="block"  class="btn-estilos" [routerLink]="['/home']">Volver</ion-button>
+              </div>
+    
+      </form>
+
+</div>
+  </div>
+</ion-content>
+
+<app-tabs [usuario]="sesion.usuarioBD"></app-tabs>

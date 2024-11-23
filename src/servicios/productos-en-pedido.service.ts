@@ -15,6 +15,7 @@ import {
 } from '@angular/fire/firestore';
 import { Pedido, PedidoService } from './pedido.service';
 import { map, Observable } from 'rxjs';
+import { NotificadorPushService } from './notificador-push.service';
 
 export interface ProductoEnPedido {
   id: string;
@@ -36,7 +37,8 @@ export class ProductoEnPedidoService {
 
   constructor(
     private firestore: Firestore,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService, 
+    private pushNotification : NotificadorPushService
   ) {
     // this.obtenerDatos();
   }
@@ -209,6 +211,7 @@ export class ProductoEnPedidoService {
       );
 
       if (todosListos) {
+        this.pushNotification.notificarMozoPedidoParaServir();
         await this.pedidoService.modificarEstadoPedidoPorID(
           idPedido,
           'Pedido Listo'

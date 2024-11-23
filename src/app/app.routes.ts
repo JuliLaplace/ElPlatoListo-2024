@@ -94,5 +94,14 @@ export const routes: Routes = [
     path: 'pagina-resultados-encuestas',
     loadComponent: () => import('./paginas/pagina-resultados-encuestas/pagina-resultados-encuestas.page').then( m => m.PaginaResultadosEncuestasPage)
   },
+  {
+    path: 'alta-productos',
+    loadComponent: () => import('./paginas/alta-productos/alta-productos.page').then( m => m.AltaProductosPage)
+  },
+  // {
+  //   path: 'alta-mesa',
+  //   loadComponent: () => import('./paginas/alta-mesa/alta-mesa.page').then( m => m.AltaMesaPage)
+  // },
+
 
 ];

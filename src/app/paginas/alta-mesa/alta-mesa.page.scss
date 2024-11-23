@@ -1,0 +1,85 @@
+.centrado {
+    overflow-y: auto;
+    background: url("../../../assets/imagenes/fondo-patron.png") no-repeat fixed center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .form-container {
+    background-color: #a090dd;
+    border-radius: 10px;
+    padding: 20px;
+  
+    ion-icon {
+        margin-right: 10px;
+    }
+    ion-input{
+        margin: 0;
+        --placeholder-color: #450797; 
+    }
+    ion-item{
+      margin: 10px;
+      --border-radius: 8px;
+      // --background: #ffffff88;
+      --background: rgba(255, 255, 255, 0.884);
+      padding: 5px
+    }
+  }
+  
+  .btn-estilos {
+    margin-top: 5px;
+    font-weight: bold;
+    color: white; //color de letra
+    background: #B692C2;
+    border-radius: 20px;
+    width: 90%;
+  }
+  
+  .botonera{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .estilo-input {
+  
+    background-color: #ffffffe0;
+    border-radius: 10px;
+    color: black;
+    margin-bottom: 10px;
+    min-height: 44px;  
+  }
+  
+  .error-message p {
+    color: red;
+    font-weight: 900;
+    display: block;
+  
+  }
+  
+  p {
+    margin: 0;
+    text-align: center;
+  }
+  
+  .error-message {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    // color: red;
+    min-height: 1.5em;
+    visibility: hidden;
+  }
+  
+  .error-message.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  //FOTO
+  ion-thumbnail {
+    --border-radius: 10px;
+    --margin-right: 10px;
+  }
+
+  

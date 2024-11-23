@@ -52,13 +52,13 @@
       <div *ngIf="mensajeAMostrar === 'estadoPedido'" class="texto">
 
         <h2>Estado del pedido: {{pedido.pedidoUsuario?.estadoPedido}}</h2>
-        <h2>Tiempo de demora: {{pedido.pedidoUsuario?.tiempoPreparacion}}</h2>
+        <h2 *ngIf="pedido.pedidoUsuario?.estadoPedido == estadoPedido.enPreparacion">Tiempo de demora: {{pedido.pedidoUsuario?.tiempoPreparacion}} min</h2>
         <h3>¡Esperamos que hayas disfrutado tu paso por El Plato Listo!</h3>
 
       </div>
 
       <div class="contenedor-btn" >
-        <button routerLink="/home" class="btn" *ngIf="mensajeAMostrar !== 'encuestaCompletada'">
+        <button routerLink="/home" class="btn" *ngIf="mensajeAMostrar !== 'encuestaCompletada' && mensajeAMostrar !== 'estadoPedido' ">
           Volver
         </button>
         <button routerLink="/cliente-pedido-en-curso" class="btn" *ngIf="mensajeAMostrar === 'encuestaCompletada' || mensajeAMostrar === 'estadoPedido' ">

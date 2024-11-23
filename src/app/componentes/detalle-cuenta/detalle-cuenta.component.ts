@@ -26,7 +26,7 @@ export class DetalleCuentaComponent implements OnInit {
   cantidad: number = 0;
   precioUnitario: number = 0;
   nombre: string = '';
-  propina: number = 0;
+  // propina: number = 0;
 
   constructor(
     public pedidoService: PedidoService,
