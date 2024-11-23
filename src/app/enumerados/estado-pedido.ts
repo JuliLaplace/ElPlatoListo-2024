@@ -6,6 +6,7 @@ export enum EstadoPedido {
     pedidoListo = 'Pedido Listo', //Mozo entrega el pedido (Cuando todos los productos del pedido están en listoParaEntregar) - Push Mozo
     entregandoPedido = 'Entregando pedido', // Mozo lleva el pedido a la mesa
     aceptoPedido = 'Pedido aceptado', //Cliente confirma la recepción del pedido
+    clientePideCuenta = 'Cliente solicita la cuenta', //Cliente pide la cuenta
     pagado = 'Pagado', //Cliente realiza el pago
     pagoConfirmado = 'Pago confirmado', //Mozo confirma el pago del cliente
     finalizado = "Finalizado", //Cliente se va del local

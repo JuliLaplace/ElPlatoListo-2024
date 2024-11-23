@@ -96,6 +96,16 @@ export class HomeMozoComponent implements OnInit {
   }
 
   obtenerEstado(estadoPedido: string): string {
-    return estadoPedido === EstadoPedido.pagado ? 'Verificar Pago' : estadoPedido;
+    let estadoAMostrar = "";
+    if (estadoPedido === EstadoPedido.esperandoMozo) {
+      estadoAMostrar = "Confirmar pedido";
+    } else if (estadoPedido === EstadoPedido.pedidoListo) {
+      estadoAMostrar = "Listo para entregar";
+    } else if (estadoPedido === EstadoPedido.pagado) {
+      estadoAMostrar = "Verificar Pago";
+    } else {
+      estadoAMostrar = estadoPedido;
+    }
+    return estadoAMostrar;
   }
 }

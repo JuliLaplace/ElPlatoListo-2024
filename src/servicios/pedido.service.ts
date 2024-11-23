@@ -233,6 +233,12 @@ export class PedidoService {
     });
   }
 
+  public clientePideLaCuenta(pedido: Pedido) {
+    this.cambiarEstadoPedido(pedido, {
+      estadoPedido: EstadoPedido.clientePideCuenta,
+    });
+  }
+
   public finalizarPedido() {
     if(this.pedidoUsuario){
       this.cambiarEstadoPedido(this.pedidoUsuario, {estadoPedido: EstadoPedido.finalizado});

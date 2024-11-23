@@ -18,8 +18,8 @@
       <div class="card-body">
         <!-- <h5 class="card-title">Special title treatment</h5> -->
         <p class="card-text precio-total"><strong>Total: $</strong>{{ pedidoService.pedidoUsuario?.precioTotal }}</p>
-        <p class="card-text" *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado' && pedidoService.pedidoUsuario?.estadoPedido === 'Pagado'"><strong>Demora estimada: </strong>{{ pedidoService.pedidoUsuario?.tiempoPreparacion + 'min.' }}</p>
-        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Entregando pedido'" class="btn" (click)="confirmarPedido(pedidoService.pedidoUsuario)">Cambia estado pedido</button>
+        <p class="card-text" *ngIf="pedidoService.pedidoUsuario?.estadoPedido !== 'Pedido aceptado' && pedidoService.pedidoUsuario?.estadoPedido !== 'Cliente solicita la cuenta' && pedidoService.pedidoUsuario?.estadoPedido !== 'Pagado'"><strong>Demora estimada: </strong>{{ pedidoService.pedidoUsuario?.tiempoPreparacion + 'min.' }}</p>
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Entregando pedido' || pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado'" class="btn" (click)="confirmarPedido(pedidoService.pedidoUsuario)">{{pedidoService.pedidoUsuario?.estadoPedido === 'Entregando pedido' ? 'Aceptar pedido' : 'Pedir la cuenta'}}</button>
       </div>
       <!-- <div class="card-footer text-muted">2 days ago</div> -->
     </div>
@@ -47,9 +47,9 @@
           <span class="boton-texto">Completar Encuesta</span>
         </button>
 
-        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado'" ion-button class="option-btn" routerLink="/detalle-cuenta">
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Cliente solicita la cuenta'" ion-button class="option-btn" routerLink="/detalle-cuenta">
           <img src="../../../assets/iconos/pedir-cuenta.png" alt="ícono verificación clientes" class="icono">
-          <span class="boton-texto">Pedir Cuenta</span>
+          <span class="boton-texto">Ver detalle de cuenta</span>
         </button>
 
       </div>

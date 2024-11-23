@@ -8,6 +8,7 @@ import { PedidoService, Pedido } from 'src/servicios/pedido.service';
 import { RouterModule } from '@angular/router';
 import { ProductoEnPedidoService } from 'src/servicios/productos-en-pedido.service';
 import { EstadoProductoEnPedido } from 'src/app/enumerados/estado-producto-en-pedido';
+import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
 
 @Component({
   selector: 'app-cliente-pedido-en-curso',
@@ -27,13 +28,14 @@ export class ClientePedidoEnCursoComponent implements OnInit {
   ngOnInit() {}
 
   confirmarPedido(unPedido: Pedido | null) {
-    console.log('Pedidosss', unPedido);
-    if (unPedido) {
+    if (unPedido?.estadoPedido === EstadoPedido.entregandoPedido) {
       this.pedidoService.pedidoAceptadoPorCliente(unPedido);
       this.productosServicio.cambiarEstadoPorIdPedido(
         unPedido.id,
         EstadoProductoEnPedido.entregado
       );
+    } else if (unPedido?.estadoPedido === EstadoPedido.aceptoPedido) {
+      this.pedidoService.clientePideLaCuenta(unPedido);
     }
   }
 }
