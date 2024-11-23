@@ -227,11 +227,11 @@ export class PedidoService {
     });
   }
 
-  public finalizarPedido(pedido: Pedido, numeroMesa: number) {
-    this.cambiarEstadoPedido(pedido, {
-      estadoPedido: EstadoPedido.finalizado,
-      mesa: numeroMesa,
-    });
+  public finalizarPedido() {
+    if(this.pedidoUsuario){
+      this.cambiarEstadoPedido(this.pedidoUsuario, {estadoPedido: EstadoPedido.finalizado});
+      
+    }
   }
 
   public confirmarPago(pedido: Pedido, numeroMesa: number) {
@@ -252,7 +252,7 @@ export class PedidoService {
 
   public cargarEncuesta(idEncuesta: string) {
     if (this.pedidoUsuario) {
-      this.modificarRegistro(this.pedidoUsuario, { idEncuesta: idEncuesta });
+      this.modificarRegistro(this.pedidoUsuario, { encuesta: idEncuesta });
     }
   }
 
