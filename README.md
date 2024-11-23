@@ -152,44 +152,58 @@ Detalles de la construcción 🛠️
 
 (Desde el Sábado 16/11 al Lunes 18/11)
 > Realizamos una reunión las tres integrantes del proyecto para la creación de nuestro servidor, para así poder incorporar a nuestro proyecto push notifications y el envío de correos electrónicos automáticos (desde nuestra cuenta como empresa: elplatolisto@gmail.com). 
-> Creamos un repositorio aparte [LINK AL REPOSITORIO](https://github.com/JuliLaplace/ElPlatoListo-backend) y dedicimos utilizar [RENDER](https://render.com/). Render es una plataforma que aloja y ejecuta nuestra aplicación. Además de manejar el servidor donde se encuentra el código, Render permite que nuestra aplicación realice tareas como el envío de notificaciones push en los celulares que tengan instalada la aplicación, además de enviar correos electrónicos de forma automática.
+> Creamos un [repositorio](https://github.com/JuliLaplace/ElPlatoListo-backend) aparte y dedicimos utilizar [Render](https://render.com/) : plataforma que aloja y ejecuta nuestra aplicación. Además de manejar el servidor donde se encuentra el código, Render permite que nuestra aplicación realice tareas como el envío de notificaciones push en los celulares que tengan instalada la aplicación, además de enviar correos electrónicos de forma automática.
 
 > Después de realizar el hosting de nuestro proyecto, decidimos generar cada una las funciónes necesarias de push notifications (según rol y acción que genera la notificación) y el envío de tres emails con distintas notificaciones para el cliente (registro exitoso en la plataforma, ingreso aceptado, ingreso rechazado).
 
 >Luego de generar el hosting y todo lo relacionado a notificaciones, se prosiguió con nuestro proyecto:
 
 ##### Gestión
-- Push notification de pre registro de clientes (supervisor/dueño) - Laplace von Hinke María Julieta.
+- Push notification de pre registro de clientes (supervisor/dueño) - Colque, Laura.
 - Push notification de ingreso a local de cliente (Maitre) - Bogado Candela.
 - Push notification de mensaje de cliente (Mozo) - Colque, Laura.
 - Correo electrónico automático (Registro) - Colque Laura.
 - Correo electrónico automático (Aceptación de cliente) - Bogado, Candela.
 - Correo electrónico automático (Rechazo de cliente) - Laplace von Hinke María Julieta.
 - Gestión de ingreso a local - Bogado Candela - Laplace von Hinke María Julieta.
-- Gestión de pedido - Colque Laura - Bogado, Candela - Laplace von Hinke María Julieta..
+- Gestión de pedido - Colque Laura - Bogado, Candela - Laplace von Hinke María Julieta.
 - Gestión Menú - Bogado Candela.
-- Chat cliente y mozo - Colque Laura.
+- Chat cliente y mozo - Colque Laura - Bogado, Candela.
 - Encuestas Cliente - Laplace von Hinke María Julieta.
 
 ##### Diseño
-- Diseño de pantalla de mensajes para cliente - Bogado, Candela.
+- Diseño de pantalla de mensajes para cliente - Bogado, Candela - Laplace von Hinke María Julieta.
 - Diseño de pantalla de mozo - Colque, Laura.
 - Diseño de pantalla de encuesta - Laplace von Hinke María Julieta.
-- 
+- Diseño pantalla bartender/cocinero -  Bogado, Candela.
 
 (Desde Martes 19/11 al Sábado 23/11)
 
+> Realizamos una reunión las tres integrantes del proyecto y decidimos abordar las correcciones:
+
+> Laplace von Hinke, María Julieta: 
+> 1. Agregar mensaje que muestre a cliente el estado del pedido (cuando escanea la mesa con pedido en curso).
+
+> Bogado Candela:
+> 1. Agregar carrousel de imágenes de productos en sección menú.
+> 2. Resaltar el precio de los productos en la sección menú y mostrar el tiempo estimado de preparación.
+
+> Colque Laura:
+> 1. Resaltar los estados de los pedidos en pantalla Mozo.
+
 ##### Gestión
-- Gestión de preparación de pedido (cocina/bartender) - Bogado, Candela.
-- Gestión de pedido entregado (mozo) - Bogado, Candela.
+- Modificación de gestión de preparación de pedido (cocina/bartender) - Bogado, Candela.
+- Modificación de gestión de pedido entregado (mozo) - Bogado, Candela.
 - Gestión pago - Colque, Laura.
-- Gestión de gráficos de encuestas - Laplace von Hinke María Julieta.
 - Gestión de propina - Colque, Laura.
-- Push notification de pedido para preparar en cocina (bartender/cocinero) - Laplace von Hinke María Julieta.
+- Push notification de pedido pendiente a realizar (bartender/cocinero) - Laplace von Hinke María Julieta.
+- Push notification de pedido de cuenta en mesas (mozo) -Bogado Candela.
+- Alta productos - Laplace von Hinke María Julieta.
 
 ##### Diseño
-- Diseño de encuestas y gráficos de encuestas -  Laplace von Hinke María Julieta.
-- Diseño pantalla bartender/cocinero -  Bogado, Candela.
+- Diseño de página de resultados de encuestas y gráficos de encuestas -  Laplace von Hinke María Julieta.
+- Diseño de QR propina - Colque, Laura.
+- Carrousel en imágenes en menú de productos - Bogado, Candela.
 
 
 
@@ -206,11 +220,15 @@ Detalles de la construcción 🛠️
 | <img src="/src/assets/qr/QR - Mesa_4.png">  | Valor: "Mesa4" | 
 | <img src="/src/assets/qr/QR - Mesa_5.png">  | Valor: "Mesa5" | 
 | <img src="/src/assets/qr/QR-Menu.png">  | Valor: "menu" | 
+| <img src="src\assets\qr\QR-PROPINA-5.png">  | Valor: "5" | 
+| <img src="src\assets\qr\QR-PROPINA-10.png">  | Valor: "10" | 
+| <img src="src\assets\qr\QR-PROPINA-15.png">  | Valor: "15" | 
+| <img src="src\assets\qr\QR-PROPINA-20.png">  | Valor: "20" | 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 📸 _Imágenes de la aplicación_ 📸
-| Imágen | Valor | 
+| Imágen | Descripción | 
 | ------ | ------ | 
 | <img src="src\assets\Imagenes-Aplicacion-Celular\Login.jpeg"> | Pantalla login con botón de usuarios (acceso rápido) desplegado | 
 | <img src="src\assets\Imagenes-Aplicacion-Celular\Registro.jpeg">  | Pantalla de registro de cliente nuevo | 
