@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { ProductoEnPedidoService } from 'src/servicios/productos-en-pedido.service';
 import { EstadoProductoEnPedido } from 'src/app/enumerados/estado-producto-en-pedido';
 import { EstadoPedido } from 'src/app/enumerados/estado-pedido';
+import { NotificadorPushService } from 'src/servicios/notificador-push.service';
 
 @Component({
   selector: 'app-cliente-pedido-en-curso',
@@ -22,7 +23,8 @@ export class ClientePedidoEnCursoComponent implements OnInit {
     public sesion: SesionService,
     public dataUsuario: DataUsuariosService,
     public pedidoService: PedidoService,
-    private productosServicio: ProductoEnPedidoService
+    private productosServicio: ProductoEnPedidoService,
+    private pushNotification: NotificadorPushService
   ) {}
 
   ngOnInit() {}
@@ -36,6 +38,7 @@ export class ClientePedidoEnCursoComponent implements OnInit {
       );
     } else if (unPedido?.estadoPedido === EstadoPedido.aceptoPedido) {
       this.pedidoService.clientePideLaCuenta(unPedido);
+      this.pushNotification.notificarMozoPedidoDeCuenta(unPedido.mesa);
     }
   }
 }
