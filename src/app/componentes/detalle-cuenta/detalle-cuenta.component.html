@@ -6,47 +6,62 @@
 
 <ion-content>
   <div class="centrado">
-    <ion-card>
-      <ion-card-content>
+    <div class="contenido">
+      <ion-card>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="table-header" size="2">Cant.</ion-col>
+              <ion-col class="table-header" size="4">Producto</ion-col>
+              <ion-col class="table-header" size="3">Precio Unitario</ion-col>
+              <ion-col class="table-header" size="3">Subtotal</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let producto of listaPedidos">
+              <ion-col class="table-data alinear-derecha" size="2">{{
+                producto.cantidad
+              }}</ion-col>
+              <ion-col class="table-data alinear-izquierda" size="4">{{
+                producto.nombreProducto
+              }}</ion-col>
+              <ion-col class="table-data alinear-derecha" size="3">{{
+                producto.precioUnitario
+              }}</ion-col>
+              <ion-col class="table-data alinear-derecha" size="3">{{
+                producto.subtotal
+              }}</ion-col>
+            </ion-row>
+          </ion-grid>
 
-        <ion-grid>
-          <ion-row>
-            <ion-col class="table-header" size="2">Cant.</ion-col>
-            <ion-col class="table-header" size="4">Producto</ion-col>
-            <ion-col class="table-header" size="3">Precio Unitario</ion-col>
-            <ion-col class="table-header" size="3">Subtotal</ion-col>
-          </ion-row>
-          <ion-row *ngFor="let producto of listaPedidos">
-            <ion-col class="table-data alinear-derecha" size="2">{{producto.cantidad}}</ion-col>
-            <ion-col class="table-data alinear-izquierda" size="4">{{producto.nombreProducto}}</ion-col>
-            <ion-col class="table-data alinear-derecha" size="3">{{producto.precioUnitario}}</ion-col>
-            <ion-col class="table-data alinear-derecha" size="3">{{producto.subtotal}}</ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <div>
-          <div class="propina">
-            <p>Propina: {{ this.pedidoService.pedidoUsuario?.propina }}%</p>
+          <div>
+            <div class="propina">
+              <p>Propina: {{ this.pedidoService.pedidoUsuario?.propina }}%</p>
+            </div>
+            <div class="total-label">
+              <span
+                >Total:
+                {{ pedidoService.pedidoUsuario?.precioTotal | currency }}</span
+              >
+            </div>
           </div>
-          <div class="total-label">
-            <span>Total: {{ pedidoService.pedidoUsuario?.precioTotal | currency }}</span>
+
+          <div class="escaneaQR">
+            <button (click)="qrService.escanear()">
+              <img src="../../../assets/iconos/pago.png" alt="" />
+              <span>Escanea el código QR<br />para agregar propina</span>
+            </button>
           </div>
-        </div>
 
-        <div class="escaneaQR">
-          <button (click)="qrService.escanear()">
-            <img src="../../../assets/iconos/pago.png" alt="">
-            <span>Escanea el código QR<br/>para agregar propina</span>
-          </button>
-        </div>
-
-
-        <ion-button expand="block" color="primary" (click)="pagarCuenta(pedidoService.pedidoUsuario!)" style="margin-top: 16px;">
-          <ion-text color="light">Pagar cuenta</ion-text>
-        </ion-button>
-
-      </ion-card-content>
-    </ion-card>
+          <ion-button
+            expand="block"
+            color="primary"
+            (click)="pagarCuenta(pedidoService.pedidoUsuario!)"
+            style="margin-top: 16px"
+          >
+            <ion-text color="light">Pagar cuenta</ion-text>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
 
