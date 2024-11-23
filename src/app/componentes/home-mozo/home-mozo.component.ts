@@ -55,17 +55,18 @@ export class HomeMozoComponent implements OnInit {
   confirmarPedido(unPedido: Pedido) {
     console.log('Pedidosss', unPedido);
 
-    if (unPedido.estadoPedido === EstadoPedido.pagado) {
-      //Si el Cliente pago la cuenta cambia el Estado a Pagado
-      //Confirmo el pago ---> Cambia estado a Finalizado y libero la mesa
-      this.pedidoServicio.confirmarPago(unPedido,unPedido.mesa);
-
-    }else if(unPedido.estadoPedido === EstadoPedido.esperandoMozo){
+    if (unPedido.estadoPedido === EstadoPedido.esperandoMozo){
       this.pedidoServicio.pedidoAceptado(unPedido);
       this.productosServicio.cambiarEstadoPorIdPedido(
         unPedido.id,
         EstadoProductoEnPedido.pendiente
       );
+    } else if (unPedido.estadoPedido === EstadoPedido.pedidoListo) {
+      this.pedidoServicio.entregandoPedido(unPedido);
+    } else if (unPedido.estadoPedido === EstadoPedido.pagado) {
+      //Si el Cliente pago la cuenta cambia el Estado a Pagado
+      //Confirmo el pago ---> Cambia estado a Finalizado y libero la mesa
+      this.pedidoServicio.confirmarPago(unPedido,unPedido.mesa);
     }
   }
 

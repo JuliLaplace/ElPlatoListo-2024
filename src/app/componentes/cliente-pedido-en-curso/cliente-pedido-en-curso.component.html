@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title *ngIf="sesion.usuarioActual">
-      Inicio | Bienvenid&#64;, {{ sesion.usuarioBD?.nombre}}
+      Inicio | Bienvenido, {{ sesion.usuarioBD?.nombre}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,9 +17,9 @@
       </div>
       <div class="card-body">
         <!-- <h5 class="card-title">Special title treatment</h5> -->
-        <p class="card-text"><strong>Total: $</strong>{{ pedidoService.pedidoUsuario?.precioTotal }}</p>
-        <p class="card-text"><strong>Demora estimada: </strong>{{ pedidoService.pedidoUsuario?.tiempoPreparacion + 'min.' }}</p>
-        <button class="btn" (click)="confirmarPedido(pedidoService.pedidoUsuario)">Cambia estado pedido</button>
+        <p class="card-text precio-total"><strong>Total: $</strong>{{ pedidoService.pedidoUsuario?.precioTotal }}</p>
+        <p class="card-text" *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Pedido aceptado' && pedidoService.pedidoUsuario?.estadoPedido === 'Pagado'"><strong>Demora estimada: </strong>{{ pedidoService.pedidoUsuario?.tiempoPreparacion + 'min.' }}</p>
+        <button *ngIf="pedidoService.pedidoUsuario?.estadoPedido === 'Entregando pedido'" class="btn" (click)="confirmarPedido(pedidoService.pedidoUsuario)">Cambia estado pedido</button>
       </div>
       <!-- <div class="card-footer text-muted">2 days ago</div> -->
     </div>

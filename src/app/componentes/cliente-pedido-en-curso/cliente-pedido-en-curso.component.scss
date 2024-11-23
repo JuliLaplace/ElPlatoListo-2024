@@ -37,7 +37,12 @@ ion-toolbar {
         
         .card-text {
             margin-bottom: 0.5em;
-            text-shadow: 0 2px 2px gray;
+            text-shadow: 0 0 2px gray;
+            color: #333;
+        }
+
+        .precio-total {
+            font-size: 1.3em;
         }
 
         button {
