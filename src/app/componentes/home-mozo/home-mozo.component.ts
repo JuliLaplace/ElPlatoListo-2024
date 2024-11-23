@@ -87,6 +87,9 @@ export class HomeMozoComponent implements OnInit {
       case EstadoPedido.pagado:
         color = EstadoColor.Pagado;
         break;
+      case EstadoPedido.pagoConfirmado:
+        color = EstadoColor.pagoConfirmado
+        break;
     }
     return color;
   }
