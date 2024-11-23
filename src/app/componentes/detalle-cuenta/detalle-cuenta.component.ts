@@ -12,7 +12,7 @@ import { SpinnerService } from 'src/servicios/spinner.service';
 import { AudioService } from 'src/servicios/audio.service';
 import { addIcons } from 'ionicons';
 import { qrCodeOutline } from 'ionicons/icons';
-import { QrScannerService } from 'src/servicios/qr-scanner.service';
+import { GestionQrService } from 'src/servicios/gestion-qr.service';
 
 @Component({
   selector: 'app-detalle-cuenta',
@@ -35,8 +35,8 @@ export class DetalleCuentaComponent implements OnInit {
     public sesion: SesionService,
     private spinnerServicio: SpinnerService,
     private audioServicio: AudioService,
-    private scanner: QrScannerService,
-    private router: Router
+    private router: Router,
+    public qrService: GestionQrService
   ) {
     addIcons({
       qrCodeOutline,
@@ -61,7 +61,7 @@ export class DetalleCuentaComponent implements OnInit {
           }
         }
       });
-
+      console.log(this.listaPedidos)
   }
 
   pagarCuenta(unPedido: Pedido) {
@@ -76,42 +76,4 @@ export class DetalleCuentaComponent implements OnInit {
     });
     this.router.navigate(['/home']);
   }
-
-  // agregarPropina() {
-  //   this.scanner.scanQRcode().then((res) => {
-  //     let codigoQr = res;
-  //     if (this.sesion.usuarioActual) {
-  //       switch (codigoQr) {
-  //         case '5':
-  //           this.propina = 5;
-  //           this.aplicarPropina(5);
-  //           break;
-  //         case '10':
-  //           this.propina = 10;
-  //           this.aplicarPropina(10);
-  //           break;
-  //         case '15':
-  //           this.propina = 15;
-  //           this.aplicarPropina(15);
-  //           break;
-  //         case '20':
-  //           this.propina = 20;
-  //           this.aplicarPropina(20);
-  //           break;
-  //         default:
-  //           break;
-  //       }
-  //     }
-  //   });
-  // }
-
-  // // Método para aplicar la propina
-  // async aplicarPropina(propina: number) {
-  //   await this.pedidoService.aplicarPropina(
-  //     this.pedidoService.pedidoUsuario!,
-  //     propina
-  //   );
-  //   // Aquí puedes agregar lógica adicional si es necesario
-  //   console.log(`Propina de ${propina}% aplicada al pedido.`);
-  // }
 }
