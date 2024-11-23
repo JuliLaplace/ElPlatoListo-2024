@@ -7,6 +7,8 @@ import { TabsComponent } from 'src/app/componentes/tabs/tabs.component';
 import { LegendPosition, NgxChartsModule } from '@swimlane/ngx-charts';
 import { EncuestaService } from 'src/servicios/encuesta.service';
 import { RouterLink } from '@angular/router';
+import { PedidoService } from 'src/servicios/pedido.service';
+import { LoginService } from 'src/servicios/login.service';
 
 export interface DataSet{
   name:string,
@@ -22,6 +24,7 @@ export interface DataSet{
 })
 export class PaginaResultadosEncuestasPage {
 
+  
   data: DataSet[] = [
     {
       "name": "Germany",
@@ -41,7 +44,7 @@ export class PaginaResultadosEncuestasPage {
     }
   ];
 
-  constructor(public sesion: SesionService, public encuesta: EncuestaService) { 
+  constructor(public sesion: SesionService, public encuesta: EncuestaService, private pedido: PedidoService, private login : LoginService) { 
    
   }
 
@@ -51,5 +54,8 @@ export class PaginaResultadosEncuestasPage {
   legendPosition: LegendPosition = LegendPosition.Below;
 
 
-
+  finalizarEstadia(){
+    this.pedido.finalizarPedido();
+    this.login.logout();
+  }
 }

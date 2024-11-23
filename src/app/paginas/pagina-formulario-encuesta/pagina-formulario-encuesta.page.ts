@@ -71,7 +71,7 @@ export class PaginaFormularioEncuestaPage implements OnInit {
       const encuesta : Encuesta = {
         id: '',
         mensaje : this.formEncuesta.get('mensaje')?.value,
-        calidadServicio: this.formEncuesta.get('calidadServicio')?.value,
+        calidadServicio: parseInt(this.formEncuesta.get('calidadServicio')?.value),
         calificacionLimpieza: this.formEncuesta.get('calificacionLimpieza')?.value,
         aspectoMasValorado: this.formEncuesta.get('aspectoMasValorado')?.value,
         serviciosAdicionales: servicios,
